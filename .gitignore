@@ -14,6 +14,9 @@
 /videoBackendConfig/web/nginx
 /videoBackendConfig/web/keys
 
+### .env (local config) ###
+.env
+
 ### STS ###
 .apt_generated
 .classpath
