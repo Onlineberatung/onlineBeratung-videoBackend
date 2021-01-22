@@ -1,0 +1,87 @@
+@import url("fonts.css");
+@import url("header.css");
+
+body.desktop-browser {
+	font-family: "Roboto-Regular",sans-serif !important;
+	font-weight: 400;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: auto;
+}
+
+/*================================================================================
+TOOLBAR
+================================================================================ */
+.new-toolbox .toolbox-content .button-group-center {
+	display: flex;
+	width: auto;
+	padding: 8px;
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 100px;
+}
+
+/* small settings button underneath audio and video button */
+.settings-button-container .settings-button-small-icon {
+	display: none;
+}
+
+/* end call button */
+.new-toolbox .toolbox-content .button-group-center > div:nth-of-type(2) {
+	order: 3;
+}
+
+.new-toolbox .toolbox-content .button-group-center .toolbox-button:nth-child(2) .toolbox-icon {
+	background-color: #FF0000;
+	border-color:#FF0000;
+	background-image: url("../images/call-off.svg");
+	background-size: 20px;
+	background-position: center;
+	background-repeat: no-repeat;
+	transition: all .6s ease;
+}
+
+.new-toolbox .toolbox-content .button-group-center .toolbox-button:nth-child(2) .toolbox-icon:hover {
+	background-color: #a31816;
+	border-color: #a31816;
+}
+
+.new-toolbox .toolbox-content .button-group-center .toolbox-button:nth-child(2) .toolbox-icon svg {
+	display: none;
+}
+
+
+/*================================================================================
+camera off screen
+================================================================================ */
+.defaultAvatar {
+	opacity: 1;
+}
+
+.avatar {
+	background-color: #524B52;
+}
+
+.videocontainer {
+	background-color: #3F373F !important;
+}
+
+
+/*================================================================================
+active video call screen
+================================================================================ */
+.subject-text {
+	font-size: 20px;
+}
+
+.subject-conference-timer {
+	opacity: 1;
+	font-size: 14px;
+	margin-top: 2px;
+}
+
+.participants-count {
+	display: none;
+}
+
+.connection-indicator {
+	display: none;
+}

@@ -45,7 +45,7 @@ var interfaceConfig = {
     CONNECTION_INDICATOR_DISABLED: false,
 
     DEFAULT_BACKGROUND: '#474747',
-    DEFAULT_LOCAL_DISPLAY_NAME: 'me',
+    DEFAULT_LOCAL_DISPLAY_NAME: 'Ich',
     DEFAULT_LOGO_URL: 'images/watermark.png',
     DEFAULT_REMOTE_DISPLAY_NAME: 'Ratsuchender',
     DEFAULT_WELCOME_PAGE_LOGO_URL: 'images/watermark.png',
@@ -78,7 +78,7 @@ var interfaceConfig = {
      *
      * @type {boolean}
      */
-    DISABLE_TRANSCRIPTION_SUBTITLES: false,
+    DISABLE_TRANSCRIPTION_SUBTITLES: true, /*changed*/
 
     /**
      * Whether or not the blurred video background for large video should be
@@ -112,7 +112,7 @@ var interfaceConfig = {
      */
     HIDE_INVITE_MORE_HEADER: true,
 
-    INITIAL_TOOLBAR_TIMEOUT: 20000,
+    INITIAL_TOOLBAR_TIMEOUT: 5000, /*changed*/
     JITSI_WATERMARK_LINK: 'https://jitsi.org',
 
     LANG_DETECTION: true, // Allow i18n to detect the system language
@@ -155,7 +155,8 @@ var interfaceConfig = {
     RECENT_LIST_ENABLED: false, /*changed*/
     REMOTE_THUMBNAIL_RATIO: 1, // 1:1
 
-    SETTINGS_SECTIONS: [ 'devices', 'language', 'moderator', 'profile', 'calendar' ],
+	// 'devices', 'language', 'moderator', 'profile', 'calendar'
+    SETTINGS_SECTIONS: [ 'devices', 'language', 'profile' ], /*changed*/
     SHOW_BRAND_WATERMARK: false,
 
     /**
@@ -166,10 +167,10 @@ var interfaceConfig = {
     SHOW_CHROME_EXTENSION_BANNER: false,
 
     SHOW_DEEP_LINKING_IMAGE: false,
-    SHOW_JITSI_WATERMARK: true,
+    SHOW_JITSI_WATERMARK: false, /*changed*/
     SHOW_POWERED_BY: false,
     SHOW_PROMOTIONAL_CLOSE_PAGE: false,
-    SHOW_WATERMARK_FOR_GUESTS: true, // if watermark is disabled by default, it can be shown only for guests
+    SHOW_WATERMARK_FOR_GUESTS: false, // if watermark is disabled by default, it can be shown only for guests
 
     /*
      * If indicated some of the error dialogs may point to the support URL for
@@ -177,7 +178,7 @@ var interfaceConfig = {
      */
     SUPPORT_URL: 'https://community.jitsi.org/',
 
-    TOOLBAR_ALWAYS_VISIBLE: true,
+    TOOLBAR_ALWAYS_VISIBLE: false, /*changed*/
 
     /**
      * The name of the toolbar buttons to display in the toolbar, including the
@@ -198,9 +199,8 @@ var interfaceConfig = {
         'tileview', 'videobackgroundblur', 'download', 'help', 'mute-everyone', 'security'
     ],*/
     TOOLBAR_BUTTONS: [
-        'microphone', 'camera', 'desktop', 'fullscreen', 'fodeviceselection', 'hangup',
-        'settings', 'raisehand', 'videoquality', 'stats', 'shortcuts', 'tileview', 'mute-everyone', 'security'
-    ],
+        'microphone', 'camera', 'hangup', 'settings', 'tileview'
+    ], /*changed*/
 
     TOOLBAR_TIMEOUT: 4000,
 
@@ -211,7 +211,7 @@ var interfaceConfig = {
     /**
      * Whether to show thumbnails in filmstrip as a column instead of as a row.
      */
-    VERTICAL_FILMSTRIP: true,
+    VERTICAL_FILMSTRIP: false, /*changed*/
 
     // Determines how the video would fit the screen. 'both' would fit the whole
     // screen, 'height' would fit the original video height to the height of the
@@ -225,7 +225,7 @@ var interfaceConfig = {
      *
      * @type {boolean}
      */
-    VIDEO_QUALITY_LABEL_DISABLED: false,
+    VIDEO_QUALITY_LABEL_DISABLED: true, /*changed*/
 
     /**
      * When enabled, the kick participant button will not be presented for users without a JWT

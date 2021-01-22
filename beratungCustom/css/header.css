@@ -1,0 +1,28 @@
+.customHeader {
+	position: fixed;
+	top: 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 96px;
+	width: 100%;
+	padding: 0 24px;
+	box-sizing: border-box;
+	background-color: white;
+	z-index: 2;
+}
+
+.customHeader .title,
+.customHeader .claim {
+	color: #3f373f;
+}
+
+.customHeader .title {
+	font-family: "Roboto-Medium",sans-serif;
+	font-size: 30px;
+	font-weight: 500;
+}
+
+.customHeader .claim {
+	font-size: 16px;
+}
