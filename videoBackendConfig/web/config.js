@@ -773,7 +773,7 @@ config.prejoinPageEnabled = true;
 config.enableWelcomePage = true;
 
 // Close page.
-config.enableClosePage = false;
+config.enableClosePage = true;
 
 // Require users to always specify a display name.
 config.requireDisplayName = false;
