@@ -24,6 +24,18 @@
 	height: 128px;
 }
 
+.vertical-filmstrip .filmstrip #filmstripLocalVideo #localDisplayName {
+	display: none;
+}
+
+.display-name-on-black video#localVideo_container {
+	opacity: 1;
+}
+
+#localVideoContainer .videocontainer__background {
+	display: none;
+}
+
 .vertical-filmstrip .filmstrip #filmstripRemoteVideos {
 	margin-bottom: 116px;
 }
