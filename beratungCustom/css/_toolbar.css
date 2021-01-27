@@ -83,6 +83,22 @@
 
 .new-toolbox .toolbox-content .button-group-center .toolbox-button:nth-child(1) .toolbox-icon svg,
 .new-toolbox .toolbox-content .button-group-center .toolbox-button:nth-child(2) .toolbox-icon svg,
-.new-toolbox .toolbox-content .button-group-center .toolbox-button:nth-child(3) .toolbox-icon svg {
+.new-toolbox .toolbox-content .button-group-center .toolbox-button:nth-child(3) .toolbox-icon svg,
+.button-group-right > .toolbox-button .toolbox-icon .jitsi-icon svg {
 	display: none;
+}
+
+/* toggle tiles mode */
+
+.button-group-right > .toolbox-button .toolbox-icon,
+.button-group-right > .toolbox-button .toolbox-icon:hover,
+.button-group-right > .toolbox-button .toolbox-icon.toggled {
+	background-image: url("../images/icons/view.svg");
+	background-size: 20px 20px;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.new-toolbox .toolbox-content .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-icon:hover {
+	background-color: rgba(255,255,255,.15);
 }
