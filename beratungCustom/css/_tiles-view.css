@@ -1,0 +1,13 @@
+.remote-video-menu-trigger {
+	margin-right: 7px;
+}
+
+.remote-video-menu-trigger svg {
+	height: 18px;
+	width: 18px;
+}
+
+.videocontainer__toolbar .indicator-container svg {
+	height: 14px;
+	width: 14px;
+}
