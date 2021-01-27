@@ -3,6 +3,7 @@
 @import url("_header.css");
 @import url("_toolbar.css");
 @import url("_prejoin.css");
+@import url("_filmstrip.css");
 
 body.desktop-browser {
 	font-family: "Roboto-Regular",sans-serif !important;
@@ -17,6 +18,16 @@ body.desktop-browser {
 	height: calc(100% - 96px);
 }
 
+.subject {
+	height: 100px;
+	background-image: linear-gradient(to bottom,rgba(0,0,0,1),rgba(0,0,0,0));
+}
+
+.new-toolbox .toolbox-background {
+	height: 150px;
+	background-image: linear-gradient(to top,rgba(0,0,0, 1),rgba(0,0,0,0));
+}
+
 /*================================================================================
 active video call screen
 ================================================================================ */
@@ -27,13 +38,12 @@ active video call screen
 }
 
 .subject-text {
-	font-size: 20px;
+	display: none;
 }
 
 .subject-conference-timer {
 	opacity: 1;
 	font-size: 14px;
-	margin-top: 2px;
 }
 
 .participants-count {
@@ -52,8 +62,8 @@ Screen when camera is off
 	opacity: 1;
 }
 
-.avatar {
-	background-color: var(--grey-1);
+.avatar[style] {
+	background-color: var(--grey-1) !important;
 }
 
 .videocontainer {
