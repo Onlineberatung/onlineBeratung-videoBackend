@@ -11,6 +11,7 @@ services:
         volumes:
             - ${CONFIG}/web:/config:Z
             - ${CUSTOMFILES}/css:/usr/share/jitsi-meet/css
+            - ${CUSTOMFILES}/static:/usr/share/jitsi-meet/static
             - ${CUSTOMFILES}/fonts:/usr/share/jitsi-meet/fonts
             - ${CUSTOMFILES}/images:/usr/share/jitsi-meet/images
             - ${CUSTOMFILES}/html/index.html:/usr/share/jitsi-meet/index.html
