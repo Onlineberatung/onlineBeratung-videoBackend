@@ -1,0 +1,9 @@
+/* hide e-mail input field */
+.Modal__PositionerAbsolute-sc-1jmnqyd-1 {
+	top: 50% !important;
+	transform: translateY(-185px);
+}
+
+.settings-pane .profile-edit .profile-edit-field:nth-of-type(2) {
+	display: none;
+}

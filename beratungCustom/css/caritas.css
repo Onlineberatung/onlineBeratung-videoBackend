@@ -5,6 +5,7 @@
 @import url("_prejoin.css");
 @import url("_filmstrip-view.css");
 @import url("_tiles-view.css");
+@import url("_settings.css");
 
 body.desktop-browser {
 	font-family: "Roboto-Regular",sans-serif !important;

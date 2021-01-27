@@ -106,3 +106,22 @@
 .new-toolbox .toolbox-content .button-group-right {
 	align-items: center;
 }
+
+@media only screen and (max-width: 500px) {
+	.new-toolbox .toolbox-content .button-group-center .toolbox-button .toolbox-icon, .new-toolbox .toolbox-content .button-group-left .toolbox-button .toolbox-icon, .new-toolbox .toolbox-content .button-group-right .toolbox-button .toolbox-icon {
+		height: 40px;
+		width: 40px;
+	}
+}
+
+@media only screen and (max-width: 700px) {
+	.new-toolbox .toolbox-content .button-group-center .toolbox-button .toolbox-icon, .new-toolbox .toolbox-content .button-group-left .toolbox-button .toolbox-icon, .new-toolbox .toolbox-content .button-group-right .toolbox-button .toolbox-icon {
+		height: 40px;
+		width: 40px;
+	}
+
+	.new-toolbox .toolbox-content .button-group-center .toolbox-button .toolbox-icon svg, .new-toolbox .toolbox-content .button-group-left .toolbox-button .toolbox-icon svg, .new-toolbox .toolbox-content .button-group-right .toolbox-button .toolbox-icon svg {
+		height: 24px;
+		width: 24px;
+	}
+}
