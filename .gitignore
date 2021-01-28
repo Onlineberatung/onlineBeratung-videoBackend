@@ -13,6 +13,8 @@
 /videoBackendConfig/prosody/config/data
 /videoBackendConfig/web/nginx
 /videoBackendConfig/web/keys
+/videoBackendConfig/web/acme-certs
+/videoBackendConfig/web/acme.sh
 
 ### .env (local config) ###
 .env
