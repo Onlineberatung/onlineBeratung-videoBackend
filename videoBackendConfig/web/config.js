@@ -767,7 +767,7 @@ config.enableCalendarIntegration = false;
 //
 
 // Prejoin page.
-config.prejoinPageEnabled = true;
+config.prejoinPageEnabled = false;
 
 // Welcome page.
 config.enableWelcomePage = true;

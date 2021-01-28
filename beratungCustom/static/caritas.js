@@ -1,3 +1,3 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-	document.title = 'Beratung & Hilfe - Video Call';
+	document.title = 'Beratung & Hilfe - Videoanruf';
 });

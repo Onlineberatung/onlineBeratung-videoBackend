@@ -36,6 +36,10 @@
 	display: none;
 }
 
+#filmstripLocalVideoThumbnail .videocontainer.display-avatar-only {
+	background-color: black !important;
+}
+
 .vertical-filmstrip .filmstrip #filmstripRemoteVideos {
 	margin-bottom: 116px;
 }
