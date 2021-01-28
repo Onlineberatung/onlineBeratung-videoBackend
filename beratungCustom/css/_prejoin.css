@@ -1,6 +1,6 @@
 .premeeting-screen {
 	margin-top: 96px;
-	background: var(--black);
+	background: var(--primary-grey);
 }
 
 .premeeting-screen .content input.field {
@@ -13,7 +13,7 @@
 
 .premeeting-screen .content input.field.focused {
 	box-shadow: none;
-	border: 2px solid var(--black);
+	border: 2px solid var(--primary-grey);
 }
 
 .premeeting-screen .action-btn.primary {
@@ -70,8 +70,17 @@
 	margin-bottom: 40px;
 }
 
+.premeeting-screen-avatar.avatar[style] {
+    position: absolute;
+    top: calc(50% - 96px);
+    transform: translateY(-100px);
+	height: 200px !important;
+	width: 200px !important;
+}
+
 .premeeting-screen-avatar text {
 	fill: rgba(255, 255, 255, 0.5);
+	font-size: 53px;
 }
 
 /* options on join button */

@@ -69,5 +69,5 @@ Screen when camera is off
 }
 
 .videocontainer {
-	background-color: var(--black) !important;
+	background-color: var(--primary-grey) !important;
 }

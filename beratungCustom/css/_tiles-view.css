@@ -15,3 +15,7 @@
 	height: 14px;
 	width: 14px;
 }
+
+#filmstripRemoteVideosContainer .videocontainer.display-avatar-only {
+	background-color: black !important;
+}

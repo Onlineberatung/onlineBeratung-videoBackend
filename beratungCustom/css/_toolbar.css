@@ -24,7 +24,7 @@
 .new-toolbox .toolbox-content .button-group-center > div:nth-of-type(1) .toolbox-icon.toggled,
 .new-toolbox .toolbox-content .button-group-center > div:nth-of-type(3) .toolbox-icon.toggled {
 	border: none;
-	background-size: 22px 22px;
+	background-size: 24px 24px;
 	background-position: center;
 	background-repeat: no-repeat;
 }
@@ -70,15 +70,15 @@
 .new-toolbox .toolbox-content .button-group-center .toolbox-button:nth-child(2) .toolbox-icon {
 	height: 40px;
 	width: 40px;
-	background-color: var(--primary);
-	border-color: var(--primary);
+	background-color: var(--primary-red);
+	border-color: var(--primary-red);
 	background-image: url("../images/icons/call-off.svg");
 	transition: all .6s ease;
 }
 
 .new-toolbox .toolbox-content .button-group-center .toolbox-button:nth-child(2) .toolbox-icon:hover {
-	background-color: var(--primary-dark);
-	border-color: var(--primary-dark);
+	background-color: var(--primary-red-dark);
+	border-color: var(--primary-red-dark);
 }
 
 .new-toolbox .toolbox-content .button-group-center .toolbox-button:nth-child(1) .toolbox-icon svg,
