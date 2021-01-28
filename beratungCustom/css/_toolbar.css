@@ -107,6 +107,23 @@
 	align-items: center;
 }
 
+/* settings menu button */
+.new-toolbox .CvzNc {
+	background-color: var(--primary-grey);
+}
+
+.new-toolbox .toolbox-content .overflow-menu .overflow-menu-item {
+	color: white !important;
+}
+
+.new-toolbox .toolbox-content .overflow-menu .overflow-menu-item:hover {
+	background-color: var(--grey-1);
+}
+
+.new-toolbox .toolbox-content .overflow-menu .overflow-menu-item-icon svg {
+	fill: white !important;
+}
+
 @media only screen and (max-width: 500px) {
 	.new-toolbox .toolbox-content .button-group-center .toolbox-button .toolbox-icon, .new-toolbox .toolbox-content .button-group-left .toolbox-button .toolbox-icon, .new-toolbox .toolbox-content .button-group-right .toolbox-button .toolbox-icon {
 		height: 40px;

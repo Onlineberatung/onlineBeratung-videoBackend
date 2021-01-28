@@ -33,6 +33,36 @@
 	background-color: var(--success-dark);
 }
 
+.premeeting-screen .settings-button-container .settings-button-small-icon {
+	display: block;
+}
+
+.premeeting-screen .video-preview-container {
+	background-color: var(--primary-grey);
+}
+
+.premeeting-screen .audio-preview-content {
+	background-color: var(--primary-grey);
+}
+
+.premeeting-screen .audio-preview-entry--selected {
+	background-color: var(--grey-1);
+}
+
+.premeeting-screen .audio-preview-entry:hover,
+.premeeting-screen .audio-preview-speaker:hover .audio-preview-entry,
+.audio-preview-microphone:hover .audio-preview-entry {
+	background-color: var(--grey-1);
+}
+
+.premeeting-screen .audio-preview-header-icon svg path {
+	fill: white;
+}
+
+.premeeting-screen .jitsi-icon.metr>svg {
+	fill: var(--grey-2);
+}
+
 .premeeting-screen .settings-button-container .toolbox-icon svg {
 	display: none;
 }
@@ -72,7 +102,8 @@
 
 .premeeting-screen-avatar.avatar[style] {
     position: absolute;
-    top: calc(50% - 96px);
+	top: calc(50% - 96px);
+	left: calc(50% - 96px);
     transform: translateY(-100px);
 	height: 200px !important;
 	width: 200px !important;

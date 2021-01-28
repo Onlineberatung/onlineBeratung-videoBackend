@@ -178,7 +178,7 @@ var interfaceConfig = {
      */
     SUPPORT_URL: 'https://community.jitsi.org/',
 
-    TOOLBAR_ALWAYS_VISIBLE: false, /*changed*/
+    TOOLBAR_ALWAYS_VISIBLE: true, /*changed*/
 
     /**
      * The name of the toolbar buttons to display in the toolbar, including the

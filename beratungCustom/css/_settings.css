@@ -148,3 +148,8 @@
 	background-color: var(--grey-2);
 	color: white;
 }
+
+/* remove prejoin screen settings */
+.settings-pane .more-tab .settings-sub-pane:nth-of-type(1) {
+	display: none;
+}
