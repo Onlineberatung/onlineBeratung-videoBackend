@@ -168,7 +168,7 @@ var interfaceConfig = {
     SHOW_DEEP_LINKING_IMAGE: false,
     SHOW_JITSI_WATERMARK: true,
     SHOW_POWERED_BY: false,
-    SHOW_PROMOTIONAL_CLOSE_PAGE: false,
+    SHOW_PROMOTIONAL_CLOSE_PAGE: true,
     SHOW_WATERMARK_FOR_GUESTS: true, // if watermark is disabled by default, it can be shown only for guests
 
     /*
