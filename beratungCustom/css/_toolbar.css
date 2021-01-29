@@ -124,6 +124,12 @@
 	fill: white !important;
 }
 
+/* screen sharing button */
+.new-toolbox .toolbox-content .button-group-left .toolbox-button {
+	display: flex;
+	align-items: center;
+}
+
 @media only screen and (max-width: 500px) {
 	.new-toolbox .toolbox-content .button-group-center .toolbox-button .toolbox-icon, .new-toolbox .toolbox-content .button-group-left .toolbox-button .toolbox-icon, .new-toolbox .toolbox-content .button-group-right .toolbox-button .toolbox-icon {
 		height: 40px;

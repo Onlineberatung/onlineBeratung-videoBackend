@@ -199,7 +199,7 @@ var interfaceConfig = {
         'tileview', 'videobackgroundblur', 'download', 'help', 'mute-everyone', 'security'
     ],*/
     TOOLBAR_BUTTONS: [
-        'microphone', 'camera', 'hangup', 'settings', 'tileview'
+        'microphone', 'camera', 'hangup', 'settings', 'tileview', 'desktop'
     ], /*changed*/
 
     TOOLBAR_TIMEOUT: 4000,
