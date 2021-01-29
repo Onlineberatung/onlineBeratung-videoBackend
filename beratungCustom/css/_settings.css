@@ -94,12 +94,20 @@
 }
 
 /* conform button */
-.Content__HeaderOrFooter-sc-1npw367-2 .fserWm {
+.Content__HeaderOrFooter-sc-1npw367-2 .fserWm,
+.Content__HeaderOrFooter-sc-1npw367-2 .KSZawh {
 	background-color: white;
 }
 
-.Content__HeaderOrFooter-sc-1npw367-2 .KSZawh {
-	background-color: var(--grey-2);
+/* decline button */
+.Content__HeaderOrFooter-sc-1npw367-2 .ceIglU {
+	color: white !important;
+}
+
+/* decline button hover */
+.Content__HeaderOrFooter-sc-1npw367-2 .gxzuWQ {
+	color: white !important;
+	background-color: var(--grey-1) !important;
 }
 
 .settings-pane .device-selection .audio-output-preview a {
