@@ -6,6 +6,7 @@
 @import url("_filmstrip-view.css");
 @import url("_tiles-view.css");
 @import url("_settings.css");
+@import url("_alerts.css");
 
 body.desktop-browser {
 	font-family: "Roboto-Regular",sans-serif !important;
@@ -56,6 +57,13 @@ active video call screen
 
 .connection-indicator {
 	display: none;
+}
+
+.videocontainer .displayNameContainer .displayname {
+	text-align: left;
+	top: 16px;
+	left: 16px;
+	font-size: 14px;
 }
 
 
