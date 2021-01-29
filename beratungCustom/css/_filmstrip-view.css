@@ -75,3 +75,8 @@
 	background-color: var(--grey-1);
 	width: 220px;
 }
+
+/* disable "grant to moderator menu item */
+.vertical-filmstrip .popover .popupmenu .popupmenu__item:nth-last-of-type(3) {
+	display: none;
+}
