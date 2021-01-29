@@ -69,3 +69,9 @@
 	height: 16px;
 	width: 16px;
 }
+
+/* popup menu */
+.vertical-filmstrip .popover .popupmenu {
+	background-color: var(--grey-1);
+	width: 220px;
+}
