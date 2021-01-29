@@ -50,6 +50,8 @@
 .settings-pane .itZGfB,
 .settings-pane .mock-atlaskit-label {
 	font-size: 12px;
+	font-family: "Roboto-Regular",sans-serif !important;
+	font-weight: 400;
 	color: rgba(255, 255, 255, 0.7);
 }
 
@@ -97,6 +99,9 @@
 .Content__HeaderOrFooter-sc-1npw367-2 .fserWm,
 .Content__HeaderOrFooter-sc-1npw367-2 .KSZawh {
 	background-color: white;
+	color: var(--primary-red) !important;
+	font-family: "Roboto-Medium",sans-serif !important;
+	font-weight: 500 !important;
 }
 
 /* decline button */
@@ -144,6 +149,7 @@
 	color: white !important;
 	font-size: 14px !important;
 	height: 32px !important;
+	text-align: left !important;
 }
 
 /* language dropdown item */
