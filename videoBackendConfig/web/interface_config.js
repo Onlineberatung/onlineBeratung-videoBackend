@@ -45,7 +45,7 @@ var interfaceConfig = {
     CONNECTION_INDICATOR_DISABLED: false,
 
     DEFAULT_BACKGROUND: '#474747',
-    DEFAULT_LOCAL_DISPLAY_NAME: 'Ich',
+    DEFAULT_LOCAL_DISPLAY_NAME: 'Ich', /* changed */
     DEFAULT_LOGO_URL: 'images/watermark.png',
     DEFAULT_REMOTE_DISPLAY_NAME: 'Ratsuchender',
     DEFAULT_WELCOME_PAGE_LOGO_URL: 'images/watermark.png',
@@ -155,7 +155,7 @@ var interfaceConfig = {
     RECENT_LIST_ENABLED: false, /*changed*/
     REMOTE_THUMBNAIL_RATIO: 1, // 1:1
 
-	// 'devices', 'language', 'moderator', 'profile', 'calendar'
+	// possible values: 'devices', 'language', 'moderator', 'profile', 'calendar'
     SETTINGS_SECTIONS: [ 'devices', 'language', 'profile' ], /*changed*/
     SHOW_BRAND_WATERMARK: false,
 
@@ -191,13 +191,13 @@ var interfaceConfig = {
      * - it's impossible to control the placement of buttons
      * - 'desktop' controls the "Share your screen" button
      */
-    /*TOOLBAR_BUTTONS: [
+    /* possible values: [
         'microphone', 'camera', 'desktop', 'embedmeeting', 'fullscreen',
         'fodeviceselection', 'hangup', 'profile', 'chat', 'recording',
         'livestreaming', 'etherpad', 'sharedvideo', 'settings', 'raisehand',
         'videoquality', 'filmstrip', 'invite', 'feedback', 'stats', 'shortcuts',
         'tileview', 'videobackgroundblur', 'download', 'help', 'mute-everyone', 'security'
-    ],*/
+    ]*/
     TOOLBAR_BUTTONS: [
         'microphone', 'camera', 'hangup', 'settings', 'tileview', 'desktop'
     ], /*changed*/
