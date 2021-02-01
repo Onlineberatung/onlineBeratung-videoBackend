@@ -89,7 +89,7 @@
 
 .indicator-icon-container.audioMuted.toolbar-icon .jitsi-icon,
 .indicator-icon-container.videoMuted.toolbar-icon .jitsi-icon {
-	width: 18px;
+	width: 13px;
 	height: 13px;
 	background-repeat: no-repeat;
 	background-size: 13px 13px;
@@ -102,4 +102,13 @@
 
 .indicator-icon-container.videoMuted.toolbar-icon .jitsi-icon {
 	background-image: url("../images/icons/camera-off.svg");
+}
+
+.vertical-filmstrip .filmstrip__videos .videocontainer .indicator-container {
+	margin-right: 4px;
+}
+
+.vertical-filmstrip .filmstrip__videos .videocontainer .remote-video-menu-trigger {
+	margin-bottom: 10px;
+	margin-left: 6px;
 }
