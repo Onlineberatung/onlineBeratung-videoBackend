@@ -80,3 +80,26 @@
 .vertical-filmstrip .popover .popupmenu .popupmenu__item:nth-last-of-type(3) {
 	display: none;
 }
+
+/* replace muted/camera-off icon */
+.indicator-icon-container.audioMuted.toolbar-icon svg,
+.indicator-icon-container.videoMuted.toolbar-icon svg {
+	display: none;
+}
+
+.indicator-icon-container.audioMuted.toolbar-icon .jitsi-icon,
+.indicator-icon-container.videoMuted.toolbar-icon .jitsi-icon {
+	width: 18px;
+	height: 13px;
+	background-repeat: no-repeat;
+	background-size: 13px 13px;
+	background-position: center center;
+}
+
+.indicator-icon-container.audioMuted.toolbar-icon .jitsi-icon {
+	background-image: url("../images/icons/audio-off.svg");
+}
+
+.indicator-icon-container.videoMuted.toolbar-icon .jitsi-icon {
+	background-image: url("../images/icons/camera-off.svg");
+}
