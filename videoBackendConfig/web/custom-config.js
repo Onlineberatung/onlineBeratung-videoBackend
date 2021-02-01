@@ -1,1 +1,1 @@
-config.tokenAuthUrl = 'authError.html';
+config.tokenAuthUrl = 'static/authError.html';
