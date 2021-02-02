@@ -1,0 +1,149 @@
+.new-toolbox .toolbox-content .button-group-center {
+	display: flex;
+	width: auto;
+	padding: 8px 0 8px 4px;
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 100px;
+}
+
+/* small settings button underneath audio and video button */
+.settings-button-container .settings-button-small-icon {
+	display: none;
+}
+
+.audio-preview,
+.video-preview {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.new-toolbox .toolbox-content .button-group-center > div:nth-of-type(1) .toolbox-icon,
+.new-toolbox .toolbox-content .button-group-center > div:nth-of-type(2) .toolbox-icon,
+.new-toolbox .toolbox-content .button-group-center > div:nth-of-type(3) .toolbox-icon,
+.new-toolbox .toolbox-content .button-group-center > div:nth-of-type(1) .toolbox-icon.toggled,
+.new-toolbox .toolbox-content .button-group-center > div:nth-of-type(3) .toolbox-icon.toggled {
+	border: none;
+	background-size: 24px 24px;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.new-toolbox .toolbox-content .button-group-center > div:nth-of-type(1) .toolbox-icon,
+.new-toolbox .toolbox-content .button-group-center > div:nth-of-type(3) .toolbox-icon,
+.new-toolbox .toolbox-content .button-group-center > div:nth-of-type(1) .toolbox-icon.toggled,
+.new-toolbox .toolbox-content .button-group-center > div:nth-of-type(3) .toolbox-icon.toggled,
+.new-toolbox .toolbox-content .button-group-center > div:nth-of-type(1) .toolbox-icon.toggled:hover,
+.new-toolbox .toolbox-content .button-group-center > div:nth-of-type(3) .toolbox-icon.toggled:hover {
+	background-color: transparent;
+}
+
+.new-toolbox .toolbox-content .button-group-center > div:nth-of-type(1) .toolbox-icon:hover,
+.new-toolbox .toolbox-content .button-group-center > div:nth-of-type(3) .toolbox-icon:hover {
+	background-color: transparent;
+	border: none;
+}
+
+/* mute button */
+.new-toolbox .toolbox-content .button-group-center > div:nth-of-type(1) .toolbox-icon {
+	background-image: url("../images/icons/audio-on.svg");
+}
+
+.new-toolbox .toolbox-content .button-group-center > div:nth-of-type(1) .toolbox-icon.toggled {
+	background-image: url("../images/icons/audio-off.svg");
+}
+
+/* camera on/off button */
+.new-toolbox .toolbox-content .button-group-center > div:nth-of-type(3) .toolbox-icon {
+	background-image: url("../images/icons/camera-on.svg");
+}
+
+.new-toolbox .toolbox-content .button-group-center > div:nth-of-type(3) .toolbox-icon.toggled {
+	background-image: url("../images/icons/camera-off.svg");
+}
+
+/* end call button */
+.new-toolbox .toolbox-content .button-group-center > div:nth-of-type(2) {
+	order: 3;
+}
+
+.new-toolbox .toolbox-content .button-group-center .toolbox-button:nth-child(2) .toolbox-icon {
+	height: 40px;
+	width: 40px;
+	background-color: var(--primary-red);
+	border-color: var(--primary-red);
+	background-image: url("../images/icons/call-off.svg");
+	transition: all .6s ease;
+}
+
+.new-toolbox .toolbox-content .button-group-center .toolbox-button:nth-child(2) .toolbox-icon:hover {
+	background-color: var(--primary-red-dark);
+	border-color: var(--primary-red-dark);
+}
+
+.new-toolbox .toolbox-content .button-group-center .toolbox-button:nth-child(1) .toolbox-icon svg,
+.new-toolbox .toolbox-content .button-group-center .toolbox-button:nth-child(2) .toolbox-icon svg,
+.new-toolbox .toolbox-content .button-group-center .toolbox-button:nth-child(3) .toolbox-icon svg,
+.button-group-right > .toolbox-button .toolbox-icon .jitsi-icon svg {
+	display: none;
+}
+
+/* toggle tiles mode */
+.button-group-right > .toolbox-button .toolbox-icon,
+.button-group-right > .toolbox-button .toolbox-icon:hover,
+.button-group-right > .toolbox-button .toolbox-icon.toggled {
+	background-image: url("../images/icons/view.svg");
+	background-size: 20px 20px;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.new-toolbox .toolbox-content .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-icon:hover {
+	background-color: rgba(255,255,255,.15);
+}
+
+.new-toolbox .toolbox-content .button-group-right {
+	align-items: center;
+}
+
+/* settings menu button */
+.new-toolbox .CvzNc {
+	background-color: var(--primary-grey);
+}
+
+.new-toolbox .toolbox-content .overflow-menu .overflow-menu-item {
+	color: white !important;
+}
+
+.new-toolbox .toolbox-content .overflow-menu .overflow-menu-item:hover {
+	background-color: var(--grey-1);
+}
+
+.new-toolbox .toolbox-content .overflow-menu .overflow-menu-item-icon svg {
+	fill: white !important;
+}
+
+/* screen sharing button */
+.new-toolbox .toolbox-content .button-group-left .toolbox-button {
+	display: flex;
+	align-items: center;
+}
+
+@media only screen and (max-width: 500px) {
+	.new-toolbox .toolbox-content .button-group-center .toolbox-button .toolbox-icon, .new-toolbox .toolbox-content .button-group-left .toolbox-button .toolbox-icon, .new-toolbox .toolbox-content .button-group-right .toolbox-button .toolbox-icon {
+		height: 40px;
+		width: 40px;
+	}
+}
+
+@media only screen and (max-width: 700px) {
+	.new-toolbox .toolbox-content .button-group-center .toolbox-button .toolbox-icon, .new-toolbox .toolbox-content .button-group-left .toolbox-button .toolbox-icon, .new-toolbox .toolbox-content .button-group-right .toolbox-button .toolbox-icon {
+		height: 40px;
+		width: 40px;
+	}
+
+	.new-toolbox .toolbox-content .button-group-center .toolbox-button .toolbox-icon svg, .new-toolbox .toolbox-content .button-group-left .toolbox-button .toolbox-icon svg, .new-toolbox .toolbox-content .button-group-right .toolbox-button .toolbox-icon svg {
+		height: 24px;
+		width: 24px;
+	}
+}
