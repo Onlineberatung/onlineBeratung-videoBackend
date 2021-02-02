@@ -1,0 +1,183 @@
+/* settings container */
+.Modal__PositionerAbsolute-sc-1jmnqyd-1 {
+	top: 50% !important;
+	transform: translateY(-185px);
+}
+
+/* settings window */
+.eoRGoR {
+	background-color: var(--primary-grey) !important;
+}
+
+/* overlay behind settings window */
+.tlylZ {
+	background-color: rgba(101, 95, 101, 0.85) !important;
+	backdrop-filter: blur(5px);
+}
+
+/* settings headline */
+.jUctfm {
+	color: white;
+	padding-left: 7px;
+}
+
+/*navigation bar */
+.ybfvp {
+	background-color: var(--grey-1) !important;
+}
+
+
+/* active navigation item underline */
+.bHNyBH {
+	background-color: white !important;
+}
+
+/* navigation item active */
+.iqNwPx {
+	color:rgba(255, 255, 255, 1) !important;
+}
+.iqNwPx:focus {
+	box-shadow: none !important;
+}
+
+/* navigation item disabled */
+.oQiLZ {
+	color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* input labels */
+.settings-pane .device-selector-label,
+.settings-pane .itZGfB,
+.settings-pane .mock-atlaskit-label {
+	font-size: 12px;
+	font-family: "Roboto-Regular",sans-serif !important;
+	font-weight: 400;
+	color: rgba(255, 255, 255, 0.7);
+}
+
+/* dropdown field */
+.settings-pane .device-selection .device-selectors .device-selector-trigger {
+	background-color: var(--grey-1);
+	border: none;
+	margin-bottom: 8px;
+	color: white;
+}
+
+/* dropdown overlay container */
+.settings-pane .caSnlw > div[style] {
+	top: -12px !important;
+}
+
+/* dropdown overlay */
+.settings-pane .cksvax[style] {
+	border: none !important;
+	background-color: var(--grey-1);
+	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* dropdown overlay field */
+.settings-pane .hWFSra:hover {
+	background-color: var(--grey-2);
+}
+
+/* dropdown overlay text */
+.settings-pane .jAdcTq {
+	color: white;
+}
+
+/* audio input background */
+.settings-dialog .device-selection .audio-input-preview {
+	background-color: var(--grey-1);
+}
+
+/* audio input bar */
+.settings-dialog .device-selection .audio-input-preview .audio-input-preview-level {
+	background-color: var(--success);
+}
+
+/* confirm button */
+.Content__HeaderOrFooter-sc-1npw367-2 .fserWm,
+.Content__HeaderOrFooter-sc-1npw367-2 .KSZawh,
+.audio-preview-test-button {
+	padding: 0 16px;
+	border-radius: 24px;
+	background-color: white;
+	color: var(--primary-red) !important;
+	font-family: "Roboto-Medium",sans-serif !important;
+	font-weight: 500 !important;
+}
+
+.audio-preview-test-button {
+	color: var(--primary-grey) !important; 
+}
+
+/* decline button */
+.Content__HeaderOrFooter-sc-1npw367-2 .ceIglU {
+	border-radius: 24px !important;
+	color: white !important;
+}
+
+/* decline button hover */
+.Content__HeaderOrFooter-sc-1npw367-2 .gxzuWQ {
+	border-radius: 24px;
+	color: white !important;
+	background-color: var(--grey-1) !important;
+}
+
+.settings-pane .device-selection .audio-output-preview a {
+	color: white;
+}
+
+/* name input field */
+.settings-pane .jsYMHu,
+.settings-pane .jsYMHu:hover,
+.settings-pane .dEUJGG {
+	background-color: var(--grey-1);
+	color: white;
+	border: none;
+}
+
+.settings-pane .jsYMHu .GVpqe::placeholder,
+.settings-pane .jsYMHu .GVpqe.focus-visible::placeholder {
+	color: white !important;
+}
+
+/* hide e-mail input field */
+.settings-pane .profile-edit .profile-edit-field:nth-of-type(2) {
+	display: none;
+}
+
+/* language dropdown button */
+.settings-pane .hdTmWL,
+.settings-pane .jJvlFE,
+.settings-pane .fAMqBy,
+.settings-pane .kVhihV,
+.settings-pane .LlcxD,
+.settings-pane .bQWkvY {
+	background-color: var(--grey-1);
+	color: white !important;
+	font-size: 14px !important;
+	height: 32px !important;
+	text-align: left !important;
+}
+
+/* language dropdown item */
+.settings-pane .jXQlZM.jXQlZM {
+	background-color: var(--grey-1);
+	color: white;
+}
+
+.settings-pane .jXQlZM.jXQlZM:hover {
+	background-color: var(--grey-2);
+	color: white;
+}
+
+/* remove prejoin screen settings */
+.settings-pane .more-tab .settings-sub-pane:nth-of-type(1) {
+	display: none;
+}
+
+/* microphone source settings on prejoin */
+.audio-preview-icon--check {
+	background: var(--success);
+}

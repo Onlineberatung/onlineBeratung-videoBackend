@@ -15,7 +15,7 @@ services:
             - ${CUSTOMFILES}/fonts:/usr/share/jitsi-meet/fonts
             - ${CUSTOMFILES}/images:/usr/share/jitsi-meet/images
             - ${CUSTOMFILES}/html/index.html:/usr/share/jitsi-meet/index.html
-            - ${CUSTOMFILES}/html/close.html:/usr/share/jitsi-meet/static/close3.html
+            - ${CUSTOMFILES}/images/favicon.ico:/usr/share/jitsi-meet/favicon.ico
         environment:
             - ENABLE_LETSENCRYPT
             - ENABLE_HTTP_REDIRECT
