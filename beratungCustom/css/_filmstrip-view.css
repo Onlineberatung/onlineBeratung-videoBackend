@@ -77,7 +77,7 @@
 }
 
 /* disable "grant to moderator menu item */
-.vertical-filmstrip .popover .popupmenu .popupmenu__item:nth-last-of-type(3) {
+.vertical-filmstrip .popover .popupmenu .popupmenu__item:nth-of-type(3) {
 	display: none;
 }
 
@@ -104,7 +104,8 @@
 	background-image: url("../images/icons/camera-off.svg");
 }
 
-.vertical-filmstrip .filmstrip__videos .videocontainer .indicator-container {
+.videocontainer__toolbar .indicator-container,
+.videocontainer__toptoolbar .indicator-container {
 	margin-right: 4px;
 }
 
