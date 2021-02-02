@@ -1,0 +1,1 @@
+config.tokenAuthUrl = 'static/authError.html';
