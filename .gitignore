@@ -2,6 +2,23 @@
 !.mvn/wrapper/maven-wrapper.jar
 /node_modules
 
+### generated Jitsi-Files ###
+/videoBackendConfig/jicofo/*.properties
+/videoBackendConfig/jvb/*.properties
+/videoBackendConfig/jvb/jvb.conf
+/videoBackendConfig/prosody/config/*.lua
+/videoBackendConfig/prosody/config/*.conf
+/videoBackendConfig/prosody/config/certs
+/videoBackendConfig/prosody/config/conf.d
+/videoBackendConfig/prosody/config/data
+/videoBackendConfig/web/nginx
+/videoBackendConfig/web/keys
+/videoBackendConfig/web/acme-certs
+/videoBackendConfig/web/acme.sh
+
+### .env (local config) ###
+.env
+
 ### STS ###
 .apt_generated
 .classpath

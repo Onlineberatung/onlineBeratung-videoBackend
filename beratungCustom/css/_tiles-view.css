@@ -1,0 +1,21 @@
+.tile-view #filmstripRemoteVideos {
+	margin: 120px 0;
+}
+
+.remote-video-menu-trigger {
+	margin-right: 7px;
+}
+
+.remote-video-menu-trigger svg {
+	height: 18px;
+	width: 18px;
+}
+
+.videocontainer__toolbar .indicator-container svg {
+	height: 14px;
+	width: 14px;
+}
+
+#filmstripRemoteVideosContainer .videocontainer.display-avatar-only {
+	background-color: black !important;
+}
