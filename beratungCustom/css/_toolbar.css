@@ -185,8 +185,12 @@ button.shareUrlButton::before {
 }
 
 .prejoin-screen .shareUrlButton {
-	bottom: 72px;
+	bottom: 64px;
 	left: 24px;
+}
+
+.prejoin-screen .shareUrlButton:hover {
+	opacity: 0.8;
 }
 
 .prejoin-screen .shareUrlButton--copied::before {
@@ -269,7 +273,7 @@ button.shareUrlButton::before {
 	.prejoin-screen .shareUrlButton {
 		width: 240px;
 		bottom: auto;
-		top: 120px;
+		top: 128px;
 		left: 50%;
 		transform: translateX(-120px);
 		justify-content: center;
