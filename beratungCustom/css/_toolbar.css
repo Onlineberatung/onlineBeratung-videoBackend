@@ -228,6 +228,24 @@ button.shareUrlButton::before {
 		height: 40px;
 		width: 40px;
 	}
+
+	/* adjust spacing of toolbox for small viewport */
+	.new-toolbox .toolbox-content .button-group-center > div {
+		margin-right: 8px;
+	}
+
+	.new-toolbox .toolbox-content .button-group-center {
+		padding-left: 104px;
+	}
+
+	/* screen sharing button */
+	.new-toolbox .toolbox-content .button-group-left > div:first-child {
+		transform: translateX(-70px);
+	}
+
+	.videocall-screen .shareUrlButton {
+		transform: translateX(-112px);
+	}
 }
 
 @media only screen and (max-width: 700px) {
@@ -240,13 +258,18 @@ button.shareUrlButton::before {
 		height: 24px;
 		width: 24px;
 	}
+
+	/* disable tile view for mobile devices */
+	.new-toolbox .toolbox-content .button-group-right .toolbox-button {
+		display: none;
+	}
 }
 
 @media only screen and (max-width: 1024px) {
-	.premeeting-screen .shareUrlButton {
+	.prejoin-screen .shareUrlButton {
 		width: 240px;
 		bottom: auto;
-		top: 24px;
+		top: 120px;
 		left: 50%;
 		transform: translateX(-120px);
 		justify-content: center;
