@@ -147,11 +147,11 @@
 /* screen sharing button */
 .new-toolbox .toolbox-content .button-group-left > div:first-child {
 	position: absolute;
-    left: 50%;
+	left: 50%;
 	bottom: 28px;
-    height: 40px;
-    width: 40px;
-    transform: translateX(-80px);
+	height: 40px;
+	width: 40px;
+	transform: translateX(-80px);
 	margin: 0;
 }
 
