@@ -2,13 +2,17 @@ const buttonText = 'Video-Link kopieren';
 const buttonTextCopied = 'In Zwischenablage kopiert';
 const buttonChangeDuration = 3000;
 
-const urlWithToken = window.location.href;
+const initialUrl = window.location.href;
 
 document.addEventListener('DOMContentLoaded', () => {
 	document.title = 'Beratung & Hilfe - Videoanruf';
 	
-	// prepend share button to body for prejoin page
-	createShareUrlButton(document.querySelector('body'));
+	console.log('is? initiator', isInitiator());
+	// prepend share button to body for prejoin page (if user is initiator of the video call)
+	if (isInitiator()) {
+		document.body.classList.add('isInitiator');
+		createShareUrlButton(document.querySelector('body'));
+	}
 	
 	/* rename prejoin join button */
 	const joinButton = document.querySelector('.prejoin-preview-dropdown-container .action-btn.primary');
@@ -27,13 +31,15 @@ document.addEventListener('DOMContentLoaded', () => {
 		document.querySelector('body > .shareUrlButton').remove();
 
 		/* add new share-URL-button to toolbox as soon the DOM-element is rendered */
-		waitForElement('#new-toolbox', 0)
-			.then(function () {
-				createShareUrlButton(document.querySelector('#new-toolbox'));
-			})
-			.catch(() => {
-				console.error('toolbox not loaded properly');
+		if (isInitiator()) {
+			waitForElement('#new-toolbox', 0)
+				.then(function () {
+					createShareUrlButton(document.querySelector('#new-toolbox'));
+				})
+				.catch(() => {
+					console.error('toolbox not loaded properly');
 			});
+		}
 	});
 });
 
@@ -43,7 +49,7 @@ const createShareUrlButton = (parentElement) => {
 	button.classList.add('shareUrlButton');
 	button.setAttribute('title', buttonText);
 	button.addEventListener('click', (event) =>
-		copyUrltoClipboard(event, urlWithToken)
+		copyUrltoClipboard(event, getShareableUrl())
 	);
 	parentElement.prepend(button);
 }
@@ -70,6 +76,20 @@ const copyUrltoClipboard = (event, url) => {
 		event.target.classList.remove('shareUrlButton--copied');
 		event.target.innerHTML = buttonText;
 	}, buttonChangeDuration);
+}
+
+const getShareableUrl = () => {
+	const url = new URL(initialUrl);
+	const searchParams = url.searchParams;
+	searchParams.delete('isInitiator');
+	url.search = searchParams.toString();
+	return url.toString();
+}
+
+const isInitiator = () => {
+	const url = new URL(initialUrl);
+	const searchParams = url.searchParams;
+	return searchParams.get('isInitiator') === 'true';
 }
 
 /**
