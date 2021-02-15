@@ -1,9 +1,17 @@
 .new-toolbox .toolbox-content .button-group-center {
 	display: flex;
 	width: auto;
-	padding: 8px 0 8px 4px;
+	padding: 8px 0;
 	background-color: rgba(0, 0, 0, 0.5);
 	border-radius: 100px;
+}
+
+/* expand the toolbar on the left to make room for the share button icon and screen sharing icon */
+.new-toolbox .toolbox-content .button-group-center {
+	padding-left: 72px;
+}
+.isInitiator .new-toolbox .toolbox-content .button-group-center {
+	padding-left: 128px;
 }
 
 /* small settings button underneath audio and video button */
@@ -11,10 +19,6 @@
 	display: none;
 }
 
-/* expand the toolbar on the left to make room for the share button icon and screen sharing icon */
-.new-toolbox .toolbox-content .button-group-center {
-	padding-left: 128px;
-}
 
 .new-toolbox .toolbox-content .button-group-center > div {
 	height: 40px;
@@ -58,7 +62,7 @@
 
 /* mute button */
 .new-toolbox .toolbox-content .button-group-center > div:nth-of-type(1) {
-	order: 3;
+	order: 1;
 }
 
 .new-toolbox .toolbox-content .button-group-center > div:nth-of-type(1) .toolbox-icon {
@@ -84,7 +88,7 @@
 
 /* end call button */
 .new-toolbox .toolbox-content .button-group-center > div:nth-of-type(2) {
-	order: 1;
+	order: 3;
 }
 
 .new-toolbox .toolbox-content .button-group-center .toolbox-button:nth-child(2) .toolbox-icon {
@@ -151,8 +155,11 @@
 	bottom: 28px;
 	height: 40px;
 	width: 40px;
-	transform: translateX(-80px);
 	margin: 0;
+	transform: translateX(-100px);
+}
+.isInitiator .new-toolbox .toolbox-content .button-group-left > div:first-child {
+	transform: translateX(-80px);
 }
 
 .new-toolbox .toolbox-content .button-group-left > div:first-child .toolbox-icon:hover {
@@ -232,24 +239,6 @@ button.shareUrlButton::before {
 		height: 40px;
 		width: 40px;
 	}
-
-	/* adjust spacing of toolbox for small viewport */
-	.new-toolbox .toolbox-content .button-group-center > div {
-		margin-right: 8px;
-	}
-
-	.new-toolbox .toolbox-content .button-group-center {
-		padding-left: 104px;
-	}
-
-	/* screen sharing button */
-	.new-toolbox .toolbox-content .button-group-left > div:first-child {
-		transform: translateX(-70px);
-	}
-
-	.videocall-screen .shareUrlButton {
-		transform: translateX(-112px);
-	}
 }
 
 @media only screen and (max-width: 700px) {
@@ -266,6 +255,23 @@ button.shareUrlButton::before {
 	/* disable tile view for mobile devices */
 	.new-toolbox .toolbox-content .button-group-right .toolbox-button {
 		display: none;
+	}
+
+	/* disable screen sharing button for mobile devices (functionality doesn't work on native mobile devices) */
+	.new-toolbox .toolbox-content .button-group-left > div:first-child {
+		display: none;
+	}
+
+
+	.videocall-screen .new-toolbox .toolbox-content .button-group-center {
+		padding-left: 16px;
+	}
+	body.isInitiator .new-toolbox .toolbox-content .button-group-center {
+		padding-left: 72px;
+	}
+
+	.videocall-screen .shareUrlButton {
+		transform: translateX(-100px);
 	}
 }
 
