@@ -1,14 +1,30 @@
 .new-toolbox .toolbox-content .button-group-center {
 	display: flex;
 	width: auto;
-	padding: 8px 0 8px 4px;
+	padding: 8px 0;
 	background-color: rgba(0, 0, 0, 0.5);
 	border-radius: 100px;
+}
+
+/* expand the toolbar on the left to make room for the share button icon and screen sharing icon */
+.new-toolbox .toolbox-content .button-group-center {
+	padding-left: 72px;
+}
+.isInitiator .new-toolbox .toolbox-content .button-group-center {
+	padding-left: 128px;
 }
 
 /* small settings button underneath audio and video button */
 .settings-button-container .settings-button-small-icon {
 	display: none;
+}
+
+
+.new-toolbox .toolbox-content .button-group-center > div {
+	height: 40px;
+	width: 40px;
+	margin-right: 16px;
+	margin-left: 0;
 }
 
 .audio-preview,
@@ -45,6 +61,10 @@
 }
 
 /* mute button */
+.new-toolbox .toolbox-content .button-group-center > div:nth-of-type(1) {
+	order: 1;
+}
+
 .new-toolbox .toolbox-content .button-group-center > div:nth-of-type(1) .toolbox-icon {
 	background-image: url("../images/icons/audio-on.svg");
 }
@@ -54,6 +74,10 @@
 }
 
 /* camera on/off button */
+.new-toolbox .toolbox-content .button-group-center > div:nth-of-type(3) {
+	order: 2;
+}
+
 .new-toolbox .toolbox-content .button-group-center > div:nth-of-type(3) .toolbox-icon {
 	background-image: url("../images/icons/camera-on.svg");
 }
@@ -71,14 +95,15 @@
 	height: 40px;
 	width: 40px;
 	background-color: var(--primary-red);
-	border-color: var(--primary-red);
+	border: none;
 	background-image: url("../images/icons/call-off.svg");
 	transition: all .6s ease;
+	margin: 0;
 }
 
 .new-toolbox .toolbox-content .button-group-center .toolbox-button:nth-child(2) .toolbox-icon:hover {
 	background-color: var(--primary-red-dark);
-	border-color: var(--primary-red-dark);
+	border: none;
 }
 
 .new-toolbox .toolbox-content .button-group-center .toolbox-button:nth-child(1) .toolbox-icon svg,
@@ -95,7 +120,7 @@
 	background-image: url("../images/icons/view.svg");
 	background-size: 20px 20px;
 	background-repeat: no-repeat;
-	background-position: center center;
+	background-position: center;
 }
 
 .new-toolbox .toolbox-content .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-icon:hover {
@@ -124,9 +149,89 @@
 }
 
 /* screen sharing button */
-.new-toolbox .toolbox-content .button-group-left .toolbox-button {
+.new-toolbox .toolbox-content .button-group-left > div:first-child {
+	position: absolute;
+	left: 50%;
+	bottom: 28px;
+	height: 40px;
+	width: 40px;
+	margin: 0;
+	transform: translateX(-100px);
+}
+.isInitiator .new-toolbox .toolbox-content .button-group-left > div:first-child {
+	transform: translateX(-80px);
+}
+
+.new-toolbox .toolbox-content .button-group-left > div:first-child .toolbox-icon:hover {
+	background-color: transparent;
+}
+
+/* share URL button */
+button.shareUrlButton {
+	position: absolute;
 	display: flex;
 	align-items: center;
+	background-color: transparent;
+	border: none;
+	font-size: 16px;
+	color: var(--white);
+	z-index: 500;
+	cursor: pointer;
+}
+
+button.shareUrlButton::before {
+	content: '';
+	display: inline-block;
+	height: 16px;
+	width: 16px;
+	margin-right: 8px;
+	background-image: url("../images/icons/link.svg");
+	background-size: 16px 16px;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.prejoin-screen .shareUrlButton {
+	bottom: 64px;
+	left: 24px;
+}
+
+.prejoin-screen .shareUrlButton:hover {
+	opacity: 0.8;
+}
+
+.prejoin-screen .shareUrlButton--copied::before {
+	background-image: url("../images/icons/checkmark.svg");
+}
+
+.videocall-screen .shareUrlButton {
+	left: 50%;
+	bottom: 28px;
+	transform: translateX(-132px);
+	font-size: 0;
+	padding: 0;
+}
+
+.videocall-screen .shareUrlButton::before {
+	height: 40px;
+	width: 40px;
+	background-size: 20px 20px;
+	margin-right: 0;
+}
+
+.videocall-screen .shareUrlButton--copied::after {
+	content: 'Video-Link wurde in die Zwischenablage kopiert';
+	display: inline-block;
+	position: absolute;
+	font-size: 14px;
+	line-height: 19px;
+	bottom: 56px;
+	width: 168px;
+	background-color: rgba(0,0,0,0.5);
+	text-align: left;
+	padding: 12px 8px;
+	border-radius: 4px;
+	cursor: auto;
 }
 
 @media only screen and (max-width: 500px) {
@@ -145,5 +250,38 @@
 	.new-toolbox .toolbox-content .button-group-center .toolbox-button .toolbox-icon svg, .new-toolbox .toolbox-content .button-group-left .toolbox-button .toolbox-icon svg, .new-toolbox .toolbox-content .button-group-right .toolbox-button .toolbox-icon svg {
 		height: 24px;
 		width: 24px;
+	}
+
+	/* disable tile view for mobile devices */
+	.new-toolbox .toolbox-content .button-group-right .toolbox-button {
+		display: none;
+	}
+
+	/* disable screen sharing button for mobile devices (functionality doesn't work on native mobile devices) */
+	.new-toolbox .toolbox-content .button-group-left > div:first-child {
+		display: none;
+	}
+
+
+	.videocall-screen .new-toolbox .toolbox-content .button-group-center {
+		padding-left: 16px;
+	}
+	body.isInitiator .new-toolbox .toolbox-content .button-group-center {
+		padding-left: 72px;
+	}
+
+	.videocall-screen .shareUrlButton {
+		transform: translateX(-100px);
+	}
+}
+
+@media only screen and (max-width: 1024px) {
+	.prejoin-screen .shareUrlButton {
+		width: 240px;
+		bottom: auto;
+		top: 128px;
+		left: 50%;
+		transform: translateX(-120px);
+		justify-content: center;
 	}
 }
