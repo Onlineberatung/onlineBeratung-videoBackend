@@ -124,7 +124,7 @@
 	display: none;
 }
 
-/* 'your microphne seems to work' banner */
+/* 'your microphone seems to work' banner */
 .prejoin-preview-status--ok {
 	background-color: var(--success);
 	position: absolute;

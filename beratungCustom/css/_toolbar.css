@@ -120,7 +120,7 @@
 	background-image: url("../images/icons/view.svg");
 	background-size: 20px 20px;
 	background-repeat: no-repeat;
-	background-position: center center;
+	background-position: center;
 }
 
 .new-toolbox .toolbox-content .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-icon:hover {
@@ -188,7 +188,7 @@ button.shareUrlButton::before {
 	background-image: url("../images/icons/link.svg");
 	background-size: 16px 16px;
 	background-repeat: no-repeat;
-	background-position: center center;
+	background-position: center;
 }
 
 .prejoin-screen .shareUrlButton {
