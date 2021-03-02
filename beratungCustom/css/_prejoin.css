@@ -97,7 +97,7 @@
 }
 
 .premeeting-screen .media-btn-container {
-	margin-bottom: 40px;
+	margin-bottom: 56px;
 }
 
 .premeeting-screen-avatar.avatar[style] {
@@ -124,6 +124,9 @@
 	display: none;
 }
 
+/* 'your microphone seems to work' banner */
 .prejoin-preview-status--ok {
 	background-color: var(--success);
+	position: absolute;
+	width: 100%;
 }

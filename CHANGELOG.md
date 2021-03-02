@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/compare/v1.1.0...v1.2.0) (2021-03-02)
+
+
+### Features
+
+* 🎸 add share button to toolbar ([2b76660](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/commit/2b766607fb6088f4d857d0e29a234c45c32f3894))
+* 🎸 disable deeplinking to allow mobile browser version ([a61236e](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/commit/a61236e9db4344f8f47e10b30f9a95131e20be64))
+* 🎸 only show share button for initiator of the video call ([60c0c92](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/commit/60c0c929e9946831ed58ecef9f60a77ff82689cd))
+
+
+### Bug Fixes
+
+* 🐛 adjust spacings ([d4b08e0](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/commit/d4b08e0a1822b173f341fbf60ae53d389fc4f0e3))
+* 🐛 toolbar on mobile ([c20f339](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/commit/c20f339efe890a667a64edbc955495cb336b5a4d))
+* 🐛 toolbar spacing if there is no sharing functionality ([8979fdf](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/commit/8979fdfbdb053e052514ffa279e41d18a7252da9))
+
 ## 1.1.0 (2021-02-08)
 
 

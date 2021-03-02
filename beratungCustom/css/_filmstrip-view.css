@@ -93,7 +93,7 @@
 	height: 13px;
 	background-repeat: no-repeat;
 	background-size: 13px 13px;
-	background-position: center center;
+	background-position: center;
 }
 
 .indicator-icon-container.audioMuted.toolbar-icon .jitsi-icon {
