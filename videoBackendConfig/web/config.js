@@ -701,6 +701,8 @@ config.hosts.domain = 'meet.jitsi';
 config.focusUserJid = 'focus@auth.meet.jitsi';
 
 config.hosts.muc = 'muc.meet.jitsi';
+// Domain for authenticated users. Defaults to <domain>.
+config.hosts.authdomain = 'meet.jitsi';
 config.bosh = '/http-bind';
 config.websocket = 'wss://caritas.local:8443/xmpp-websocket';
 // Video configuration.
@@ -809,3 +811,5 @@ if (!config.testing.hasOwnProperty('octo')) config.testing.octo = {};
 
 config.testing.capScreenshareBitrate = 1;
 config.testing.octo.probability = 0;
+config.tokenAuthUrl = 'static/authError.html';
+config.disableDeepLinking = true;
