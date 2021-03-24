@@ -109,15 +109,10 @@ const handleConferenceDestruction = () => {
 	/* wait for jitsi room to be properly initialized */
 	if (typeof APP !== "undefined" && typeof APP.conference !== "undefined" && APP.conference.getMyUserId()){
 		/* add listener to the conference */
-		APP.conference.addConferenceListener("conference.failed",function (e) {
-			switch(e) 
-				{
-					case "conference.destroyed":
-						document.location.href="close3.html";
-						break;
-					default:
-						console.error(e)
-				}
+		APP.conference._room.on("conference.failed", function (error) {
+			if (error === "conference.destroyed") {
+				document.location.href = "static/close3.html";
+			}
 		});
 	} else {
 		setTimeout(waitForElement, 250);
