@@ -7,7 +7,6 @@ const initialUrl = window.location.href;
 document.addEventListener('DOMContentLoaded', () => {
 	document.title = 'Beratung & Hilfe - Videoanruf';
 	
-	console.log('is? initiator', isInitiator());
 	// prepend share button to body for prejoin page (if user is initiator of the video call)
 	if (isInitiator()) {
 		document.body.classList.add('isInitiator');
@@ -28,7 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		document.body.classList.add('videocall-screen');
 
 		/* remove share-URL-button of prejoin page */
-		document.querySelector('body > .shareUrlButton').remove();
+		const shareButton = document.querySelector('body > .shareUrlButton');
+		if (shareButton) {
+			shareButton.remove();
+		}
 
 		/* add new share-URL-button to toolbox as soon the DOM-element is rendered */
 		if (isInitiator()) {
@@ -41,6 +43,17 @@ document.addEventListener('DOMContentLoaded', () => {
 			});
 		}
 	});
+
+	/* initialize event handling for conference destruction by moderator departure */
+	const inVideoRoom = () => {
+		const url = window.location.pathname;
+		return !(url.includes('close3.html') || url.includes('authError.html'));
+	}
+	waitForElement('#new-toolbox', 0).then(() => {
+		if (inVideoRoom()) {
+			handleConferenceDestruction();
+		}
+	})
 });
 
 const createShareUrlButton = (parentElement) => {
@@ -90,6 +103,20 @@ const isInitiator = () => {
 	const url = new URL(initialUrl);
 	const searchParams = url.searchParams;
 	return searchParams.get('isInitiator') === 'true';
+}
+
+const handleConferenceDestruction = () => {
+	/* wait for jitsi room to be properly initialized */
+	if (typeof APP !== "undefined" && typeof APP.conference !== "undefined" && APP.conference.getMyUserId()){
+		/* add listener to the conference */
+		APP.conference._room.on("conference.failed", function (error) {
+			if (error === "conference.destroyed") {
+				document.location.href = "static/close3.html";
+			}
+		});
+	} else {
+		setTimeout(waitForElement, 250);
+	}
 }
 
 /**
