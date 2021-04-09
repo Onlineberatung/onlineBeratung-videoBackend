@@ -117,6 +117,7 @@ services:
         volumes:
             - ${CONFIG}/prosody/config:/config:Z
             - ${CONFIG}/prosody/prosody-plugins-custom:/prosody-plugins-custom:Z
+            - ${CONFIG}/prosody/prosody-plugins-custom/mod_muc_lobby_rooms.lua:/prosody-plugins/mod_muc_lobby_rooms.lua:Z
         environment:
             - AUTH_TYPE
             - ENABLE_AUTH
