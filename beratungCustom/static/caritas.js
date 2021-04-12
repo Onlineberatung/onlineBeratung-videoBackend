@@ -10,39 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	// prepend share button to body for prejoin page (if user is initiator of the video call)
 	if (isInitiator()) {
 		document.body.classList.add('isInitiator');
-		createShareUrlButton(document.querySelector('body'));
-	}
-	
-	/* rename prejoin join button */
-	const joinButton = document.querySelector('.prejoin-preview-dropdown-container .action-btn.primary');
-	if (joinButton) {
-		joinButton.innerHTML = 'Jetzt Teilnehmen';
-	}
-		
-	/* Specify with class on the body that prejoin page is active */
-	document.body.classList.add('prejoin-screen');
-	joinButton.addEventListener('click', () => {
-		/* Specify with class on the body that videocall page is active */
-		document.body.classList.remove('prejoin-screen');
-		document.body.classList.add('videocall-screen');
 
-		/* remove share-URL-button of prejoin page */
-		const shareButton = document.querySelector('body > .shareUrlButton');
-		if (shareButton) {
-			shareButton.remove();
-		}
-
-		/* add new share-URL-button to toolbox as soon the DOM-element is rendered */
-		if (isInitiator()) {
-			waitForElement('#new-toolbox', 0)
-				.then(function () {
-					createShareUrlButton(document.querySelector('#new-toolbox'));
-				})
-				.catch(() => {
-					console.error('toolbox not loaded properly');
-			});
-		}
-	});
+		waitForElement('#new-toolbox', 0)
+		.then(function () {
+			createShareUrlButton(document.querySelector('#new-toolbox'));
+		})
+		.catch(() => {
+			console.error('toolbox not loaded properly');
+		});
+	}
 
 	/* initialize event handling for conference destruction by moderator departure */
 	const inVideoRoom = () => {

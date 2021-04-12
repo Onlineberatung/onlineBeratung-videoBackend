@@ -130,3 +130,55 @@
 	position: absolute;
 	width: 100%;
 }
+
+/* copy jitsi conference link */
+.premeeting-screen .content .copy-meeting {
+	display: none;
+}
+
+/* enter jitsi conference password */
+.premeeting-screen .action-btn.secondary {
+	display: none;
+}
+
+/* waiting spinner */
+#lobby-screen .content .container .spinner {
+	position: relative;
+	height: 60px;
+	width: 60px;
+	margin: 20px;
+}
+
+#lobby-screen .content .container .spinner::before,
+#lobby-screen .content .container .spinner::after {
+	content: '';
+	position: absolute;
+	display: block;
+	height: 100%;
+	width: 100%;
+	background-color: var(--primary-red);
+	border-radius: 100%;
+	animation: bounce 2s infinite ease-in-out;
+}
+
+#lobby-screen .content .container .spinner::after {
+	animation-delay: -1s;
+}
+
+#lobby-screen .content .container .Spinner__Outer-sc-1ejgacn-0 {
+	display: none;
+}
+
+@keyframes bounce {
+	0%,
+	100% {
+		opacity: 1;
+		transform: scale(0);
+		-webkit-transform: scale(0);
+	}
+	50% {
+		opacity: 0;
+		transform: scale(1);
+		-webkit-transform: scale(1);
+	}
+}
