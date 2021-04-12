@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	document.title = 'Beratung & Hilfe - Videoanruf';
 	
 	// prepend share button to body for prejoin page (if user is initiator of the video call)
-	if (isInitiator()) {
-		document.body.classList.add('isInitiator');
+	if (isModerator()) {
+		document.body.classList.add('isModerator');
 
 		waitForElement('#new-toolbox', 0)
 		.then(function () {
@@ -70,15 +70,17 @@ const copyUrltoClipboard = (event, url) => {
 const getShareableUrl = () => {
 	const url = new URL(initialUrl);
 	const searchParams = url.searchParams;
-	searchParams.delete('isInitiator');
-	url.search = searchParams.toString();
-	return url.toString();
+	const jwtParam = searchParams.get('jwt');
+	const jwt = parseJwt(jwtParam);
+	return jwt.guestVideoCallUrl;
 }
 
-const isInitiator = () => {
+const isModerator = () => {
 	const url = new URL(initialUrl);
 	const searchParams = url.searchParams;
-	return searchParams.get('isInitiator') === 'true';
+	const jwtParam = searchParams.get('jwt');
+	const jwt = parseJwt(jwtParam);
+	return jwt.moderator;
 }
 
 const handleConferenceDestruction = () => {
@@ -115,3 +117,16 @@ function waitForElement(querySelector, timeout=0){
         }, 100);
     });
 }
+
+/**
+ * Get decoded object of jwt
+ */
+ function parseJwt (token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+};
