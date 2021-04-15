@@ -2,7 +2,7 @@ const buttonText = 'Video-Link kopieren';
 const buttonTextCopied = 'In Zwischenablage kopiert';
 const buttonChangeDuration = 3000;
 
-const initialUrl = window.location.href;
+const url = new URL(window.location.href);
 
 document.addEventListener('DOMContentLoaded', () => {
 	document.title = 'Beratung & Hilfe - Videoanruf';
@@ -68,19 +68,15 @@ const copyUrltoClipboard = (event, url) => {
 }
 
 const getShareableUrl = () => {
-	const url = new URL(initialUrl);
-	const searchParams = url.searchParams;
-	const jwtParam = searchParams.get('jwt');
+	const jwtParam = url.searchParams.get('jwt');
 	const jwt = parseJwt(jwtParam);
 	return jwt.guestVideoCallUrl;
 }
 
 const isModerator = () => {
-	const url = new URL(initialUrl);
-	const searchParams = url.searchParams;
-	const jwtParam = searchParams.get('jwt');
+	const jwtParam = url.searchParams.get('jwt');
 	const jwt = parseJwt(jwtParam);
-	return jwt.moderator;
+	return !!jwt.moderator;
 }
 
 const handleConferenceDestruction = () => {
@@ -93,7 +89,7 @@ const handleConferenceDestruction = () => {
 			}
 		});
 	} else {
-		setTimeout(waitForElement, 250);
+		setTimeout(handleConferenceDestruction, 250);
 	}
 }
 
