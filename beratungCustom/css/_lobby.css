@@ -156,7 +156,7 @@
 	display: block;
 	height: 100%;
 	width: 100%;
-	background-color: var(--primary-red);
+	background-color: var(--success);
 	border-radius: 100%;
 	animation: bounce 2s infinite ease-in-out;
 }
@@ -167,6 +167,16 @@
 
 #lobby-screen .content .container .Spinner__Outer-sc-1ejgacn-0 {
 	display: none;
+}
+
+#lobby-screen .action-btn.primary.disabled {
+	background-color: var(--grey-3);
+	color: var(--grey-2);
+}
+
+#lobby-screen .content .container .joining-message {
+	color: var(--white);
+	text-align: center;
 }
 
 @keyframes bounce {
