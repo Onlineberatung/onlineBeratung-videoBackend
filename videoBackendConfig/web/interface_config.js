@@ -115,7 +115,7 @@ var interfaceConfig = {
     INITIAL_TOOLBAR_TIMEOUT: 5000, /*changed*/
     JITSI_WATERMARK_LINK: 'https://jitsi.org',
 
-    LANG_DETECTION: true, // Allow i18n to detect the system language
+    LANG_DETECTION: false, // Allow i18n to detect the system language
     LIVE_STREAMING_HELP_LINK: 'https://jitsi.org/live', // Documentation reference for the live streaming feature.
     LOCAL_THUMBNAIL_RATIO: 16 / 9, // 16:9
 
