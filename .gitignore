@@ -15,6 +15,7 @@
 /videoBackendConfig/web/keys
 /videoBackendConfig/web/acme-certs
 /videoBackendConfig/web/acme.sh
+/videoBackendConfig/web/config.js
 
 ### .env (local config) ###
 .env
