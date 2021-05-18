@@ -147,6 +147,21 @@
 	display: none;
 }
 
+/* hide 'more' settings tab */
+.settings-dialog .styled__NavItem-sc-716rt7-5:last-child {
+	display: none;
+}
+
+/* hide auth name */
+.profile-edit {
+	margin-bottom: 16px;
+}
+
+.settings-pane.profile-pane .auth-name,
+.settings-pane.profile-pane .mock-atlaskit-label {
+	display: none;
+}
+
 /* language dropdown button */
 .settings-pane .hdTmWL,
 .settings-pane .jJvlFE,

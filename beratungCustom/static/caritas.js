@@ -2,47 +2,23 @@ const buttonText = 'Video-Link kopieren';
 const buttonTextCopied = 'In Zwischenablage kopiert';
 const buttonChangeDuration = 3000;
 
-const initialUrl = window.location.href;
+const url = new URL(window.location.href);
 
 document.addEventListener('DOMContentLoaded', () => {
 	document.title = 'Beratung & Hilfe - Videoanruf';
 	
-	// prepend share button to body for prejoin page (if user is initiator of the video call)
-	if (isInitiator()) {
-		document.body.classList.add('isInitiator');
-		createShareUrlButton(document.querySelector('body'));
-	}
-	
-	/* rename prejoin join button */
-	const joinButton = document.querySelector('.prejoin-preview-dropdown-container .action-btn.primary');
-	if (joinButton) {
-		joinButton.innerHTML = 'Jetzt Teilnehmen';
-	}
-		
-	/* Specify with class on the body that prejoin page is active */
-	document.body.classList.add('prejoin-screen');
-	joinButton.addEventListener('click', () => {
-		/* Specify with class on the body that videocall page is active */
-		document.body.classList.remove('prejoin-screen');
-		document.body.classList.add('videocall-screen');
+	// prepend share button to body for prejoin page (if user is moderator of the video call)
+	if (isModerator()) {
+		document.body.classList.add('isModerator');
 
-		/* remove share-URL-button of prejoin page */
-		const shareButton = document.querySelector('body > .shareUrlButton');
-		if (shareButton) {
-			shareButton.remove();
-		}
-
-		/* add new share-URL-button to toolbox as soon the DOM-element is rendered */
-		if (isInitiator()) {
-			waitForElement('#new-toolbox', 0)
-				.then(function () {
-					createShareUrlButton(document.querySelector('#new-toolbox'));
-				})
-				.catch(() => {
-					console.error('toolbox not loaded properly');
-			});
-		}
-	});
+		waitForElement('#new-toolbox', 0)
+		.then(function () {
+			createShareUrlButton(document.querySelector('#new-toolbox'));
+		})
+		.catch(() => {
+			console.error('toolbox not loaded properly');
+		});
+	}
 
 	/* initialize event handling for conference destruction by moderator departure */
 	const inVideoRoom = () => {
@@ -92,17 +68,15 @@ const copyUrltoClipboard = (event, url) => {
 }
 
 const getShareableUrl = () => {
-	const url = new URL(initialUrl);
-	const searchParams = url.searchParams;
-	searchParams.delete('isInitiator');
-	url.search = searchParams.toString();
-	return url.toString();
+	const jwtParam = url.searchParams.get('jwt');
+	const jwt = parseJwt(jwtParam);
+	return jwt.guestVideoCallUrl;
 }
 
-const isInitiator = () => {
-	const url = new URL(initialUrl);
-	const searchParams = url.searchParams;
-	return searchParams.get('isInitiator') === 'true';
+const isModerator = () => {
+	const jwtParam = url.searchParams.get('jwt');
+	const jwt = parseJwt(jwtParam);
+	return !!jwt.moderator;
 }
 
 const handleConferenceDestruction = () => {
@@ -115,7 +89,7 @@ const handleConferenceDestruction = () => {
 			}
 		});
 	} else {
-		setTimeout(waitForElement, 250);
+		setTimeout(handleConferenceDestruction, 250);
 	}
 }
 
@@ -139,3 +113,16 @@ function waitForElement(querySelector, timeout=0){
         }, 100);
     });
 }
+
+/**
+ * Get decoded object of jwt
+ */
+ function parseJwt (token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+};
