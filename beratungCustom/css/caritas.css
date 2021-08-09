@@ -7,6 +7,7 @@
 @import url("_tiles-view.css");
 @import url("_settings.css");
 @import url("_alerts.css");
+@import url("_securityBanner.css");
 
 body.desktop-browser {
 	font-family: "Roboto-Regular",sans-serif !important;
