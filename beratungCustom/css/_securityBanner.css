@@ -1,0 +1,43 @@
+_:-ms-fullscreen, :root .securityBanner[style] {
+	display: block !important;
+}
+.securityBanner {
+	display: none;
+	background: #ff9f00;
+	color: #3f373f;
+	text-align: left;
+	font-size: 16px;
+	line-height: 21px;
+	padding: 16px 64px;
+	margin: 0;
+	position: relative;
+	z-index: 500;
+}
+.securityBanner a {
+	text-decoration: underline;
+	color: #fff;
+}
+.securityBanner a:hover {
+	color: #f4d2d1;
+}
+.securityBanner > svg {
+	width: 24px;
+	height: 24px;
+	left: 16px;
+	position: absolute;
+}
+.securityBanner a.close svg {
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	top: 16px;
+	right: 16px;
+}
+.securityBanner a.close svg path {
+	transition: fill 500ms ease;
+	fill: #3f373f;
+}
+.securityBanner a.close:hover svg path {
+	fill: #000;
+}
+
