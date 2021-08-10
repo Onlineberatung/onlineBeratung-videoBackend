@@ -1,4 +1,4 @@
-function hideSecurityBanner(e) {
+function securityBanner(e) {
   e.preventDefault();
   document
   .querySelector('.securityBanner')
@@ -12,4 +12,4 @@ if (!window.chrome) {
 }
 document
 .querySelector('.securityBanner a.close')
-.addEventListener('click', hideSecurityBanner);
+.addEventListener('click', securityBanner);
