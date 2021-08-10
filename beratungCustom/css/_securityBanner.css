@@ -1,6 +1,3 @@
-_:-ms-fullscreen, :root .securityBanner[style] {
-	display: block !important;
-}
 .securityBanner {
 	display: none;
 	background: #ff9f00;
