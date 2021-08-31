@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/compare/v1.4.0...v1.4.1) (2021-08-31)
+
+## [1.4.0](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/compare/v1.3.0...v1.4.0) (2021-08-31)
+
+
+### Features
+
+* add security banner for non chromium browsers ([c3b13c0](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/commit/c3b13c0fcd8294e9f3e04f0121719306d3f99178))
+
 ## [1.3.0](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/compare/v1.2.0...v1.3.0) (2021-05-03)
 
 
