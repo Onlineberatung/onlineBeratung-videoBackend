@@ -1,11 +1,14 @@
 module:hook("muc-occupant-left", function(event)
   local barejid = event.occupant.bare_jid;
   local role =  event.room:get_affiliation(barejid);
+  local statistics_enabled = module:get_option_boolean('enable_statistics');
   if role == "owner" then
     local room = event.room:get_name();
     event.room:clear();
-    local utctimestamp = os.date("!%Y-%m-%dT%XZ");
-    fireStatisticsEvent(utctimestamp, room);
+    if statistics_enabled then
+      local utctimestamp = os.date("!%Y-%m-%dT%XZ");
+      fireStatisticsEvent(utctimestamp, room);
+    end
   end
 end)
 
@@ -15,18 +18,21 @@ function fireStatisticsEvent(timestamp, room)
   local http = require("socket.http");
   local mime = require("mime");
 
+  local rabbit_url = module:get_option_string('rabbit_url');
+  local rabbit_username = module:get_option_string('rabbit_username');
+  local rabbit_password = module:get_option_string('rabbit_password');
+  local rabbit_user = rabbit_username .. [[:]] .. rabbit_password;
   local message = [[ {\"eventType\":\"STOP_VIDEO_CALL\",\"videoCallUuid\":\"]] .. room .. [[\",\"timestamp\":\"]] .. timestamp .. [[\"}]];
-  local path = "http://45.12.48.12:15672/api/exchanges/%2F/statistics.topic/publish";
   local payload = [[ {"properties":{}, "routing_key":"STOP_VIDEO_CALL", "payload":"]] .. message .. [[", "payload_encoding":"string"} ]];
   local response_body = { }
 
   local res, httpcode, response_headers, status = http.request
   {
-    url = path,
+    url = rabbit_url,
     method = "POST",
     headers =
     {
-      ["Authorization"] = "Basic " .. (mime.b64("statistics:XmbV2B3U!PztJuW")),
+      ["Authorization"] = "Basic " .. (mime.b64(rabbit_user)),
       ["Content-Type"] = "application/json",
       ["Content-Length"] = payload:len()
     },
@@ -40,4 +46,3 @@ function fireStatisticsEvent(timestamp, room)
   end
 
 end
-
