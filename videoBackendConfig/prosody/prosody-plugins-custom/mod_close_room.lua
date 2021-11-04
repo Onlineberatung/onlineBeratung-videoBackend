@@ -4,6 +4,7 @@ module:hook("muc-occupant-left", function(event)
   local statistics_enabled = module:get_option_boolean('enable_statistics');
   if role == "owner" then
     local room = event.room:get_name();
+    event.room:destroy();
     event.room:clear();
     if statistics_enabled then
       local utctimestamp = os.date("!%Y-%m-%dT%XZ");
