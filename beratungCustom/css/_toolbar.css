@@ -94,7 +94,7 @@
 .new-toolbox .toolbox-content .button-group-center .toolbox-button:nth-child(2) .toolbox-icon {
 	height: 40px;
 	width: 40px;
-	background-color: var(--red);
+	background-color: var(--primary-red);
 	border: none;
 	background-image: url("../images/icons/call-off.svg");
 	transition: all .6s ease;
@@ -102,7 +102,7 @@
 }
 
 .new-toolbox .toolbox-content .button-group-center .toolbox-button:nth-child(2) .toolbox-icon:hover {
-	background-color: var(--red-dark);
+	background-color: var(--primary-red-dark);
 	border: none;
 }
 
