@@ -7,6 +7,7 @@
 /videoBackendConfig/jvb/*.properties
 /videoBackendConfig/jvb/jvb.conf
 /videoBackendConfig/prosody/config/*.lua
+/videoBackendConfig/prosody/config/conf.d/*.lua
 /videoBackendConfig/prosody/config/*.conf
 /videoBackendConfig/prosody/config/conf.d/*.lua
 /videoBackendConfig/prosody/config/certs

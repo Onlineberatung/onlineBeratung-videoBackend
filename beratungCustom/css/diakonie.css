@@ -1,5 +1,4 @@
 @import url("_colors.css");
-@import url("_fonts.css");
 @import url("_header.css");
 @import url("_toolbar.css");
 @import url("_lobby.css");
@@ -10,8 +9,8 @@
 @import url("_securityBanner.css");
 
 body.desktop-browser {
-	font-family: "Roboto-Regular",sans-serif !important;
-	font-weight: 400;
+	font-family: Arial, sans-serif !important;
+	font-weight: normal;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: auto;
 }
@@ -69,8 +68,8 @@ active video call screen
 .subject-conference-timer {
 	opacity: 1;
 	font-size: 20px;
-	font-family: "Roboto-Medium",sans-serif !important;
-	font-weight: 500;
+	font-family: Arial, sans-serif !important;
+	font-weight: bold;
 }
 
 .participants-count {

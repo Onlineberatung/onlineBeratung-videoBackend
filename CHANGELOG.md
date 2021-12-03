@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/compare/v1.4.0...v1.4.1) (2021-08-31)
+
+## [1.4.0](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/compare/v1.3.0...v1.4.0) (2021-08-31)
+
+
+### Features
+
+* add security banner for non chromium browsers ([c3b13c0](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/commit/c3b13c0fcd8294e9f3e04f0121719306d3f99178))
+
+## [1.3.0](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/compare/v1.2.0...v1.3.0) (2021-05-03)
+
+
+### Features
+
+* 🎸 adjust styles of lobby based on design QS ([444394e](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/commit/444394efaf1210c01611b898fb349e7d67f086f6))
+* 🎸 disable language detection and set default to de ([f224bc6](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/commit/f224bc6505f75806d957e38f301de520dc370fba))
+* 🎸 event handling for destructed conference by moderator ([1fc9ac0](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/commit/1fc9ac0939c7bb28f3ed401a23d368f48e6461dd))
+* 🎸 remove prejoin page styles/logic and add lobby ([bd8d366](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/commit/bd8d366e0559db2f3b3a210d17d30ede7de79cf5))
+* add config.js again to git ([0090f1a](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/commit/0090f1ac320b669c8f8b1d16884351c4bf3b8013))
+* destroy room when no moderator is present ([4909428](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/commit/49094280d2c7c72354e32bb21f1eb36b2b32e675))
+* enable lobby an activate when owner joins ([fa3ee94](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/commit/fa3ee94446df8a8a3a39f2c599276f0b21caddb0))
+* provide modetator based sessions ([4e11aa9](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/commit/4e11aa91676ed0b8231056575974e87871fdfa58))
+* remove config.js again from git ([aeb50a9](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/commit/aeb50a9d6629990a42510893c65ee1ed3509ee9a))
+* updated to newest jitsi version and added moderator role ([e8745c9](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/commit/e8745c9383437aae0529c0e13ad383f9014962cc))
+
+
+### Bug Fixes
+
+* 🐛 remove unneeded information in settings panel ([4808863](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/commit/4808863fe8f575d1c13a51a1560d2f8cac38b9e2))
+
 ## [1.2.0](https://github.com/CaritasDeutschland/caritas-onlineBeratung-videoBackend/compare/v1.1.0...v1.2.0) (2021-03-02)
 
 
