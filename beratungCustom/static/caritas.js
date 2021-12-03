@@ -5,7 +5,7 @@ const buttonChangeDuration = 3000;
 const url = new URL(window.location.href);
 
 document.addEventListener('DOMContentLoaded', () => {
-	document.title = 'Beratung - Videoanruf';
+	document.title = 'Beratung & Hilfe - Videoanruf';
 	
 	// prepend share button to body for prejoin page (if user is moderator of the video call)
 	if (isModerator()) {
