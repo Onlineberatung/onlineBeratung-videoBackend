@@ -1,6 +1,5 @@
-# Diakonie Online-Beratung videoBackend
-
-This is the repository containing all logic for the Diakonie Online-Beratung videoBackend.
+# Caritas Online-Beratung videoBackend
+This is the repository containing all logic for the Caritas Online-Beratung videoBackend.
 
 ## Help and Documentation
 In the project [documentation](https://caritasdeutschland.github.io/documentation/docs/setup/setup-backend) you'll find information for setting up and running the project.

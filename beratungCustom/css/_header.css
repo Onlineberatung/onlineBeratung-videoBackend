@@ -21,9 +21,9 @@
 }
 
 .customHeader .title {
-	font-family: Arial, sans-serif;
+	font-family: "Roboto-Medium",sans-serif;
 	font-size: 30px;
-	font-weight: bold;
+	font-weight: 500;
 }
 
 .customHeader .claim {

@@ -4,6 +4,7 @@
 }
 
 .premeeting-screen .content input.field {
+	border-radius: 24px;
 	font-size: 16px;
 	line-height: 52px;
 	height: 52px;
@@ -17,18 +18,19 @@
 
 .premeeting-screen .action-btn.primary {
 	width: 320px;
-	background-color: var(--primary);
+	background-color: var(--success);
 	border: none;
 	padding: 14px 0;
-	font-family: Arial, sans-serif;
+	font-family: "Roboto-Medium",sans-serif;
 	font-size: 16px;
 	text-transform: uppercase;
-	font-weight: bold;
+	font-weight: 500;
+	border-radius: 24px;
 	transition: background .6s ease;
 }
 
 .premeeting-screen .action-btn.primary:hover {
-	background-color: var(--primary-dark);
+	background-color: var(--success-dark);
 }
 
 .premeeting-screen .settings-button-container .settings-button-small-icon {
@@ -124,7 +126,7 @@
 
 /* 'your microphone seems to work' banner */
 .prejoin-preview-status--ok {
-	background-color: var(--primary);
+	background-color: var(--success);
 	position: absolute;
 	width: 100%;
 }
