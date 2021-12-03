@@ -9,7 +9,6 @@
 /videoBackendConfig/prosody/config/*.lua
 /videoBackendConfig/prosody/config/conf.d/*.lua
 /videoBackendConfig/prosody/config/*.conf
-/videoBackendConfig/prosody/config/conf.d/*.lua
 /videoBackendConfig/prosody/config/certs
 /videoBackendConfig/prosody/config/data
 /videoBackendConfig/web/nginx
