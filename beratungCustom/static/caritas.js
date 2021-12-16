@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	/* initialize event handling for conference destruction by moderator departure */
 	const inVideoRoom = () => {
 		const url = window.location.pathname;
-		return !(url.includes('close3.html') || url.includes('authError.html'));
+		return !(url.includes('close2.html') || url.includes('authError.html'));
 	}
 	waitForElement('#new-toolbox', 0).then(() => {
 		if (inVideoRoom()) {
@@ -85,7 +85,7 @@ const handleConferenceDestruction = () => {
 		/* add listener to the conference */
 		APP.conference._room.on("conference.failed", function (error) {
 			if (error === "conference.destroyed") {
-				document.location.href = "static/close3.html";
+				document.location.href = "static/close2.html";
 			}
 		});
 	} else {
