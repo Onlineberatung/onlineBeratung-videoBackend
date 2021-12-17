@@ -100,6 +100,17 @@
 	margin-bottom: 56px;
 }
 
+.premeeting-screen .media-btn-container .toolbox-content-items {
+	display: flex;
+	justify-content: center;
+	margin: 24px 0 16px 0;
+	width: 100%;
+}
+
+.premeeting-screen .media-btn-container .toolbox-content-items > div {
+	margin: 0 12px;
+}
+
 .premeeting-screen-avatar.avatar[style] {
     position: absolute;
 	top: calc(50% - 96px);

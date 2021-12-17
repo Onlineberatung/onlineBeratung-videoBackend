@@ -1,104 +1,291 @@
 @import url("_colors.css");
 @import url("_fonts.css");
 @import url("_header.css");
-@import url("_toolbar.css");
 @import url("_lobby.css");
 @import url("_filmstrip-view.css");
 @import url("_tiles-view.css");
 @import url("_settings.css");
 @import url("_alerts.css");
 @import url("_securityBanner.css");
+.new-toolbox .toolbox-content {
+  padding: 0; }
 
+.new-toolbox .toolbox-content .toolbox-content-wrapper {
+  padding: 20px 16px;
+  margin: auto; }
+
+.new-toolbox .toolbox-content .toolbox-content-items {
+  display: flex;
+  width: auto;
+  padding: 8px 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 100px; }
+
+/* small settings button underneath audio and video button */
+.settings-button-container .settings-button-small-icon {
+  display: none; }
+
+.new-toolbox .toolbox-content .toolbox-content-items > div {
+  height: 40px;
+  width: 40px;
+  margin-right: 16px;
+  margin-left: 0; }
+  .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) {
+    order: 3; }
+  .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) {
+    order: 4; }
+  .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) {
+    margin-left: 8px;
+    order: 2; }
+  .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) {
+    order: 5; }
+  .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(5) {
+    margin-right: 8px;
+    order: 6; }
+  .new-toolbox .toolbox-content .toolbox-content-items > div.share-url-button {
+    margin-left: 8px;
+    order: 1; }
+    .new-toolbox .toolbox-content .toolbox-content-items > div.share-url-button + div {
+      margin-left: 0; }
+  .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(5) .toolbox-icon {
+    border-radius: 50%; }
+    .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(5) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(5) .toolbox-icon.toggled {
+      border: none;
+      background-size: 24px 24px;
+      background-position: center;
+      background-repeat: no-repeat; }
+      .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon.toggled:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon.toggled:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon.toggled:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon.toggled:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(5) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(5) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(5) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(5) .toolbox-icon.toggled:hover {
+        background-color: transparent; }
+    .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(5) .toolbox-icon:hover {
+      background-color: transparent;
+      border: none; }
+
+.isModerator .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) {
+  margin-left: 0; }
+
+.audio-preview,
+.video-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+/* mute button */
+.new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon {
+  background-image: url("../images/icons/audio-on.svg"); }
+  .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon.toggled {
+    background-image: url("../images/icons/audio-off.svg"); }
+
+/* camera on/off button */
+.new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon {
+  background-image: url("../images/icons/camera-on.svg"); }
+  .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon.toggled {
+    background-image: url("../images/icons/camera-off.svg"); }
+
+/* end call button */
+.new-toolbox .toolbox-content .toolbox-content-items .toolbox-button:nth-child(5) .toolbox-icon {
+  height: 40px;
+  width: 40px;
+  background-color: var(--primary-red);
+  border: none;
+  background-image: url("../images/icons/call-off.svg");
+  transition: all .6s ease;
+  margin: 0; }
+  .new-toolbox .toolbox-content .toolbox-content-items .toolbox-button:nth-child(5) .toolbox-icon:hover {
+    background-color: var(--primary-red-dark);
+    border: none; }
+
+.new-toolbox .toolbox-content .toolbox-content-items .toolbox-button:nth-child(1) .toolbox-icon svg,
+.new-toolbox .toolbox-content .toolbox-content-items .toolbox-button:nth-child(2) .toolbox-icon svg,
+.new-toolbox .toolbox-content .toolbox-content-items .toolbox-button:nth-child(5) .toolbox-icon svg {
+  display: none; }
+
+/* toggle tiles mode */
+.button-group-right > .toolbox-button .toolbox-icon,
+.button-group-right > .toolbox-button .toolbox-icon:hover,
+.button-group-right > .toolbox-button .toolbox-icon.toggled {
+  background-image: url("../images/icons/view.svg");
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center; }
+
+.new-toolbox .toolbox-content .toolbox-icon.toggled,
+.new-toolbox .toolbox-content .toolbox-icon:hover {
+  background-color: rgba(255, 255, 255, 0.15); }
+
+.new-toolbox .toolbox-content .button-group-right {
+  align-items: center; }
+
+/* settings menu button */
+.new-toolbox .CvzNc {
+  background-color: var(--primary-grey); }
+
+.new-toolbox .toolbox-content .overflow-menu .overflow-menu-item {
+  color: white !important; }
+
+.new-toolbox .toolbox-content .overflow-menu .overflow-menu-item:hover {
+  background-color: var(--grey-1); }
+
+.new-toolbox .toolbox-content .overflow-menu .overflow-menu-item-icon svg {
+  fill: white !important; }
+
+/* screen sharing button */
+.new-toolbox .toolbox-content .button-group-left > div:first-child {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  height: 40px;
+  width: 40px;
+  margin: 0;
+  transform: translateX(-100px); }
+
+.isModerator .new-toolbox .toolbox-content .button-group-left > div:first-child {
+  transform: translateX(-80px); }
+
+.new-toolbox .toolbox-content .button-group-left > div:first-child .toolbox-icon:hover {
+  background-color: transparent; }
+
+/* share URL button */
+button.shareUrlButton {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  font-size: 0;
+  color: var(--white);
+  z-index: 500;
+  cursor: pointer; }
+  button.shareUrlButton::before {
+    content: '';
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    margin-right: 0;
+    background-image: url("../images/icons/link.svg");
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: center; }
+
+button.shareUrlButton--copied::after {
+  content: 'Video-Link wurde in die Zwischenablage kopiert';
+  display: inline-block;
+  position: absolute;
+  font-size: 14px;
+  line-height: 19px;
+  bottom: 56px;
+  width: 168px;
+  background-color: rgba(0, 0, 0, 0.5);
+  text-align: left;
+  padding: 12px 8px;
+  border-radius: 4px;
+  cursor: auto; }
+
+@media only screen and (max-width: 500px) {
+  .new-toolbox .toolbox-content .toolbox-content-items .toolbox-button .toolbox-icon,
+  .new-toolbox .toolbox-content .button-group-left .toolbox-button .toolbox-icon,
+  .new-toolbox .toolbox-content .button-group-right .toolbox-button .toolbox-icon {
+    height: 40px;
+    width: 40px; } }
+@media only screen and (max-width: 700px) {
+  .new-toolbox .toolbox-content .toolbox-content-items .toolbox-button .toolbox-icon,
+  .new-toolbox .toolbox-content .button-group-left .toolbox-button .toolbox-icon,
+  .new-toolbox .toolbox-content .button-group-right .toolbox-button .toolbox-icon {
+    height: 40px;
+    width: 40px; }
+
+  .new-toolbox .toolbox-content .toolbox-content-items .toolbox-button .toolbox-icon svg,
+  .new-toolbox .toolbox-content .button-group-left .toolbox-button .toolbox-icon svg,
+  .new-toolbox .toolbox-content .button-group-right .toolbox-button .toolbox-icon svg {
+    height: 24px;
+    width: 24px; }
+
+  /* disable tile view for mobile devices */
+  .new-toolbox .toolbox-content .button-group-right .toolbox-button {
+    display: none; }
+
+  /* disable screen sharing button for mobile devices (functionality doesn't work on native mobile devices) */
+  .new-toolbox .toolbox-content .button-group-left > div:first-child {
+    display: none; }
+
+  .new-toolbox .toolbox-content .toolbox-content-items {
+    padding-left: 16px; } }
 body.desktop-browser {
-	font-family: "Roboto-Regular",sans-serif !important;
-	font-weight: 400;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: auto;
-}
+  font-family: "Roboto-Regular",sans-serif !important;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: auto; }
 
 #react {
-	padding-top: 96px;
-	height: 100%;
-	box-sizing: border-box;
-}
+  height: 100%;
+  box-sizing: border-box; }
 
 #videospace {
-	margin-top: 96px;
-	box-sizing: border-box;
-}
+  box-sizing: border-box; }
 
 #largeVideoElementsContainer {
-    position: absolute;
-    top: 0;
-	width: 100%;
-	height: calc(100% - 96px);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
 
 #largeVideoWrapper[style] {
-	position: relative;
-	inset: auto !important;
-}
-
-.subject {
-	top: 0;
-	height: 100px;
-	background-image: linear-gradient(to bottom,rgba(0,0,0,0.8),rgba(0,0,0,0));
-}
+  position: relative;
+  inset: auto !important; }
 
 .new-toolbox .toolbox-background {
-	height: 150px;
-	background-image: linear-gradient(to top,rgba(0,0,0, 0.8),rgba(0,0,0,0));
-}
+  height: 150px;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)); }
 
 /*================================================================================
 active video call screen
 ================================================================================ */
-
 /* microphone volume indicator */
-.videocontainer>.audioindicator-container span.audiodot-bottom::after, .videocontainer>.audioindicator-container span.audiodot-middle::after, .videocontainer>.audioindicator-container span.audiodot-top::after, .videocontainer>span.audioindicator span.audiodot-bottom::after, .videocontainer>span.audioindicator span.audiodot-middle::after, .videocontainer>span.audioindicator span.audiodot-top::after {
-	background: var(--success);
-}
+.videocontainer > .audioindicator-container span.audiodot-bottom::after,
+.videocontainer > .audioindicator-container span.audiodot-middle::after,
+.videocontainer > .audioindicator-container span.audiodot-top::after,
+.videocontainer > span.audioindicator span.audiodot-bottom::after,
+.videocontainer > span.audioindicator span.audiodot-middle::after,
+.videocontainer > span.audioindicator span.audiodot-top::after {
+  background: var(--success); }
+
+.subject {
+  /* Completely hidden because it was not visible and overwritten by customHeader */
+  display: none !important; }
 
 .subject-text {
-	display: none;
-}
+  display: none; }
 
 .subject-conference-timer {
-	opacity: 1;
-	font-size: 20px;
-	font-family: "Roboto-Medium",sans-serif !important;
-	font-weight: 500;
-}
+  opacity: 1;
+  font-size: 20px;
+  font-family: "Roboto-Medium",sans-serif !important;
+  font-weight: 500; }
 
 .participants-count {
-	display: none;
-}
+  display: none; }
 
 .connection-indicator {
-	display: none;
-}
+  display: none; }
 
 .videocontainer .displayNameContainer .displayname {
-	text-align: left;
-	top: 16px;
-	left: 8px;
-	font-size: 14px;
-}
+  text-align: left;
+  top: 16px;
+  left: 8px;
+  font-size: 14px; }
 
 /*================================================================================
 Screen when camera is off
 ================================================================================ */
 .defaultAvatar {
-	opacity: 1;
-}
+  opacity: 1; }
 
 .avatar[style] {
-	background-color: var(--grey-1) !important;
-}
+  background-color: var(--grey-1) !important; }
 
 .videocontainer {
-	background-color: var(--primary-grey) !important;
-}
+  background-color: var(--primary-grey) !important; }
+
+/*# sourceMappingURL=caritas.css.map */

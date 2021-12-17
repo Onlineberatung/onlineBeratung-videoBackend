@@ -2,6 +2,10 @@
 	margin: 120px 0;
 }
 
+.tile-view .filmstrip__videos.remote-videos {
+	margin: auto;
+}
+
 .remote-video-menu-trigger {
 	margin-right: 7px;
 }
