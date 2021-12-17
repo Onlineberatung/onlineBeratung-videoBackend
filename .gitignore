@@ -28,6 +28,7 @@
 .settings
 .springBeans
 .sts4-cache
+.sass-cache
 
 ### IntelliJ IDEA ###
 .idea

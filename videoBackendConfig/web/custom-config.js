@@ -7,4 +7,5 @@ config.toolbarButtons = [
     'camera',
     'hangup',
     'desktop',
+    'settings',
 ];

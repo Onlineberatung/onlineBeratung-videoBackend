@@ -1,5 +1,6 @@
 .vertical-filmstrip .filmstrip.reduce-height {
 	width: 220px;
+	height: 100%;
 }
 
 .vertical-filmstrip .filmstrip {

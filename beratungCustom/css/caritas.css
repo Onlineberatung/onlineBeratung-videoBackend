@@ -35,23 +35,33 @@
   .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) {
     order: 4; }
   .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) {
+    margin-left: 8px;
     order: 2; }
   .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) {
     order: 5; }
+  .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(5) {
+    margin-right: 8px;
+    order: 6; }
   .new-toolbox .toolbox-content .toolbox-content-items > div.share-url-button {
+    margin-left: 8px;
     order: 1; }
-  .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon {
+    .new-toolbox .toolbox-content .toolbox-content-items > div.share-url-button + div {
+      margin-left: 0; }
+  .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(5) .toolbox-icon {
     border-radius: 50%; }
-    .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon.toggled {
+    .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(5) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(5) .toolbox-icon.toggled {
       border: none;
       background-size: 24px 24px;
       background-position: center;
       background-repeat: no-repeat; }
-      .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon.toggled:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon.toggled:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon.toggled:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon.toggled:hover {
+      .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon.toggled:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon.toggled:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon.toggled:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon.toggled:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(5) .toolbox-icon, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(5) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(5) .toolbox-icon.toggled, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(5) .toolbox-icon.toggled:hover {
         background-color: transparent; }
-    .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon:hover {
+    .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(1) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(2) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(4) .toolbox-icon:hover, .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(5) .toolbox-icon:hover {
       background-color: transparent;
       border: none; }
+
+.isModerator .new-toolbox .toolbox-content .toolbox-content-items > div:nth-of-type(3) {
+  margin-left: 0; }
 
 .audio-preview,
 .video-preview {
@@ -72,7 +82,7 @@
     background-image: url("../images/icons/camera-off.svg"); }
 
 /* end call button */
-.new-toolbox .toolbox-content .toolbox-content-items .toolbox-button:nth-child(4) .toolbox-icon {
+.new-toolbox .toolbox-content .toolbox-content-items .toolbox-button:nth-child(5) .toolbox-icon {
   height: 40px;
   width: 40px;
   background-color: var(--primary-red);
@@ -80,13 +90,13 @@
   background-image: url("../images/icons/call-off.svg");
   transition: all .6s ease;
   margin: 0; }
-  .new-toolbox .toolbox-content .toolbox-content-items .toolbox-button:nth-child(4) .toolbox-icon:hover {
+  .new-toolbox .toolbox-content .toolbox-content-items .toolbox-button:nth-child(5) .toolbox-icon:hover {
     background-color: var(--primary-red-dark);
     border: none; }
 
 .new-toolbox .toolbox-content .toolbox-content-items .toolbox-button:nth-child(1) .toolbox-icon svg,
 .new-toolbox .toolbox-content .toolbox-content-items .toolbox-button:nth-child(2) .toolbox-icon svg,
-.new-toolbox .toolbox-content .toolbox-content-items .toolbox-button:nth-child(4) .toolbox-icon svg {
+.new-toolbox .toolbox-content .toolbox-content-items .toolbox-button:nth-child(5) .toolbox-icon svg {
   display: none; }
 
 /* toggle tiles mode */
@@ -136,9 +146,6 @@
 
 /* share URL button */
 button.shareUrlButton {
-  position: absolute;
-  left: 50%;
-  bottom: 28px;
   padding: 0;
   display: flex;
   align-items: center;
@@ -147,25 +154,17 @@ button.shareUrlButton {
   font-size: 0;
   color: var(--white);
   z-index: 500;
-  cursor: pointer;
-  transform: translateX(-132px); }
-
-button.shareUrlButton::before {
-  content: '';
-  display: inline-block;
-  height: 16px;
-  width: 16px;
-  margin-right: 8px;
-  background-image: url("../images/icons/link.svg");
-  background-size: 16px 16px;
-  background-repeat: no-repeat;
-  background-position: center; }
-
-button.shareUrlButton::before {
-  height: 40px;
-  width: 40px;
-  background-size: 20px 20px;
-  margin-right: 0; }
+  cursor: pointer; }
+  button.shareUrlButton::before {
+    content: '';
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    margin-right: 0;
+    background-image: url("../images/icons/link.svg");
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: center; }
 
 button.shareUrlButton--copied::after {
   content: 'Video-Link wurde in die Zwischenablage kopiert';
@@ -182,15 +181,21 @@ button.shareUrlButton--copied::after {
   cursor: auto; }
 
 @media only screen and (max-width: 500px) {
-  .new-toolbox .toolbox-content .toolbox-content-items .toolbox-button .toolbox-icon, .new-toolbox .toolbox-content .button-group-left .toolbox-button .toolbox-icon, .new-toolbox .toolbox-content .button-group-right .toolbox-button .toolbox-icon {
+  .new-toolbox .toolbox-content .toolbox-content-items .toolbox-button .toolbox-icon,
+  .new-toolbox .toolbox-content .button-group-left .toolbox-button .toolbox-icon,
+  .new-toolbox .toolbox-content .button-group-right .toolbox-button .toolbox-icon {
     height: 40px;
     width: 40px; } }
 @media only screen and (max-width: 700px) {
-  .new-toolbox .toolbox-content .toolbox-content-items .toolbox-button .toolbox-icon, .new-toolbox .toolbox-content .button-group-left .toolbox-button .toolbox-icon, .new-toolbox .toolbox-content .button-group-right .toolbox-button .toolbox-icon {
+  .new-toolbox .toolbox-content .toolbox-content-items .toolbox-button .toolbox-icon,
+  .new-toolbox .toolbox-content .button-group-left .toolbox-button .toolbox-icon,
+  .new-toolbox .toolbox-content .button-group-right .toolbox-button .toolbox-icon {
     height: 40px;
     width: 40px; }
 
-  .new-toolbox .toolbox-content .toolbox-content-items .toolbox-button .toolbox-icon svg, .new-toolbox .toolbox-content .button-group-left .toolbox-button .toolbox-icon svg, .new-toolbox .toolbox-content .button-group-right .toolbox-button .toolbox-icon svg {
+  .new-toolbox .toolbox-content .toolbox-content-items .toolbox-button .toolbox-icon svg,
+  .new-toolbox .toolbox-content .button-group-left .toolbox-button .toolbox-icon svg,
+  .new-toolbox .toolbox-content .button-group-right .toolbox-button .toolbox-icon svg {
     height: 24px;
     width: 24px; }
 
@@ -203,10 +208,7 @@ button.shareUrlButton--copied::after {
     display: none; }
 
   .new-toolbox .toolbox-content .toolbox-content-items {
-    padding-left: 16px; }
-
-  button.shareUrlButton {
-    transform: translateX(-100px); } }
+    padding-left: 16px; } }
 body.desktop-browser {
   font-family: "Roboto-Regular",sans-serif !important;
   font-weight: 400;
@@ -214,24 +216,17 @@ body.desktop-browser {
   -moz-osx-font-smoothing: auto; }
 
 #react {
-  padding-top: 96px;
   height: 100%;
   box-sizing: border-box; }
 
 #videospace {
-  margin-top: 96px;
-  height: calc(100% - 96px);
   box-sizing: border-box; }
-
-.tile-view .filmstrip {
-  height: calc(100% - 96px);
-  top: 96px; }
 
 #largeVideoElementsContainer {
   position: absolute;
   top: 0;
   width: 100%;
-  height: calc(100% - 96px);
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center; }
@@ -239,11 +234,6 @@ body.desktop-browser {
 #largeVideoWrapper[style] {
   position: relative;
   inset: auto !important; }
-
-.subject {
-  top: 0;
-  height: 100px;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)); }
 
 .new-toolbox .toolbox-background {
   height: 150px;
@@ -253,8 +243,17 @@ body.desktop-browser {
 active video call screen
 ================================================================================ */
 /* microphone volume indicator */
-.videocontainer > .audioindicator-container span.audiodot-bottom::after, .videocontainer > .audioindicator-container span.audiodot-middle::after, .videocontainer > .audioindicator-container span.audiodot-top::after, .videocontainer > span.audioindicator span.audiodot-bottom::after, .videocontainer > span.audioindicator span.audiodot-middle::after, .videocontainer > span.audioindicator span.audiodot-top::after {
+.videocontainer > .audioindicator-container span.audiodot-bottom::after,
+.videocontainer > .audioindicator-container span.audiodot-middle::after,
+.videocontainer > .audioindicator-container span.audiodot-top::after,
+.videocontainer > span.audioindicator span.audiodot-bottom::after,
+.videocontainer > span.audioindicator span.audiodot-middle::after,
+.videocontainer > span.audioindicator span.audiodot-top::after {
   background: var(--success); }
+
+.subject {
+  /* Completely hidden because it was not visible and overwritten by customHeader */
+  display: none !important; }
 
 .subject-text {
   display: none; }
