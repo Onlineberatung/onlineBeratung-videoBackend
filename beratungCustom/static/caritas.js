@@ -6,14 +6,14 @@ const url = new URL(window.location.href);
 
 document.addEventListener('DOMContentLoaded', () => {
 	document.title = 'Beratung & Hilfe - Videoanruf';
-	
+
 	// prepend share button to body for prejoin page (if user is moderator of the video call)
 	if (isModerator()) {
 		document.body.classList.add('isModerator');
 
 		waitForElement('#new-toolbox', 0)
 		.then(function () {
-			createShareUrlButton(document.querySelector('#new-toolbox'));
+			createShareUrlButton(document.querySelector('#new-toolbox .toolbox-content-items'));
 		})
 		.catch(() => {
 			console.error('toolbox not loaded properly');
@@ -33,6 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const createShareUrlButton = (parentElement) => {
+	const buttonContainer = document.createElement('div');
+	buttonContainer.classList.add('share-url-button');
+
 	const button = document.createElement('button');
 	button.innerHTML = buttonText;
 	button.classList.add('shareUrlButton');
@@ -40,7 +43,10 @@ const createShareUrlButton = (parentElement) => {
 	button.addEventListener('click', (event) =>
 		copyUrltoClipboard(event, getShareableUrl())
 	);
-	parentElement.prepend(button);
+
+	buttonContainer.append(button);
+
+	parentElement.append(buttonContainer);
 }
 
 const copyUrltoClipboard = (event, url) => {
@@ -96,17 +102,17 @@ const handleConferenceDestruction = () => {
 /**
  * Wait for an element before resolving a promise
  * @param {String} querySelector - Selector of element to wait for
- * @param {Integer} timeout - Milliseconds to wait before timing out, or 0 for no timeout              
+ * @param {Integer} timeout - Milliseconds to wait before timing out, or 0 for no timeout
  */
 function waitForElement(querySelector, timeout=0){
     const startTime = new Date().getTime();
     return new Promise((resolve, reject)=>{
         const timer = setInterval(()=>{
             const now = new Date().getTime();
-            if(document.querySelector(querySelector)){
+            if (document.querySelector(querySelector)) {
                 clearInterval(timer);
                 resolve();
-            }else if(timeout && now - startTime >= timeout){
+            } else if (timeout && now - startTime >= timeout) {
                 clearInterval(timer);
                 reject();
             }

@@ -200,7 +200,7 @@ var interfaceConfig = {
     ]*/
     TOOLBAR_BUTTONS: [
         'microphone', 'camera', 'hangup', 'settings', 'tileview', 'desktop'
-    ], /*changed*/
+    ], /*changed*/ /* deprecated -> moved to custom-config.js */
 
     TOOLBAR_TIMEOUT: 4000,
 
