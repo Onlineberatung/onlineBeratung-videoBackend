@@ -1,0 +1,44 @@
+.premeeting-screen {
+  .prejoin-input-area {
+    .prejoin-preview-dropdown-container {
+      & > .primary {
+        box-shadow: 0 6px 0 0 rgba(0, 0, 0, .1);
+        border: 0;
+        padding: 13px 16px;
+        color: #fff;
+
+        & > div {
+          width: 50px;
+
+          &:hover {
+            background-color: #a31816;
+          }
+        }
+      }
+    }
+  }
+
+  .content {
+    &-controls {
+      .title {
+        color: #3f373f;
+      }
+
+      input.field {
+        height: 50px;
+        color: #3f373f;
+        border: 1px solid #8c878c;
+        border-radius: 25px;
+        outline: 0;
+
+        &.focused {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+}
+
+#preview {
+  background: #cc1e1c;
+}

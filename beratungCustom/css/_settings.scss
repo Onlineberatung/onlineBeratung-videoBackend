@@ -1,0 +1,137 @@
+.settings-dialog {
+  div[role="tablist"] {
+    div[role="tab"] {
+      color: $tabColor;
+
+      &[data-selected] {
+        color: $tabColorSelected;
+
+        & > span[data-selected] {
+          background-color: $tabSelectedLine;
+        }
+      }
+    }
+  }
+
+  .profile-edit {
+    flex-direction: column;
+    margin: 24px 0 0;
+
+    .profile-edit-field {
+      margin: 0 0 24px;
+
+      input {
+        color: rgb(51, 51, 51);
+      }
+
+      & > div {
+        display: flex;
+
+        label {
+          display: flex;
+          align-items: center;
+
+          div {
+            color: $labelColor;
+            font-weight: 400;
+            padding: 0;
+          }
+        }
+
+        & > * {
+          flex: 1;
+        }
+
+        & > div > div > div {
+          background-color: #ffffff;
+          border-width: 1px;
+          padding: 15px 20px;
+          border-radius: 25px;
+        }
+      }
+    }
+  }
+
+  .dropdown-menu {
+    button {
+      background: #fff;
+      border: 1px solid rgb(63, 55, 63);
+      border-radius: 25px;
+      height: auto;
+      padding: 8px 20px;
+      text-align: left;
+
+      &, & > span {
+        color: #3f373f;
+      }
+
+      span[role="presentation"] {
+        color: rgb(153, 153, 153);
+        fill: rgb(153, 153, 153);
+
+        svg {
+          transform: scale(2);
+        }
+      }
+    }
+  }
+
+  .settings-pane {
+    h2 {
+      font-size: 16px;
+      line-height: 21px;
+      font-family: Roboto,sans-serif;
+      font-weight: 500;
+    }
+
+    .mock-atlaskit-label {
+      color: #3f373f;
+    }
+
+    label {
+      input[type="checkbox"] {
+        & + svg {
+          --local-background: $colorWhite;
+          --local-background-active: $colorWhite;
+          --local-background-checked: $colorWhite;
+          --local-background-checked-hover: $colorWhite;
+          --local-background-disabled: $colorWhite;
+
+          --local-border: #8c878c;
+          --local-border-disabled: #8c878c;
+          --local-border-focus: #8c878c;
+          --local-border-active: #8c878c;
+          --local-border-checked: #8c878c;
+          --local-border-checked-hover: #8c878c;
+          --local-tick-rest: transparent;
+
+          --local-background-hover: #ffffff;
+          --local-border-hover: #3f373f;
+
+          --local-tick-checked: $colorRed1;
+          --local-tick-disabled: $colorRed1;
+          --local-tick-active: $colorRed1;
+
+          --local-border-invalid: #FF5630;
+          --local-border-checked-invalid: #FF5630;
+
+          transform: scale(2);
+
+          rect {
+            stroke-width: 1px;
+          }
+
+          & + span {
+            color: $labelColor;
+          }
+        }
+
+        &:checked + svg {
+          /* Extra override because jitsi has overwritten */
+          --checkbox-background-color: #ffffff;
+          --checkbox-border-color: #3f373f;
+        }
+      }
+    }
+  }
+}
