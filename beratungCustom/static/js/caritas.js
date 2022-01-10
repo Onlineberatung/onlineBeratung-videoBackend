@@ -4,49 +4,84 @@ const buttonChangeDuration = 3000;
 
 const url = new URL(window.location.href);
 
-document.addEventListener('DOMContentLoaded', () => {
-	document.title = 'Beratung & Hilfe - Videoanruf';
-
-	// prepend share button to body for prejoin page (if user is moderator of the video call)
-	if (isModerator()) {
-		document.body.classList.add('isModerator');
-
-		waitForElement('#new-toolbox', 0)
-		.then(function () {
-			createShareUrlButton(document.querySelector('#new-toolbox .toolbox-content-items'));
-		})
-		.catch(() => {
-			console.error('toolbox not loaded properly');
-		});
-	}
-
-	/* initialize event handling for conference destruction by moderator departure */
-	const inVideoRoom = () => {
-		const url = window.location.pathname;
-		return !(url.includes('close2.html') || url.includes('authError.html'));
-	}
-	waitForElement('#new-toolbox', 0).then(() => {
-		if (inVideoRoom()) {
-			handleConferenceDestruction();
+const waitForApp = () => {
+	return new Promise((resolve, reject) => {
+		if (APP?.conference && APP?.connection && APP?.store){
+			resolve();
+		} else {
+			setTimeout(() => {
+				waitForApp()
+					.then(resolve)
+					.catch(reject);
+			}, 250);
 		}
-	})
+	});
+}
+
+let unsubscribe = null;
+
+document.addEventListener('DOMContentLoaded', () => {
+	if (!JitsiMeetJS.app) {
+		return;
+	}
+
+	waitForApp()
+		.then(() => {
+			unsubscribe = APP.store.subscribe(() => {
+				if (isModerator() && !document.body.classList.contains('isModerator')) {
+					document.body.classList.add('isModerator');
+				}
+
+				const room = APP?.conference?._room;
+				if (room) {
+					unsubscribe();
+
+					if (isModerator()) {
+						waitForElement('#new-toolbox', 0)
+							.then(function () {
+								createShareUrlButton(document.querySelector('#new-toolbox .toolbox-content-items'));
+							});
+					}
+
+					room.on(JitsiMeetJS.events.conference.CONFERENCE_FAILED, function (error) {
+						if (error === JitsiMeetJS.errors.conference.CONFERENCE_DESTROYED) {
+							document.location.href = "static/close2.html";
+						}
+					});
+				}
+			});
+		});
 });
 
 const createShareUrlButton = (parentElement) => {
-	const buttonContainer = document.createElement('div');
-	buttonContainer.classList.add('share-url-button');
+	const id = 'ca-share-url-button';
+	if (parentElement.querySelector(`#${id}`)) {
+		return;
+	}
+
+	const buttonContainer1 = document.createElement('div');
+	buttonContainer1.classList.add('share-url-button');
+	buttonContainer1.classList.add('toolbox-button');
+
+	const buttonContainer2 = document.createElement('div');
+	buttonContainer1.append(buttonContainer2);
+
+	const buttonContainer3 = document.createElement('div');
+	buttonContainer3.classList.add('toolbox-icon');
+	buttonContainer2.append(buttonContainer3);
 
 	const button = document.createElement('button');
 	button.innerHTML = buttonText;
 	button.classList.add('shareUrlButton');
+	button.setAttribute('id', 'ca-share-url-button');
 	button.setAttribute('title', buttonText);
 	button.addEventListener('click', (event) =>
 		copyUrltoClipboard(event, getShareableUrl())
 	);
 
-	buttonContainer.append(button);
+	buttonContainer3.append(button);
 
-	parentElement.append(buttonContainer);
+	parentElement.prepend(buttonContainer1);
 }
 
 const copyUrltoClipboard = (event, url) => {
@@ -74,35 +109,19 @@ const copyUrltoClipboard = (event, url) => {
 }
 
 const getShareableUrl = () => {
-	const jwtParam = url.searchParams.get('jwt');
-	const jwt = parseJwt(jwtParam);
-	return jwt.guestVideoCallUrl;
+	const jwt = parseJwt();
+	return jwt?.guestVideoCallUrl;
 }
 
 const isModerator = () => {
-	const jwtParam = url.searchParams.get('jwt');
-	const jwt = parseJwt(jwtParam);
-	return !!jwt.moderator;
-}
-
-const handleConferenceDestruction = () => {
-	/* wait for jitsi room to be properly initialized */
-	if (typeof APP !== "undefined" && typeof APP.conference !== "undefined" && APP.conference.getMyUserId()){
-		/* add listener to the conference */
-		APP.conference._room.on("conference.failed", function (error) {
-			if (error === "conference.destroyed") {
-				document.location.href = "static/close2.html";
-			}
-		});
-	} else {
-		setTimeout(handleConferenceDestruction, 250);
-	}
+	const jwt = parseJwt();
+	return !!jwt?.moderator;
 }
 
 /**
  * Wait for an element before resolving a promise
  * @param {String} querySelector - Selector of element to wait for
- * @param {Integer} timeout - Milliseconds to wait before timing out, or 0 for no timeout
+ * @param {number} timeout - Milliseconds to wait before timing out, or 0 for no timeout
  */
 function waitForElement(querySelector, timeout=0){
     const startTime = new Date().getTime();
@@ -123,12 +142,16 @@ function waitForElement(querySelector, timeout=0){
 /**
  * Get decoded object of jwt
  */
- function parseJwt (token) {
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+ function parseJwt () {
+ 	if (!APP.connection.token) {
+ 		return;
+	}
+
+    const base64Url = APP.connection.token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
 
     return JSON.parse(jsonPayload);
-};
+}

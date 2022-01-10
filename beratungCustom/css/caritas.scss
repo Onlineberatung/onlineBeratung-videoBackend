@@ -1,107 +1,98 @@
-@import url("_colors.css");
-@import url("_fonts.css");
-@import url("_header.css");
+@import "fonts";
+@import "colors";
+@import "securityBanner";
 @import "toolbar";
-@import url("_lobby.css");
-@import url("_filmstrip-view.css");
-@import url("_tiles-view.css");
-@import url("_settings.css");
-@import url("_alerts.css");
-@import url("_securityBanner.css");
+@import "settings";
+@import "dialog";
+@import "notification-participant-list";
+@import "premeeting/premeeting-screens";
+@import "premeeting/device-status";
 
-body.desktop-browser {
-	font-family: "Roboto-Regular",sans-serif !important;
-	font-weight: 400;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: auto;
+/*
+Light brown background profile: #f4f0ee
+
+ */
+
+body {
+  font-family: "Roboto-Regular",sans-serif !important;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: auto;
 }
-
-#react {
-	height: 100%;
-	box-sizing: border-box;
-}
-
-#videospace {
-	box-sizing: border-box;
-}
-
-#largeVideoElementsContainer {
-    position: absolute;
-    top: 0;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-#largeVideoWrapper[style] {
-	position: relative;
-	inset: auto !important;
-}
-
-.new-toolbox .toolbox-background {
-	height: 150px;
-	background-image: linear-gradient(to top,rgba(0,0,0, 0.8),rgba(0,0,0,0));
-}
-
-/*================================================================================
-active video call screen
-================================================================================ */
-
-/* microphone volume indicator */
-.videocontainer>.audioindicator-container span.audiodot-bottom::after,
-.videocontainer>.audioindicator-container span.audiodot-middle::after,
-.videocontainer>.audioindicator-container span.audiodot-top::after,
-.videocontainer>span.audioindicator span.audiodot-bottom::after,
-.videocontainer>span.audioindicator span.audiodot-middle::after,
-.videocontainer>span.audioindicator span.audiodot-top::after {
-	background: var(--success);
-}
-
 
 .subject {
-	/* Completely hidden because it was not visible and overwritten by customHeader */
-	display: none !important;
+  display: none !important;
 }
 
-.subject-text {
-	display: none;
+.watermark {
+  width: 140px;
+  height: 36px;
 }
 
-.subject-conference-timer {
-	opacity: 1;
-	font-size: 20px;
-	font-family: "Roboto-Medium",sans-serif !important;
-	font-weight: 500;
+a {
+  color: $linkColor !important;
+  transition: all .6s ease;
+
+  &:hover {
+    color: $linkColorHover !important;
+    transition: all .3s ease;
+  }
 }
 
-.participants-count {
-	display: none;
+div[role="dialog"] {
+  footer {
+    justify-content: center;
+
+    button {
+      &, &[form="modal-dialog-form"], &#modal-dialog-cancel-button {
+        min-width: 200px;
+        height: auto;
+        padding: 11px 10px;
+        border-radius: 25px;
+        text-transform: uppercase;
+        font-size: 16px;
+        line-height: 21px;
+        font-weight: 700;
+
+        border: 3px solid $btnSecondaryBorder;
+
+        &, & span {
+          color: $btnSecondaryColor;
+        }
+
+        &:hover {
+          border-color: $btnSecondaryBorderHover;
+          background-color: $btnSecondaryBgHover;
+
+          &, & span {
+            color: $btnSecondaryColorHover;
+          }
+        }
+      }
+
+      &[form="modal-dialog-form"] {
+        background-color: $btnPrimaryBg;
+
+        &, & span {
+          color: $btnPrimaryColor;
+        }
+
+        &:hover {
+          background-color: $btnPrimaryBgHover;
+          border-color: $btnPrimaryBorderHover;
+
+          &, & span {
+            color: $btnPrimaryColorHover;
+          }
+        }
+      }
+    }
+  }
 }
 
-.connection-indicator {
-	display: none;
-}
-
-.videocontainer .displayNameContainer .displayname {
-	text-align: left;
-	top: 16px;
-	left: 8px;
-	font-size: 14px;
-}
-
-/*================================================================================
-Screen when camera is off
-================================================================================ */
-.defaultAvatar {
-	opacity: 1;
-}
-
-.avatar[style] {
-	background-color: var(--grey-1) !important;
-}
-
-.videocontainer {
-	background-color: var(--primary-grey) !important;
+body.desktop-browser {
+  font-family: "Roboto-Regular",sans-serif !important;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: auto;
 }

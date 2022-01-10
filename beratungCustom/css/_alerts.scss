@@ -1,0 +1,67 @@
+/* alert message container */
+.jIMojv {
+	left: 24px !important;
+}
+
+
+.atlaskit-portal-container {
+	/* screen sharing error */
+	.gCocoh {
+		background-color: var(--primary-red);
+	}
+
+	/* screen sharing error text */
+	.jFmWzq,
+	.DdnJG,
+	.gmTwkP,
+	.fNNJJt,
+	.eJrykB {
+		color: white;
+	}
+}
+
+/* incoming enquiry */
+#knocking-participant-list {
+	z-index: 999;
+	background-color: var(--white);
+	color: var(--primary-grey);
+	top: 120px;
+	border: none;
+
+	ul {
+		padding-right: 0;
+	}
+
+	.title {
+		background-color: var(--grey-3);
+		border-radius: 8px 8px 0 0;
+	}
+
+	button {
+		&.primary {
+			border-radius: 24px;
+			background-color: var(--primary-red);
+			color: var(--white);
+			padding: 8px 12px;
+			margin-right: 0;
+		}
+
+		&.borderLess {
+			color: var(--primary-red);
+		}
+
+		&:hover {
+			transform: none;
+		}
+	}
+
+	.avatar {
+		height: 36px !important;
+		width: 36px !important;
+
+		text {
+			fill: var(--white);
+		}
+	}
+
+}

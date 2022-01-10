@@ -8,4 +8,19 @@ config.toolbarButtons = [
     'hangup',
     'desktop',
     'settings',
+    'select-background',
+    //'tileview'
 ];
+config.defaultLocalDisplayName = 'Ich';
+config.defaultRemoteDisplayName = 'Ratsuchender';
+config.disableModeratorIndicator = true;
+config.connectionIndicators = {
+    disabled: true,
+    disableDetails: true,
+}
+config.toolbarConfig = {
+    initialTimeout: 5000,
+    alwaysVisible: false,
+    timeout: 4000,
+};
+config.dynamicBrandingUrl = '/dynamicBranding.json';

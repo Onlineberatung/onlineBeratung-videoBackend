@@ -1,0 +1,53 @@
+.securityBanner {
+	display: none;
+	background: #ff9f00;
+	color: #3f373f;
+	text-align: left;
+	font-size: 16px;
+	line-height: 21px;
+	padding: 16px 64px;
+	margin: 0;
+	position: fixed;
+	width: 100%;
+	left: 0;
+	top: 0;
+	z-index: 500;
+	box-sizing: border-box;
+
+	a {
+		text-decoration: underline;
+		color: #fff;
+
+		&:hover {
+			color: #f4d2d1;
+		}
+
+		&.close {
+			svg {
+				width: 16px;
+				height: 16px;
+				position: absolute;
+				top: 16px;
+				right: 16px;
+
+				path {
+					transition: fill 500ms ease;
+					fill: #3f373f;
+				}
+			}
+
+			&:hover svg path {
+				fill: #000;
+			}
+		}
+	}
+
+	& > svg {
+		width: 24px;
+		height: 24px;
+		left: 16px;
+		position: absolute;
+	}
+}
+
+
