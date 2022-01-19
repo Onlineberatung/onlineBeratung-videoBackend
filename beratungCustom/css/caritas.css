@@ -320,6 +320,9 @@ div[role=dialog] header #modal-header-close-button:hover svg {
   color: #ffffff;
   border: none;
 }
+.premeeting-screen [data-testid="lobby.knockButton"][aria-disabled=true] {
+  background-color: #dcd9dc !important;
+}
 
 #preview {
   background: #cc1e1c;

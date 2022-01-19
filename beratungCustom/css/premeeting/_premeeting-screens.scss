@@ -49,6 +49,12 @@
   [data-testid="lobby.knockButton"] {
     color: $colorWhite;
     border: none;
+
+    // Jitsi changes the background color on hover,
+    // even though the element is disabled
+    &[aria-disabled="true"] {
+      background-color: $colorGrey4 !important;
+    }
   }
 }
 
