@@ -48,6 +48,7 @@
   // https://github.com/jitsi/jitsi-meet/blob/8ebca64af18fb099a2af64a8273809022677b23b/react/features/base/premeeting/components/web/ActionButton.js#L102
   [data-testid="lobby.knockButton"] {
     color: $colorWhite;
+    border: none;
   }
 }
 
