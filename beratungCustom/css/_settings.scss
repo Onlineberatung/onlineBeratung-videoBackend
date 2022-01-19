@@ -13,6 +13,14 @@
     }
   }
 
+  // Hide the auth panel in the UI which allows the user to sign out
+  // https://github.com/jitsi/jitsi-meet/blob/5dee37dd8220888cf587a70bba81c4d9d75fd40c/react/features/settings/components/web/ProfileTab.js#L191-L215
+  .profile-pane {
+    #login_button, .auth-name, .mock-atlaskit-label {
+      display: none;
+    }
+  }
+
   .profile-edit {
     flex-direction: column;
     margin: 24px 0 0;
@@ -91,11 +99,11 @@
     label {
       input[type="checkbox"] {
         & + svg {
-          --local-background: $colorWhite;
-          --local-background-active: $colorWhite;
-          --local-background-checked: $colorWhite;
-          --local-background-checked-hover: $colorWhite;
-          --local-background-disabled: $colorWhite;
+          --local-background: #{$colorWhite};
+          --local-background-active: #{$colorWhite};
+          --local-background-checked: #{$colorWhite};
+          --local-background-checked-hover: #{$colorWhite};
+          --local-background-disabled: #{$colorWhite};
 
           --local-border: #8c878c;
           --local-border-disabled: #8c878c;
@@ -108,9 +116,9 @@
           --local-background-hover: #ffffff;
           --local-border-hover: #3f373f;
 
-          --local-tick-checked: $colorRed1;
-          --local-tick-disabled: $colorRed1;
-          --local-tick-active: $colorRed1;
+          --local-tick-checked: #{$colorRed1};
+          --local-tick-disabled: #{$colorRed1};
+          --local-tick-active: #{$colorRed1};
 
           --local-border-invalid: #FF5630;
           --local-border-checked-invalid: #FF5630;
