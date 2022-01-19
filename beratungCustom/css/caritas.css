@@ -318,6 +318,7 @@ div[role=dialog] header #modal-header-close-button:hover svg {
 }
 .premeeting-screen [data-testid="lobby.knockButton"] {
   color: #ffffff;
+  border: none;
 }
 
 #preview {
