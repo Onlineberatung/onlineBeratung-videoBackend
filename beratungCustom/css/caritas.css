@@ -120,8 +120,11 @@
   background: #535353;
 }
 
+.settings-dialog > div:first-child > div:first-child > span:first-child:empty {
+  background-color: #dcd9dc;
+}
 .settings-dialog div[role=tablist] div[role=tab] {
-  color: #cc1e1c;
+  color: #3f373f;
 }
 .settings-dialog div[role=tablist] div[role=tab][data-selected] {
   color: #a31816;
@@ -162,6 +165,9 @@
   border-width: 1px;
   padding: 15px 20px;
   border-radius: 25px;
+}
+.settings-dialog input[name=disableSelfView] ~ * {
+  display: none;
 }
 .settings-dialog .dropdown-menu button {
   background: #fff;
@@ -304,7 +310,6 @@ div[role=dialog] header #modal-header-close-button:hover svg {
   color: #3f373f;
 }
 .premeeting-screen .content-controls input.field {
-  height: 50px;
   color: #3f373f;
   border: 1px solid #8c878c;
   border-radius: 25px;
@@ -319,6 +324,8 @@ div[role=dialog] header #modal-header-close-button:hover svg {
 .premeeting-screen [data-testid="lobby.knockButton"] {
   color: #ffffff;
   border: none;
+  padding: 10px;
+  line-height: 22px;
 }
 .premeeting-screen [data-testid="lobby.knockButton"][aria-disabled=true] {
   background-color: #dcd9dc !important;

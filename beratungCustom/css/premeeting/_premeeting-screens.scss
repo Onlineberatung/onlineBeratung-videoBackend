@@ -25,7 +25,6 @@
       }
 
       input.field {
-        height: 50px;
         color: #3f373f;
         border: 1px solid #8c878c;
         border-radius: 25px;
@@ -49,6 +48,9 @@
   [data-testid="lobby.knockButton"] {
     color: $colorWhite;
     border: none;
+    // Same height as input field above
+    padding: 10px;
+    line-height: 22px;
 
     // Jitsi changes the background color on hover,
     // even though the element is disabled
