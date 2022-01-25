@@ -40,13 +40,19 @@ a {
   }
 }
 
+// Hide the menu to mirror the video (not really useful) and to
+// hide the self view (not correctly translated in German)
+#local-video-menu-trigger {
+  display: none;
+}
+
 div[role="dialog"] {
   footer {
     justify-content: center;
 
     button {
       &, &[form="modal-dialog-form"], &#modal-dialog-cancel-button {
-        min-width: 200px;
+        min-width: 150px;
         height: auto;
         padding: 11px 10px;
         border-radius: 25px;

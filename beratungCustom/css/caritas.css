@@ -369,11 +369,15 @@ a:hover {
   transition: all 0.3s ease;
 }
 
+#local-video-menu-trigger {
+  display: none;
+}
+
 div[role=dialog] footer {
   justify-content: center;
 }
 div[role=dialog] footer button, div[role=dialog] footer button[form=modal-dialog-form], div[role=dialog] footer button#modal-dialog-cancel-button {
-  min-width: 200px;
+  min-width: 150px;
   height: auto;
   padding: 11px 10px;
   border-radius: 25px;
