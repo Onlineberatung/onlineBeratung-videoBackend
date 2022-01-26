@@ -1,4 +1,10 @@
 #new-toolbox {
+  // Jitsi doesn't provide an API to style the dominant speaker name
+  // https://github.com/jitsi/jitsi-meet/blob/29eb9452c06cc31768b8b79ef7d1a7819042654e/react/features/display-name/components/web/DisplayNameBadge.js#L17
+  .toolbox-content-wrapper > *:first-child:not(.toolbox-content-items) > * {
+    background-color: $colorWhite;
+  }
+
   .toolbox-content-items {
     border-radius: 30px;
     background-color: rgba(0, 0, 0, 0.5);

@@ -1,15 +1,17 @@
 @font-face {
-  font-family: 'Roboto-Regular';
+  font-family: "Roboto-Regular";
   src: url("../fonts/custom/roboto-v18-latin-regular.eot?#iefix");
   src: url("../fonts/custom/roboto-v18-latin-regular.eot?#iefix") format("eot"), url("../fonts/custom/roboto-v18-latin-regular.woff2") format("woff2"), url("../fonts/custom/roboto-v18-latin-regular.woff") format("woff"), url("../fonts/custom/roboto-v18-latin-regular.ttf") format("truetype"), url("../fonts/custom/roboto-v18-latin-regular.svg") format("svg");
   font-weight: 400;
-  font-style: normal; }
+  font-style: normal;
+}
 @font-face {
-  font-family: 'Roboto-Medium';
+  font-family: "Roboto-Medium";
   src: url("../fonts/custom/roboto-v18-latin-500.eot?#iefix");
   src: url("../fonts/custom/roboto-v18-latin-500.eot?#iefix") format("eot"), url("../fonts/custom/roboto-v18-latin-500.woff2") format("woff2"), url("../fonts/custom/roboto-v18-latin-500.woff") format("woff"), url("../fonts/custom/roboto-v18-latin-500.ttf") format("truetype"), url("../fonts/custom/roboto-v18-latin-500.svg") format("svg");
   font-weight: 500;
-  font-style: normal; }
+  font-style: normal;
+}
 .securityBanner {
   display: none;
   background: #ff9f00;
@@ -24,135 +26,182 @@
   left: 0;
   top: 0;
   z-index: 500;
-  box-sizing: border-box; }
-  .securityBanner a {
-    text-decoration: underline;
-    color: #fff; }
-    .securityBanner a:hover {
-      color: #f4d2d1; }
-    .securityBanner a.close svg {
-      width: 16px;
-      height: 16px;
-      position: absolute;
-      top: 16px;
-      right: 16px; }
-      .securityBanner a.close svg path {
-        transition: fill 500ms ease;
-        fill: #3f373f; }
-    .securityBanner a.close:hover svg path {
-      fill: #000; }
-  .securityBanner > svg {
-    width: 24px;
-    height: 24px;
-    left: 16px;
-    position: absolute; }
+  box-sizing: border-box;
+}
+.securityBanner a {
+  text-decoration: underline;
+  color: #fff;
+}
+.securityBanner a:hover {
+  color: #f4d2d1;
+}
+.securityBanner a.close svg {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+.securityBanner a.close svg path {
+  transition: fill 500ms ease;
+  fill: #3f373f;
+}
+.securityBanner a.close:hover svg path {
+  fill: #000;
+}
+.securityBanner > svg {
+  width: 24px;
+  height: 24px;
+  left: 16px;
+  position: absolute;
+}
 
+#new-toolbox .toolbox-content-wrapper > *:first-child:not(.toolbox-content-items) > * {
+  background-color: #ffffff;
+}
 #new-toolbox .toolbox-content-items {
   border-radius: 30px;
-  background-color: rgba(0, 0, 0, 0.5); }
-  #new-toolbox .toolbox-content-items .toolbox-icon {
-    border-radius: 50%; }
-    #new-toolbox .toolbox-content-items .toolbox-icon, #new-toolbox .toolbox-content-items .toolbox-icon.toggled {
-      background: #525252; }
-    #new-toolbox .toolbox-content-items .toolbox-icon.hangup-button {
-      background-color: #cc1e1c; }
-      #new-toolbox .toolbox-content-items .toolbox-icon.hangup-button:hover {
-        background-color: #a31816; }
-  #new-toolbox .toolbox-content-items .share-url-button {
-    /* share URL button */ }
-    #new-toolbox .toolbox-content-items .share-url-button button.shareUrlButton {
-      padding: 0;
-      display: flex;
-      align-items: center;
-      background-color: transparent;
-      border: none;
-      font-size: 0;
-      color: #ffffff;
-      z-index: 500;
-      cursor: pointer; }
-      #new-toolbox .toolbox-content-items .share-url-button button.shareUrlButton::before {
-        content: '';
-        display: inline-block;
-        height: 22px;
-        width: 48px;
-        background-image: url("../images/caritas/icons/link.svg");
-        background-size: 20px 20px;
-        background-repeat: no-repeat;
-        background-position: center; }
-      #new-toolbox .toolbox-content-items .share-url-button button.shareUrlButton--copied::after {
-        content: 'Video-Link wurde in die Zwischenablage kopiert';
-        display: inline-block;
-        position: absolute;
-        font-size: 14px;
-        line-height: 19px;
-        bottom: 70px;
-        background-color: rgba(0, 0, 0, 0.5);
-        text-align: left;
-        padding: 12px 8px;
-        border-radius: 4px;
-        cursor: auto; }
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#new-toolbox .toolbox-content-items .toolbox-icon {
+  border-radius: 50%;
+}
+#new-toolbox .toolbox-content-items .toolbox-icon, #new-toolbox .toolbox-content-items .toolbox-icon.toggled {
+  background: #525252;
+}
+#new-toolbox .toolbox-content-items .toolbox-icon.hangup-button {
+  background-color: #cc1e1c;
+}
+#new-toolbox .toolbox-content-items .toolbox-icon.hangup-button:hover {
+  background-color: #a31816;
+}
+#new-toolbox .toolbox-content-items .share-url-button {
+  /* share URL button */
+}
+#new-toolbox .toolbox-content-items .share-url-button button.shareUrlButton {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  font-size: 0;
+  color: #ffffff;
+  z-index: 500;
+  cursor: pointer;
+}
+#new-toolbox .toolbox-content-items .share-url-button button.shareUrlButton::before {
+  content: "";
+  display: inline-block;
+  height: 22px;
+  width: 48px;
+  background-image: url("../images/caritas/icons/link.svg");
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+#new-toolbox .toolbox-content-items .share-url-button button.shareUrlButton--copied::after {
+  content: "Video-Link wurde in die Zwischenablage kopiert";
+  display: inline-block;
+  position: absolute;
+  font-size: 14px;
+  line-height: 19px;
+  bottom: 70px;
+  background-color: rgba(0, 0, 0, 0.5);
+  text-align: left;
+  padding: 12px 8px;
+  border-radius: 4px;
+  cursor: auto;
+}
 
 .premeeting-screen #new-toolbox .toolbox-content-items .toolbox-icon, .premeeting-screen #new-toolbox .toolbox-content-items .toolbox-icon.toggled {
-  background: #525252; }
+  background: #525252;
+}
 .premeeting-screen #new-toolbox .toolbox-content-items .toolbox-icon:hover {
-  background: #535353; }
+  background: #535353;
+}
 
-.settings-dialog div[role="tablist"] div[role="tab"] {
-  color: #cc1e1c; }
-  .settings-dialog div[role="tablist"] div[role="tab"][data-selected] {
-    color: #a31816; }
-    .settings-dialog div[role="tablist"] div[role="tab"][data-selected] > span[data-selected] {
-      background-color: #a31816; }
+.settings-dialog > div:first-child > div:first-child > span:first-child:empty {
+  background-color: #dcd9dc;
+}
+.settings-dialog div[role=tablist] div[role=tab] {
+  color: #3f373f;
+}
+.settings-dialog div[role=tablist] div[role=tab][data-selected] {
+  color: #a31816;
+}
+.settings-dialog div[role=tablist] div[role=tab][data-selected] > span[data-selected] {
+  background-color: #a31816;
+}
+.settings-dialog .profile-pane #login_button, .settings-dialog .profile-pane .auth-name, .settings-dialog .profile-pane .mock-atlaskit-label {
+  display: none;
+}
 .settings-dialog .profile-edit {
   flex-direction: column;
-  margin: 24px 0 0; }
-  .settings-dialog .profile-edit .profile-edit-field {
-    margin: 0 0 24px; }
-    .settings-dialog .profile-edit .profile-edit-field input {
-      color: #333333; }
-    .settings-dialog .profile-edit .profile-edit-field > div {
-      display: flex; }
-      .settings-dialog .profile-edit .profile-edit-field > div label {
-        display: flex;
-        align-items: center; }
-        .settings-dialog .profile-edit .profile-edit-field > div label div {
-          color: rgba(0, 0, 0, 0.6);
-          font-weight: 400;
-          padding: 0; }
-      .settings-dialog .profile-edit .profile-edit-field > div > * {
-        flex: 1; }
-      .settings-dialog .profile-edit .profile-edit-field > div > div > div > div {
-        background-color: #ffffff;
-        border-width: 1px;
-        padding: 15px 20px;
-        border-radius: 25px; }
+  margin: 24px 0 0;
+}
+.settings-dialog .profile-edit .profile-edit-field {
+  margin: 0 0 24px;
+}
+.settings-dialog .profile-edit .profile-edit-field input {
+  color: #333333;
+}
+.settings-dialog .profile-edit .profile-edit-field > div {
+  display: flex;
+}
+.settings-dialog .profile-edit .profile-edit-field > div label {
+  display: flex;
+  align-items: center;
+}
+.settings-dialog .profile-edit .profile-edit-field > div label div {
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 400;
+  padding: 0;
+}
+.settings-dialog .profile-edit .profile-edit-field > div > * {
+  flex: 1;
+}
+.settings-dialog .profile-edit .profile-edit-field > div > div > div > div {
+  background-color: #ffffff;
+  border-width: 1px;
+  padding: 15px 20px;
+  border-radius: 25px;
+}
+.settings-dialog input[name=disableSelfView] ~ * {
+  display: none;
+}
 .settings-dialog .dropdown-menu button {
   background: #fff;
   border: 1px solid #3f373f;
   border-radius: 25px;
   height: auto;
   padding: 8px 20px;
-  text-align: left; }
-  .settings-dialog .dropdown-menu button, .settings-dialog .dropdown-menu button > span {
-    color: #3f373f; }
-  .settings-dialog .dropdown-menu button span[role="presentation"] {
-    color: #999999;
-    fill: #999999; }
-    .settings-dialog .dropdown-menu button span[role="presentation"] svg {
-      transform: scale(2); }
+  text-align: left;
+}
+.settings-dialog .dropdown-menu button, .settings-dialog .dropdown-menu button > span {
+  color: #3f373f;
+}
+.settings-dialog .dropdown-menu button span[role=presentation] {
+  color: #999999;
+  fill: #999999;
+}
+.settings-dialog .dropdown-menu button span[role=presentation] svg {
+  transform: scale(2);
+}
 .settings-dialog .settings-pane h2 {
   font-size: 16px;
   line-height: 21px;
-  font-family: Roboto,sans-serif;
-  font-weight: 500; }
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+}
 .settings-dialog .settings-pane .mock-atlaskit-label {
-  color: #3f373f; }
-.settings-dialog .settings-pane label input[type="checkbox"] + svg {
-  --local-background: $colorWhite;
-  --local-background-active: $colorWhite;
-  --local-background-checked: $colorWhite;
-  --local-background-checked-hover: $colorWhite;
-  --local-background-disabled: $colorWhite;
+  color: #3f373f;
+}
+.settings-dialog .settings-pane label input[type=checkbox] + svg {
+  --local-background: #ffffff;
+  --local-background-active: #ffffff;
+  --local-background-checked: #ffffff;
+  --local-background-checked-hover: #ffffff;
+  --local-background-disabled: #ffffff;
   --local-border: #8c878c;
   --local-border-disabled: #8c878c;
   --local-border-focus: #8c878c;
@@ -162,152 +211,211 @@
   --local-tick-rest: transparent;
   --local-background-hover: #ffffff;
   --local-border-hover: #3f373f;
-  --local-tick-checked: $colorRed1;
-  --local-tick-disabled: $colorRed1;
-  --local-tick-active: $colorRed1;
+  --local-tick-checked: #cc1e1c;
+  --local-tick-disabled: #cc1e1c;
+  --local-tick-active: #cc1e1c;
   --local-border-invalid: #FF5630;
   --local-border-checked-invalid: #FF5630;
-  transform: scale(2); }
-  .settings-dialog .settings-pane label input[type="checkbox"] + svg rect {
-    stroke-width: 1px; }
-  .settings-dialog .settings-pane label input[type="checkbox"] + svg + span {
-    color: rgba(0, 0, 0, 0.6); }
-.settings-dialog .settings-pane label input[type="checkbox"]:checked + svg {
+  transform: scale(2);
+}
+.settings-dialog .settings-pane label input[type=checkbox] + svg rect {
+  stroke-width: 1px;
+}
+.settings-dialog .settings-pane label input[type=checkbox] + svg + span {
+  color: rgba(0, 0, 0, 0.6);
+}
+.settings-dialog .settings-pane label input[type=checkbox]:checked + svg {
   /* Extra override because jitsi has overwritten */
   --checkbox-background-color: #ffffff;
-  --checkbox-border-color: #3f373f; }
+  --checkbox-border-color: #3f373f;
+}
 
-div[role="dialog"] header #modal-header-close-button {
-  background: none; }
-  div[role="dialog"] header #modal-header-close-button svg {
-    fill: #8c878c; }
-  div[role="dialog"] header #modal-header-close-button:hover {
-    background: none; }
-    div[role="dialog"] header #modal-header-close-button:hover svg {
-      fill: #3f373f; }
+div[role=dialog] header #modal-header-close-button {
+  background: none;
+}
+div[role=dialog] header #modal-header-close-button svg {
+  fill: #8c878c;
+}
+div[role=dialog] header #modal-header-close-button:hover {
+  background: none;
+}
+div[role=dialog] header #modal-header-close-button:hover svg {
+  fill: #3f373f;
+}
 
 #notification-participant-list {
   top: 120px;
-  left: 24px; }
-  #notification-participant-list #knocking-participant-list {
-    background: #ffffff;
-    color: #3f373f; }
-    #notification-participant-list #knocking-participant-list ul {
-      padding-right: 0; }
-    #notification-participant-list #knocking-participant-list .title {
-      background-color: #dcd9dc;
-      border-radius: 8px 8px 0 0; }
-    #notification-participant-list #knocking-participant-list button {
-      text-transform: uppercase;
-      border-radius: 25px;
-      padding: 8px 12px;
-      font-weight: 700; }
-      #notification-participant-list #knocking-participant-list button.primary {
-        background-color: #cc1e1c;
-        color: #ffffff;
-        margin-right: 0; }
-        #notification-participant-list #knocking-participant-list button.primary:hover {
-          background-color: #a31816;
-          color: #ffffff; }
-      #notification-participant-list #knocking-participant-list button.borderLess {
-        color: #cc1e1c;
-        border: 3px solid #cc1e1c;
-        background-color: #ffffff; }
-        #notification-participant-list #knocking-participant-list button.borderLess:hover {
-          border-color: #a31816;
-          background-color: #ffffff;
-          color: #a31816; }
-      #notification-participant-list #knocking-participant-list button:hover {
-        transform: none; }
-    #notification-participant-list #knocking-participant-list .avatar {
-      height: 36px !important;
-      width: 36px !important; }
-      #notification-participant-list #knocking-participant-list .avatar text {
-        fill: #ffffff; }
+  left: 24px;
+}
+#notification-participant-list #knocking-participant-list {
+  background: #ffffff;
+  color: #3f373f;
+}
+#notification-participant-list #knocking-participant-list ul {
+  padding-right: 0;
+}
+#notification-participant-list #knocking-participant-list .title {
+  background-color: #dcd9dc;
+  border-radius: 8px 8px 0 0;
+}
+#notification-participant-list #knocking-participant-list button {
+  text-transform: uppercase;
+  border-radius: 25px;
+  padding: 8px 12px;
+  font-weight: 700;
+}
+#notification-participant-list #knocking-participant-list button.primary {
+  background-color: #cc1e1c;
+  color: #ffffff;
+  margin-right: 0;
+}
+#notification-participant-list #knocking-participant-list button.primary:hover {
+  background-color: #a31816;
+  color: #ffffff;
+}
+#notification-participant-list #knocking-participant-list button.borderLess {
+  color: #cc1e1c;
+  border: 3px solid #cc1e1c;
+  background-color: #ffffff;
+}
+#notification-participant-list #knocking-participant-list button.borderLess:hover {
+  border-color: #a31816;
+  background-color: #ffffff;
+  color: #a31816;
+}
+#notification-participant-list #knocking-participant-list button:hover {
+  transform: none;
+}
+#notification-participant-list #knocking-participant-list .avatar {
+  height: 36px !important;
+  width: 36px !important;
+}
+#notification-participant-list #knocking-participant-list .avatar text {
+  fill: #ffffff;
+}
 
 .premeeting-screen .prejoin-input-area .prejoin-preview-dropdown-container > .primary {
   box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.1);
   border: 0;
   padding: 13px 16px;
-  color: #fff; }
-  .premeeting-screen .prejoin-input-area .prejoin-preview-dropdown-container > .primary > div {
-    width: 50px; }
-    .premeeting-screen .prejoin-input-area .prejoin-preview-dropdown-container > .primary > div:hover {
-      background-color: #a31816; }
+  color: #fff;
+}
+.premeeting-screen .prejoin-input-area .prejoin-preview-dropdown-container > .primary > div {
+  width: 50px;
+}
+.premeeting-screen .prejoin-input-area .prejoin-preview-dropdown-container > .primary > div:hover {
+  background-color: #a31816;
+}
 .premeeting-screen .content-controls .title {
-  color: #3f373f; }
+  color: #3f373f;
+}
 .premeeting-screen .content-controls input.field {
-  height: 50px;
   color: #3f373f;
   border: 1px solid #8c878c;
   border-radius: 25px;
-  outline: 0; }
-  .premeeting-screen .content-controls input.field.focused {
-    box-shadow: none; }
+  outline: 0;
+}
+.premeeting-screen .content-controls input.field.focused {
+  box-shadow: none;
+}
+.premeeting-screen [data-testid="lobby.enterPasswordButton"] {
+  display: none;
+}
+.premeeting-screen [data-testid="lobby.knockButton"] {
+  color: #ffffff;
+  border: none;
+  padding: 10px;
+  line-height: 22px;
+}
+.premeeting-screen [data-testid="lobby.knockButton"][aria-disabled=true] {
+  background-color: #dcd9dc !important;
+}
 
 #preview {
-  background: #cc1e1c; }
+  background: #cc1e1c;
+}
 
 .device-status {
-  color: #3f373f; }
+  color: #3f373f;
+}
 
 /*
 Light brown background profile: #f4f0ee
 
  */
 body {
-  font-family: "Roboto-Regular",sans-serif !important;
+  font-family: "Roboto-Regular", sans-serif !important;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: auto; }
+  -moz-osx-font-smoothing: auto;
+}
 
 .subject {
-  display: none !important; }
+  display: none !important;
+}
 
 .watermark {
   width: 140px;
-  height: 36px; }
+  height: 36px;
+  filter: drop-shadow(0 0 15px #000000);
+}
 
 a {
   color: #cc1e1c !important;
-  transition: all .6s ease; }
-  a:hover {
-    color: #a31816 !important;
-    transition: all .3s ease; }
+  transition: all 0.6s ease;
+}
+a:hover {
+  color: #a31816 !important;
+  transition: all 0.3s ease;
+}
 
-div[role="dialog"] footer {
-  justify-content: center; }
-  div[role="dialog"] footer button, div[role="dialog"] footer button[form="modal-dialog-form"], div[role="dialog"] footer button#modal-dialog-cancel-button {
-    min-width: 200px;
-    height: auto;
-    padding: 11px 10px;
-    border-radius: 25px;
-    text-transform: uppercase;
-    font-size: 16px;
-    line-height: 21px;
-    font-weight: 700;
-    border: 3px solid #cc1e1c; }
-    div[role="dialog"] footer button, div[role="dialog"] footer button span, div[role="dialog"] footer button[form="modal-dialog-form"], div[role="dialog"] footer button[form="modal-dialog-form"] span, div[role="dialog"] footer button#modal-dialog-cancel-button, div[role="dialog"] footer button#modal-dialog-cancel-button span {
-      color: #cc1e1c; }
-    div[role="dialog"] footer button:hover, div[role="dialog"] footer button[form="modal-dialog-form"]:hover, div[role="dialog"] footer button#modal-dialog-cancel-button:hover {
-      border-color: #a31816;
-      background-color: #ffffff; }
-      div[role="dialog"] footer button:hover, div[role="dialog"] footer button:hover span, div[role="dialog"] footer button[form="modal-dialog-form"]:hover, div[role="dialog"] footer button[form="modal-dialog-form"]:hover span, div[role="dialog"] footer button#modal-dialog-cancel-button:hover, div[role="dialog"] footer button#modal-dialog-cancel-button:hover span {
-        color: #a31816; }
-  div[role="dialog"] footer button[form="modal-dialog-form"] {
-    background-color: #cc1e1c; }
-    div[role="dialog"] footer button[form="modal-dialog-form"], div[role="dialog"] footer button[form="modal-dialog-form"] span {
-      color: #ffffff; }
-    div[role="dialog"] footer button[form="modal-dialog-form"]:hover {
-      background-color: #a31816;
-      border-color: #a31816; }
-      div[role="dialog"] footer button[form="modal-dialog-form"]:hover, div[role="dialog"] footer button[form="modal-dialog-form"]:hover span {
-        color: #ffffff; }
+#local-video-menu-trigger {
+  display: none;
+}
+
+div[role=dialog] footer {
+  justify-content: center;
+}
+div[role=dialog] footer button, div[role=dialog] footer button[form=modal-dialog-form], div[role=dialog] footer button#modal-dialog-cancel-button {
+  min-width: 150px;
+  height: auto;
+  padding: 11px 10px;
+  border-radius: 25px;
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 21px;
+  font-weight: 700;
+  border: 3px solid #cc1e1c;
+}
+div[role=dialog] footer button, div[role=dialog] footer button span, div[role=dialog] footer button[form=modal-dialog-form], div[role=dialog] footer button[form=modal-dialog-form] span, div[role=dialog] footer button#modal-dialog-cancel-button, div[role=dialog] footer button#modal-dialog-cancel-button span {
+  color: #cc1e1c;
+}
+div[role=dialog] footer button:hover, div[role=dialog] footer button[form=modal-dialog-form]:hover, div[role=dialog] footer button#modal-dialog-cancel-button:hover {
+  border-color: #a31816;
+  background-color: #ffffff;
+}
+div[role=dialog] footer button:hover, div[role=dialog] footer button:hover span, div[role=dialog] footer button[form=modal-dialog-form]:hover, div[role=dialog] footer button[form=modal-dialog-form]:hover span, div[role=dialog] footer button#modal-dialog-cancel-button:hover, div[role=dialog] footer button#modal-dialog-cancel-button:hover span {
+  color: #a31816;
+}
+div[role=dialog] footer button[form=modal-dialog-form] {
+  background-color: #cc1e1c;
+}
+div[role=dialog] footer button[form=modal-dialog-form], div[role=dialog] footer button[form=modal-dialog-form] span {
+  color: #ffffff;
+}
+div[role=dialog] footer button[form=modal-dialog-form]:hover {
+  background-color: #a31816;
+  border-color: #a31816;
+}
+div[role=dialog] footer button[form=modal-dialog-form]:hover, div[role=dialog] footer button[form=modal-dialog-form]:hover span {
+  color: #ffffff;
+}
 
 body.desktop-browser {
-  font-family: "Roboto-Regular",sans-serif !important;
+  font-family: "Roboto-Regular", sans-serif !important;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: auto; }
+  -moz-osx-font-smoothing: auto;
+}
 
 /*# sourceMappingURL=caritas.css.map */
