@@ -11,7 +11,7 @@
           width: 50px;
 
           &:hover {
-            background-color: #a31816;
+            background-color: $color2;
           }
         }
       }
@@ -27,7 +27,7 @@
       input.field {
         color: #3f373f;
         border: 1px solid #8c878c;
-        border-radius: 25px;
+        border-radius: $inputBorderRadius;
         outline: 0;
 
         &.focused {
@@ -61,5 +61,5 @@
 }
 
 #preview {
-  background: #cc1e1c;
+  background: $color1;
 }

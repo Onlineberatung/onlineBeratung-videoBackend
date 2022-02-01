@@ -59,13 +59,13 @@
           background-color: #ffffff;
           border-width: 1px;
           padding: 15px 20px;
-          border-radius: 25px;
+          border-radius: $buttonBorderRadius;
         }
       }
     }
   }
 
-  // Somehow Jitsi doesn't load the German label for this 
+  // Somehow Jitsi doesn't load the German label for this
   // feature. Since it's not really important just hide it.
   input[name="disableSelfView"] {
     ~ * {
@@ -77,7 +77,7 @@
     button {
       background: #fff;
       border: 1px solid rgb(63, 55, 63);
-      border-radius: 25px;
+      border-radius: $buttonBorderRadius;
       height: auto;
       padding: 8px 20px;
       text-align: left;
@@ -101,7 +101,7 @@
     h2 {
       font-size: 16px;
       line-height: 21px;
-      font-family: Roboto,sans-serif;
+      font-family: $font2;
       font-weight: 500;
     }
 
@@ -129,9 +129,9 @@
           --local-background-hover: #ffffff;
           --local-border-hover: #3f373f;
 
-          --local-tick-checked: #{$colorRed1};
-          --local-tick-disabled: #{$colorRed1};
-          --local-tick-active: #{$colorRed1};
+          --local-tick-checked: #{$color1};
+          --local-tick-disabled: #{$color1};
+          --local-tick-active: #{$color1};
 
           --local-border-invalid: #FF5630;
           --local-border-checked-invalid: #FF5630;

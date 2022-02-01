@@ -11,7 +11,7 @@ services:
         volumes:
             - ${CONFIG}/web:/config:Z
             # Images
-            - ${CUSTOMFILES}/images/caritas:/usr/share/jitsi-meet/images/caritas
+            - ${CUSTOMFILES}/images/custom:/usr/share/jitsi-meet/images/custom
             # Fonts
             - ${CUSTOMFILES}/fonts/custom:/usr/share/jitsi-meet/fonts/custom
             # HTML Files
@@ -25,8 +25,8 @@ services:
             # Custom Branding
             - ${CUSTOMFILES}/html/dynamicBranding.json:/usr/share/jitsi-meet/dynamicBranding.json
             # Custom CSS
-            - ${CUSTOMFILES}/css/caritas.css:/usr/share/jitsi-meet/css/caritas.css
-            - ${CUSTOMFILES}/css/caritas.css.map:/usr/share/jitsi-meet/css/caritas.css.map
+            - ${CUSTOMFILES}/css/styles.css:/usr/share/jitsi-meet/css/styles.css
+            - ${CUSTOMFILES}/css/styles.css.map:/usr/share/jitsi-meet/css/styles.css.map
         environment:
             - AMPLITUDE_ID
             - ANALYTICS_SCRIPT_URLS
