@@ -94,7 +94,7 @@
   display: inline-block;
   height: 22px;
   width: 48px;
-  background-image: url("../images/caritas/icons/link.svg");
+  background-image: url("../images/custom/icons/link.svg");
   background-size: 20px 20px;
   background-repeat: no-repeat;
   background-position: center;
@@ -418,4 +418,4 @@ body.desktop-browser {
   -moz-osx-font-smoothing: auto;
 }
 
-/*# sourceMappingURL=caritas.css.map */
+/*# sourceMappingURL=styles.css.map */

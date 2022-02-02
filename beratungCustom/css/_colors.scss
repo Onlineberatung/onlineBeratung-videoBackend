@@ -1,5 +1,5 @@
-$colorRed1: #cc1e1c;
-$colorRed2: #a31816;
+$color1: #cc1e1c;
+$color2: #a31816;
 
 $colorWhite: #ffffff;
 $colorBlack: #000000;
@@ -10,24 +10,29 @@ $colorGrey3: #8c878c;
 $colorGrey4: #dcd9dc;
 
 $tabColor: $colorGrey1;
-$tabColorSelected: $colorRed2;
-$tabSelectedLine: $colorRed2;
+$tabColorSelected: $color2;
+$tabSelectedLine: $color2;
 
 $labelColor: rgba(0,0,0,.6);
 
-$btnPrimaryBg: $colorRed1;
-$btnPrimaryBgHover: $colorRed2;
-$btnPrimaryBorder: $colorRed1;
-$btnPrimaryBorderHover: $colorRed2;
+$btnPrimaryBg: $color1;
+$btnPrimaryBgHover: $color2;
+$btnPrimaryBorder: $color1;
+$btnPrimaryBorderHover: $color2;
 $btnPrimaryColor: $colorWhite;
 $btnPrimaryColorHover: $colorWhite;
 
 $btnSecondaryBg: $colorWhite;
 $btnSecondaryBgHover: $colorWhite;
-$btnSecondaryBorder: $colorRed1;
-$btnSecondaryBorderHover: $colorRed2;
-$btnSecondaryColor: $colorRed1;
-$btnSecondaryColorHover: $colorRed2;
+$btnSecondaryBorder: $color1;
+$btnSecondaryBorderHover: $color2;
+$btnSecondaryColor: $color1;
+$btnSecondaryColorHover: $color2;
 
-$linkColor: $colorRed1;
-$linkColorHover: $colorRed2;
+$linkColor: $color1;
+$linkColorHover: $color2;
+
+$toolbarBg: rgba(0, 0, 0, 0.5);
+
+$toolbarHangUpBg: $color1;
+$toolbarHangUpBgHover: $color2;

@@ -6,8 +6,8 @@ interfaceConfig.DISABLE_TRANSCRIPTION_SUBTITLES = true;
 interfaceConfig.DISABLE_VIDEO_BACKGROUND = true;
 interfaceConfig.DISPLAY_WELCOME_PAGE_CONTENT = true;
 interfaceConfig.DEFAULT_BACKGROUND = '#ffffff';
-//interfaceConfig.DEFAULT_LOGO_URL = 'images/caritas/watermark.svg';
-interfaceConfig.DEFAULT_WELCOME_PAGE_LOGO_URL = 'images/caritas/watermark.svg';
+//interfaceConfig.DEFAULT_LOGO_URL = 'images/custom/watermark.svg';
+interfaceConfig.DEFAULT_WELCOME_PAGE_LOGO_URL = 'images/custom/watermark.svg';
 //interfaceConfig.JITSI_WATERMARK_LINK = '#';
 
 interfaceConfig.ENABLE_DIAL_OUT = false;

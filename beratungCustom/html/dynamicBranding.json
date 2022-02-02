@@ -1,5 +1,5 @@
 {
-  "logoImageUrl": "images/caritas/watermark.svg",
+  "logoImageUrl": "images/custom/watermark.svg",
   "backgroundColor": "rgb(71, 71, 71)",
   "premeetingBackground": "#ffffff",
   "customTheme": {
@@ -15,6 +15,7 @@
       "action01Hover": "#a31816",
       "action01Active": "#a31816",
       "action01Focus": "#a31816",
+
       "action01Disabled": "#dcd9dc",
 
       "action02": "#3D3D3D",

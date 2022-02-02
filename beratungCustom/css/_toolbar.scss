@@ -6,21 +6,21 @@
   }
 
   .toolbox-content-items {
-    border-radius: 30px;
-    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: $toolboxBorderRadius;
+    background-color: $toolbarBg;
 
     .toolbox-icon {
-      border-radius: 50%;
+      border-radius: $toolboxIconButtonBorderRadius;
 
       &, &.toggled {
         background: #525252;
       }
 
       &.hangup-button {
-        background-color: $colorRed1;
+        background-color: $toolbarHangUpBg;
 
         &:hover {
-          background-color: $colorRed2;
+          background-color: $toolbarHangUpBgHover;
         }
       }
     }
@@ -43,7 +43,7 @@
           display: inline-block;
           height: 22px;
           width: 48px;
-          background-image: url("../images/caritas/icons/link.svg");
+          background-image: url("../images/custom/icons/link.svg");
           background-size: 20px 20px;
           background-repeat: no-repeat;
           background-position: center;

@@ -39,7 +39,7 @@
 
 	button {
 		&.primary {
-			border-radius: 24px;
+			border-radius: $buttonBorderRadius;
 			background-color: var(--primary-red);
 			color: var(--white);
 			padding: 8px 12px;
