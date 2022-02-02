@@ -48,6 +48,16 @@ document.addEventListener('DOMContentLoaded', () => {
 							document.location.href = "static/close2.html";
 						}
 					});
+
+					room.on(JitsiMeetJS.events.conference.CONFERENCE_JOINED, function () {
+						// Enable e2ee
+						if (isModerator()) {
+							APP.store.dispatch({
+								type: 'TOGGLE_E2EE',
+								enabled: true
+							});
+						}
+					});
 				}
 			});
 		});
