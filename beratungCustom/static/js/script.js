@@ -6,7 +6,7 @@ const url = new URL(window.location.href);
 
 const waitForApp = () => {
 	return new Promise((resolve, reject) => {
-		if (APP?.conference && APP?.connection && APP?.store) {
+		if (APP?.store) {
 			resolve();
 		} else {
 			setTimeout(() => {
@@ -18,40 +18,138 @@ const waitForApp = () => {
 	});
 }
 
-let unsubscribe = null;
+let e2eeBanner = null;
+
+const hideE2EEBanner = () => {
+	if (e2eeBanner.classList.contains('visible')) {
+		e2eeBanner.classList.remove('visible');
+	}
+}
+
+const showE2EEBanner = () => {
+	if (!e2eeBanner.classList.contains('visible')) {
+		e2eeBanner.classList.add('visible');
+	}
+}
+
+let eventsRegistered = false;
+let e2eeActivationTimeout = null;
+let e2eeDisabling = false;
+let e2eeEnabling = false;
+let e2eeLastState = null;
 
 document.addEventListener('DOMContentLoaded', () => {
 	if (!JitsiMeetJS.app) {
 		return;
 	}
 
+	if (!document.getElementById('e2ee-banner')) {
+		createE2EEBanner();
+	}
+
 	waitForApp()
 		.then(() => {
-			unsubscribe = APP.store.subscribe(() => {
-				if (isModerator() && !document.body.classList.contains('isModerator')) {
-					document.body.classList.add('isModerator');
+			e2eeLastState = APP.store.getState()['features/e2ee']?.enabled ?? false;
+			APP.store.subscribe(() => {
+				const featuresLobby = APP.store.getState()['features/lobby'];
+				const featuresE2ee = APP.store.getState()['features/e2ee'];
+				const featuresBaseConference = APP.store.getState()['features/base/conference'];
+
+				if (e2eeLastState !== featuresE2ee.enabled) {
+					e2eeLastState = featuresE2ee.enabled;
+					if (featuresE2ee.enabled === true) {
+						e2eeEnabling = false;
+					} else {
+						e2eeDisabling = false;
+					}
 				}
 
-				const room = APP?.conference?._room;
-				if (room) {
-					unsubscribe();
+				if (isModerator()) {
+					// If no one is knocking
+					if (featuresLobby.knockingParticipants.length <= 0) {
+						// Try to enable e2ee
+						if (!featuresE2ee.enabled && featuresE2ee.everyoneSupportE2EE === true && !e2eeEnabling) {
+							e2eeEnabling = true;
+							// Wait some seconds until user joined and key exchange will work
+							e2eeActivationTimeout = setTimeout(() => {
+								APP.store.dispatch({
+									type: 'TOGGLE_E2EE',
+									enabled: true
+								});
+							}, 5000);
+						}
+					} else {
+						if (e2eeActivationTimeout) {
+							clearTimeout(e2eeActivationTimeout);
+							e2eeEnabling = false;
+						}
 
-					if (isModerator()) {
-						waitForElement('#new-toolbox', 0)
-							.then(function () {
-								createShareUrlButton(document.querySelector('#new-toolbox .toolbox-content-items'));
+						if (featuresE2ee.enabled && !e2eeDisabling) {
+							e2eeDisabling = true;
+							APP.store.dispatch({
+								type: 'TOGGLE_E2EE',
+								enabled: false
 							});
+						}
 					}
 
-					room.on(JitsiMeetJS.events.conference.CONFERENCE_FAILED, function (error) {
-						if (error === JitsiMeetJS.errors.conference.CONFERENCE_DESTROYED) {
-							document.location.href = "static/close2.html";
+					if (!document.body.classList.contains('isModerator')) {
+						document.body.classList.add('isModerator');
+					}
+
+					const featuresToolbox = APP.store.getState()['features/toolbox'];
+
+					const room = featuresBaseConference?.conference?.room;
+					if (room && room?.joined && featuresToolbox.enabled) {
+						createShareUrlButton(document.querySelector('#new-toolbox .toolbox-content-items'));
+					}
+				}
+
+				// Show/Hide e2ee banner for everyone
+				const room = featuresBaseConference?.conference?.room;
+				if (room && room?.joined) {
+					if (Object.keys(room?.members).length > 1) {
+						if (featuresE2ee.enabled === true) {
+							hideE2EEBanner();
+						} else if (featuresE2ee.enabled === false) {
+							showE2EEBanner();
 						}
-					});
+					} else {
+						hideE2EEBanner();
+					}
+
+					if (!eventsRegistered) {
+						eventsRegistered = true;
+
+						room.on(JitsiMeetJS.events.conference.CONFERENCE_FAILED, (error) => {
+							if (error === JitsiMeetJS.errors.conference.CONFERENCE_DESTROYED) {
+								document.location.href = "/static/close2.html";
+							}
+						});
+					}
 				}
 			});
 		});
 });
+
+const createE2EEBanner = () => {
+	const banner = document.createElement('div');
+	banner.setAttribute('id', 'e2ee-banner');
+
+	const bannerText = document.createElement('div');
+	bannerText.classList.add('text');
+	bannerText.innerHTML = 'Durch die technischen Vorraussetzungen ist der Video-Call nicht Ende-zu-Ende verschlüsselt. Jedoch ist der Video-Call transportverschlüsselt.';
+	banner.append(bannerText);
+
+	const closeBanner = document.createElement('div');
+	closeBanner.classList.add('close');
+	closeBanner.innerText = 'Ausblenden';
+	closeBanner.onclick = hideE2EEBanner;
+	banner.append(closeBanner);
+
+	e2eeBanner = banner;
+	document.body.prepend(banner);
+}
 
 const createShareUrlButton = (parentElement) => {
 	const id = 'ca-share-url-button';
@@ -116,27 +214,6 @@ const getShareableUrl = () => {
 const isModerator = () => {
 	const jwt = parseJwt();
 	return !!jwt?.moderator;
-}
-
-/**
- * Wait for an element before resolving a promise
- * @param {String} querySelector - Selector of element to wait for
- * @param {number} timeout - Milliseconds to wait before timing out, or 0 for no timeout
- */
-function waitForElement(querySelector, timeout = 0) {
-	const startTime = new Date().getTime();
-	return new Promise((resolve, reject) => {
-		const timer = setInterval(() => {
-			const now = new Date().getTime();
-			if (document.querySelector(querySelector)) {
-				clearInterval(timer);
-				resolve();
-			} else if (timeout && now - startTime >= timeout) {
-				clearInterval(timer);
-				reject();
-			}
-		}, 100);
-	});
 }
 
 /**

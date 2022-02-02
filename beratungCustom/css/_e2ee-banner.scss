@@ -1,0 +1,24 @@
+#e2ee-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  background: rgba(255, 159, 0, 0.9);
+  color: #3f373f;
+  display: none;
+  justify-content: space-between;
+
+  &.visible {
+    display: flex;
+  }
+
+  & > * {
+    padding: 16px;
+    color: #3f373f;
+  }
+
+  .close {
+    cursor: pointer;
+  }
+}
