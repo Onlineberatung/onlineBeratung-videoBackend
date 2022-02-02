@@ -1,5 +1,6 @@
 config.tokenAuthUrl = 'static/authError.html';
 config.disableDeepLinking = true;
+config.enableWelcomePage = false;
 config.enableClosePage = true;
 config.defaultLanguage = 'de';
 config.toolbarButtons = [
