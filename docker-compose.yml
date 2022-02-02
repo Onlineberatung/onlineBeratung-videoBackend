@@ -21,6 +21,7 @@ services:
             - ${CUSTOMFILES}/static/authError.html:/usr/share/jitsi-meet/static/authError.html
             - ${CUSTOMFILES}/static/close2.html:/usr/share/jitsi-meet/static/close2.html
             - ${CUSTOMFILES}/static/close2.html:/usr/share/jitsi-meet/static/close3.html
+            - ${CUSTOMFILES}/static/no_e2ee.html:/usr/share/jitsi-meet/static/no_e2ee.html
             - ${CUSTOMFILES}/static/js:/usr/share/jitsi-meet/static/js
             # Custom Branding
             - ${CUSTOMFILES}/html/dynamicBranding.json:/usr/share/jitsi-meet/dynamicBranding.json
