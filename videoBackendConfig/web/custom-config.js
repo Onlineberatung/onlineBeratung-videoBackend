@@ -15,6 +15,9 @@ config.toolbarButtons = [
 config.defaultLocalDisplayName = 'Ich';
 config.defaultRemoteDisplayName = 'Ratsuchender';
 config.disableModeratorIndicator = true;
+config.remoteVideoMenu = {
+    disableGrantModerator: true,
+}
 config.connectionIndicators = {
     disabled: true,
     disableDetails: true,
