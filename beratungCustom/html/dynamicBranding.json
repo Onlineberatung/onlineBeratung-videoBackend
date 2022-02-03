@@ -4,17 +4,17 @@
   "premeetingBackground": "#ffffff",
   "customTheme": {
     "shape": {
-      "borderRadius": 50
+      "borderRadius": 0
     },
     "palette": {
       "ui02": "#ffffff",
 
       "text01": "#3f373f",
 
-      "action01": "#cc1e1c",
-      "action01Hover": "#a31816",
-      "action01Active": "#a31816",
-      "action01Focus": "#a31816",
+      "action01": "#5a2572",
+      "action01Hover": "#3a2673",
+      "action01Active": "#3a2673",
+      "action01Focus": "#3a2673",
 
       "action01Disabled": "#dcd9dc",
 

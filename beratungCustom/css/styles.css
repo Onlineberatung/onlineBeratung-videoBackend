@@ -60,20 +60,20 @@
   background-color: #ffffff;
 }
 #new-toolbox .toolbox-content-items {
-  border-radius: 30px;
-  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 0px;
+  background-color: #f2f0f9;
 }
 #new-toolbox .toolbox-content-items .toolbox-icon {
-  border-radius: 50%;
+  border-radius: 0px;
 }
 #new-toolbox .toolbox-content-items .toolbox-icon, #new-toolbox .toolbox-content-items .toolbox-icon.toggled {
   background: #525252;
 }
 #new-toolbox .toolbox-content-items .toolbox-icon.hangup-button {
-  background-color: #cc1e1c;
+  background-color: #5a2572;
 }
 #new-toolbox .toolbox-content-items .toolbox-icon.hangup-button:hover {
-  background-color: #a31816;
+  background-color: #3a2673;
 }
 #new-toolbox .toolbox-content-items .share-url-button {
   /* share URL button */
@@ -127,10 +127,10 @@
   color: #3f373f;
 }
 .settings-dialog div[role=tablist] div[role=tab][data-selected] {
-  color: #a31816;
+  color: #3a2673;
 }
 .settings-dialog div[role=tablist] div[role=tab][data-selected] > span[data-selected] {
-  background-color: #a31816;
+  background-color: #3a2673;
 }
 .settings-dialog .profile-pane #login_button, .settings-dialog .profile-pane .auth-name, .settings-dialog .profile-pane .mock-atlaskit-label {
   display: none;
@@ -164,7 +164,7 @@
   background-color: #ffffff;
   border-width: 1px;
   padding: 15px 20px;
-  border-radius: 25px;
+  border-radius: 0px;
 }
 .settings-dialog input[name=disableSelfView] ~ * {
   display: none;
@@ -172,7 +172,7 @@
 .settings-dialog .dropdown-menu button {
   background: #fff;
   border: 1px solid #3f373f;
-  border-radius: 25px;
+  border-radius: 0px;
   height: auto;
   padding: 8px 20px;
   text-align: left;
@@ -190,7 +190,7 @@
 .settings-dialog .settings-pane h2 {
   font-size: 16px;
   line-height: 21px;
-  font-family: Roboto, sans-serif;
+  font-family: Arial, sans-serif;
   font-weight: 500;
 }
 .settings-dialog .settings-pane .mock-atlaskit-label {
@@ -211,9 +211,9 @@
   --local-tick-rest: transparent;
   --local-background-hover: #ffffff;
   --local-border-hover: #3f373f;
-  --local-tick-checked: #cc1e1c;
-  --local-tick-disabled: #cc1e1c;
-  --local-tick-active: #cc1e1c;
+  --local-tick-checked: #5a2572;
+  --local-tick-disabled: #5a2572;
+  --local-tick-active: #5a2572;
   --local-border-invalid: #FF5630;
   --local-border-checked-invalid: #FF5630;
   transform: scale(2);
@@ -260,28 +260,28 @@ div[role=dialog] header #modal-header-close-button:hover svg {
 }
 #notification-participant-list #knocking-participant-list button {
   text-transform: uppercase;
-  border-radius: 25px;
+  border-radius: 0px;
   padding: 8px 12px;
   font-weight: 700;
 }
 #notification-participant-list #knocking-participant-list button.primary {
-  background-color: #cc1e1c;
+  background-color: #5a2572;
   color: #ffffff;
   margin-right: 0;
 }
 #notification-participant-list #knocking-participant-list button.primary:hover {
-  background-color: #a31816;
+  background-color: #3a2673;
   color: #ffffff;
 }
 #notification-participant-list #knocking-participant-list button.borderLess {
-  color: #cc1e1c;
-  border: 3px solid #cc1e1c;
+  color: #5a2572;
+  border: 3px solid #5a2572;
   background-color: #ffffff;
 }
 #notification-participant-list #knocking-participant-list button.borderLess:hover {
-  border-color: #a31816;
+  border-color: #3a2673;
   background-color: #ffffff;
-  color: #a31816;
+  color: #3a2673;
 }
 #notification-participant-list #knocking-participant-list button:hover {
   transform: none;
@@ -304,7 +304,7 @@ div[role=dialog] header #modal-header-close-button:hover svg {
   width: 50px;
 }
 .premeeting-screen .prejoin-input-area .prejoin-preview-dropdown-container > .primary > div:hover {
-  background-color: #a31816;
+  background-color: #3a2673;
 }
 .premeeting-screen .content-controls .title {
   color: #3f373f;
@@ -312,7 +312,7 @@ div[role=dialog] header #modal-header-close-button:hover svg {
 .premeeting-screen .content-controls input.field {
   color: #3f373f;
   border: 1px solid #8c878c;
-  border-radius: 25px;
+  border-radius: 0px;
   outline: 0;
 }
 .premeeting-screen .content-controls input.field.focused {
@@ -332,7 +332,7 @@ div[role=dialog] header #modal-header-close-button:hover svg {
 }
 
 #preview {
-  background: #cc1e1c;
+  background: #5a2572;
 }
 
 .device-status {
@@ -344,7 +344,7 @@ Light brown background profile: #f4f0ee
 
  */
 body {
-  font-family: "Roboto-Regular", sans-serif !important;
+  font-family: Arial, sans-serif !important;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: auto;
@@ -361,11 +361,11 @@ body {
 }
 
 a {
-  color: #cc1e1c !important;
+  color: #5a2572 !important;
   transition: all 0.6s ease;
 }
 a:hover {
-  color: #a31816 !important;
+  color: #3a2673 !important;
   transition: all 0.3s ease;
 }
 
@@ -380,39 +380,39 @@ div[role=dialog] footer button, div[role=dialog] footer button[form=modal-dialog
   min-width: 150px;
   height: auto;
   padding: 11px 10px;
-  border-radius: 25px;
+  border-radius: 0px;
   text-transform: uppercase;
   font-size: 16px;
   line-height: 21px;
   font-weight: 700;
-  border: 3px solid #cc1e1c;
+  border: 3px solid #5a2572;
 }
 div[role=dialog] footer button, div[role=dialog] footer button span, div[role=dialog] footer button[form=modal-dialog-form], div[role=dialog] footer button[form=modal-dialog-form] span, div[role=dialog] footer button#modal-dialog-cancel-button, div[role=dialog] footer button#modal-dialog-cancel-button span {
-  color: #cc1e1c;
+  color: #5a2572;
 }
 div[role=dialog] footer button:hover, div[role=dialog] footer button[form=modal-dialog-form]:hover, div[role=dialog] footer button#modal-dialog-cancel-button:hover {
-  border-color: #a31816;
+  border-color: #3a2673;
   background-color: #ffffff;
 }
 div[role=dialog] footer button:hover, div[role=dialog] footer button:hover span, div[role=dialog] footer button[form=modal-dialog-form]:hover, div[role=dialog] footer button[form=modal-dialog-form]:hover span, div[role=dialog] footer button#modal-dialog-cancel-button:hover, div[role=dialog] footer button#modal-dialog-cancel-button:hover span {
-  color: #a31816;
+  color: #3a2673;
 }
 div[role=dialog] footer button[form=modal-dialog-form] {
-  background-color: #cc1e1c;
+  background-color: #5a2572;
 }
 div[role=dialog] footer button[form=modal-dialog-form], div[role=dialog] footer button[form=modal-dialog-form] span {
   color: #ffffff;
 }
 div[role=dialog] footer button[form=modal-dialog-form]:hover {
-  background-color: #a31816;
-  border-color: #a31816;
+  background-color: #3a2673;
+  border-color: #3a2673;
 }
 div[role=dialog] footer button[form=modal-dialog-form]:hover, div[role=dialog] footer button[form=modal-dialog-form]:hover span {
   color: #ffffff;
 }
 
 body.desktop-browser {
-  font-family: "Roboto-Regular", sans-serif !important;
+  font-family: Arial, sans-serif !important;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: auto;

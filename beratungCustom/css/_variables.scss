@@ -1,8 +1,8 @@
-$buttonBorderRadius: 25px;
+$buttonBorderRadius: 0px;
 $inputBorderRadius: $buttonBorderRadius;
 
-$toolboxIconButtonBorderRadius: 50%;
-$toolboxBorderRadius: 30px;
+$toolboxIconButtonBorderRadius: $buttonBorderRadius;
+$toolboxBorderRadius: $buttonBorderRadius;
 
-$font1: "Roboto-Regular",sans-serif;
-$font2: Roboto,sans-serif;
+$font1: Arial,sans-serif;
+$font2: $font1;
