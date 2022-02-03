@@ -1,0 +1,34 @@
+{
+  "logoImageUrl": "images/custom/watermark.svg",
+  "backgroundColor": "rgb(71, 71, 71)",
+  "premeetingBackground": "#ffffff",
+  "customTheme": {
+    "shape": {
+      "borderRadius": 0
+    },
+    "palette": {
+      "ui02": "#ffffff",
+
+      "text01": "#3f373f",
+
+      "action01": "#5a2572",
+      "action01Hover": "#3a2673",
+      "action01Active": "#3a2673",
+      "action01Focus": "#3a2673",
+
+      "action01Disabled": "#dcd9dc",
+
+      "action02": "#3D3D3D",
+      "action02Hover": "#525252",
+      "action02Active": "#292929",
+      "action02Focus": "#858585",
+      "action02Disabled": "#141414",
+
+      "action03": "#525252",
+      "action03Hover": "#525252",
+      "action03Active": "#292929",
+      "action03Focus": "#858585",
+      "action03Disabled": "transparent"
+    }
+  }
+}

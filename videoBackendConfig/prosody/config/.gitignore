@@ -1,0 +1,6 @@
+/*.lua
+/conf.d/*.lua
+/*.conf
+/certs
+/data
+!.gitignore
