@@ -1,0 +1,84 @@
+#new-toolbox {
+  // Jitsi doesn't provide an API to style the dominant speaker name
+  // https://github.com/jitsi/jitsi-meet/blob/29eb9452c06cc31768b8b79ef7d1a7819042654e/react/features/display-name/components/web/DisplayNameBadge.js#L17
+  .toolbox-content-wrapper > *:first-child:not(.toolbox-content-items) > * {
+    background-color: $colorWhite;
+  }
+
+  .toolbox-content-items {
+    border-radius: $toolboxBorderRadius;
+    background-color: $toolbarBg;
+
+    .toolbox-icon {
+      border-radius: $toolboxIconButtonBorderRadius;
+
+      &, &.toggled {
+        background: #525252;
+      }
+
+      &.hangup-button {
+        background-color: $toolbarHangUpBg;
+
+        &:hover {
+          background-color: $toolbarHangUpBgHover;
+        }
+      }
+    }
+
+    .share-url-button {
+      /* share URL button */
+      button.shareUrlButton {
+        padding: 0;
+        display: flex;
+        align-items: center;
+        background-color: transparent;
+        border: none;
+        font-size: 0;
+        color: $colorWhite;
+        z-index: 500;
+        cursor: pointer;
+
+        &::before {
+          content: '';
+          display: inline-block;
+          height: 22px;
+          width: 48px;
+          background-image: url("../images/custom/icons/link.svg");
+          background-size: 20px 20px;
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+
+        &--copied::after {
+          content: 'Video-Link wurde in die Zwischenablage kopiert';
+          display: inline-block;
+          position: absolute;
+          font-size: 14px;
+          line-height: 19px;
+          bottom: 70px;
+          background-color: rgba(0,0,0,0.5);
+          text-align: left;
+          padding: 12px 8px;
+          border-radius: 4px;
+          cursor: auto;
+        }
+      }
+    }
+  }
+}
+
+.premeeting-screen {
+  #new-toolbox {
+    .toolbox-content-items {
+      .toolbox-icon {
+        &, &.toggled {
+          background: #525252;
+        }
+
+        &:hover {
+          background: #535353;
+        }
+      }
+    }
+  }
+}

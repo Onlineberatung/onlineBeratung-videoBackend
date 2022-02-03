@@ -1,0 +1,65 @@
+.premeeting-screen {
+  .prejoin-input-area {
+    .prejoin-preview-dropdown-container {
+      & > .primary {
+        box-shadow: 0 6px 0 0 rgba(0, 0, 0, .1);
+        border: 0;
+        padding: 13px 16px;
+        color: #fff;
+
+        & > div {
+          width: 50px;
+
+          &:hover {
+            background-color: $color2;
+          }
+        }
+      }
+    }
+  }
+
+  .content {
+    &-controls {
+      .title {
+        color: #3f373f;
+      }
+
+      input.field {
+        color: #3f373f;
+        border: 1px solid #8c878c;
+        border-radius: $inputBorderRadius;
+        outline: 0;
+
+        &.focused {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+
+  // Hide the button to enter a room password, since we don't use passwords
+  // https://github.com/jitsi/jitsi-meet/issues/7115
+  [data-testid="lobby.enterPasswordButton"] {
+    display: none;
+  }
+
+  // Jitsi doesn't support a separate text color for action buttons
+  // https://github.com/jitsi/jitsi-meet/blob/8ebca64af18fb099a2af64a8273809022677b23b/react/features/base/premeeting/components/web/ActionButton.js#L102
+  [data-testid="lobby.knockButton"] {
+    color: $colorWhite;
+    border: none;
+    // Same height as input field above
+    padding: 10px;
+    line-height: 22px;
+
+    // Jitsi changes the background color on hover,
+    // even though the element is disabled
+    &[aria-disabled="true"] {
+      background-color: $colorGrey4 !important;
+    }
+  }
+}
+
+#preview {
+  background: $color1;
+}
