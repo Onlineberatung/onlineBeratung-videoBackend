@@ -144,7 +144,7 @@ services:
 
     # XMPP server
     prosody:
-        image: jitsi/prosody:stable-6726-2
+        image: jitsi/prosody:stable-6865
         restart: ${RESTART_POLICY}
         expose:
             - '5222'
@@ -222,7 +222,7 @@ services:
 
     # Focus component
     jicofo:
-        image: jitsi/jicofo:stable-6726-2
+        image: jitsi/jicofo:stable-6865
         restart: ${RESTART_POLICY}
         volumes:
             - ${CONFIG}/jicofo:/config:Z
@@ -273,7 +273,7 @@ services:
 
     # Video bridge
     jvb:
-        image: jitsi/jvb:stable-6726-2
+        image: jitsi/jvb:stable-6865
         restart: ${RESTART_POLICY}
         ports:
             - '${JVB_PORT}:${JVB_PORT}/udp'
