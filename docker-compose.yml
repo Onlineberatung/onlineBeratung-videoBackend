@@ -12,11 +12,8 @@ services:
             - ${CONFIG}/web:/config:Z
             # Images
             - ${CUSTOMFILES}/images/custom:/usr/share/jitsi-meet/images/custom
-            # Fonts
-            - ${CUSTOMFILES}/fonts/custom:/usr/share/jitsi-meet/fonts/custom
             # HTML Files
             - ${CUSTOMFILES}/html/body.html:/usr/share/jitsi-meet/body.html
-            - ${CUSTOMFILES}/html/title.html:/usr/share/jitsi-meet/title.html
             # Static files
             - ${CUSTOMFILES}/static/authError.html:/usr/share/jitsi-meet/static/authError.html
             - ${CUSTOMFILES}/static/close2.html:/usr/share/jitsi-meet/static/close2.html
