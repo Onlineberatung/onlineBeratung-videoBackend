@@ -6,7 +6,7 @@ const url = new URL(window.location.href);
 
 const waitForApp = () => {
 	return new Promise((resolve, reject) => {
-		if (APP?.conference && APP?.connection && APP?.store){
+		if (APP?.conference && APP?.connection && APP?.store) {
 			resolve();
 		} else {
 			setTimeout(() => {
@@ -139,7 +139,7 @@ const isModerator = () => {
  * See: https://github.com/jitsi/lib-jitsi-meet/blob/afc006e99a42439c305c20faab50a1f786254676/modules/browser/BrowserCapabilities.js#L259
  * @returns {boolean} {@code true} if the browser supports insertable streams or encoded transform (Safari).
  */
-export const supportsE2EEncryptionVideoCall = () => {
+const supportsE2EEncryptionVideoCall = () => {
 	return supportsInsertableStreams() || supportsEncodedTransform();
 };
 /**
@@ -170,7 +170,7 @@ function supportsInsertableStreams() {
 	const stream = new ReadableStream();
 
 	try {
-		window.postMessage(stream, '*', [ stream ]);
+		window.postMessage(stream, '*', [stream]);
 
 		return true;
 	} catch {
@@ -183,35 +183,35 @@ function supportsInsertableStreams() {
  * @param {String} querySelector - Selector of element to wait for
  * @param {number} timeout - Milliseconds to wait before timing out, or 0 for no timeout
  */
-function waitForElement(querySelector, timeout=0){
-    const startTime = new Date().getTime();
-    return new Promise((resolve, reject)=>{
-        const timer = setInterval(()=>{
-            const now = new Date().getTime();
-            if (document.querySelector(querySelector)) {
-                clearInterval(timer);
-                resolve();
-            } else if (timeout && now - startTime >= timeout) {
-                clearInterval(timer);
-                reject();
-            }
-        }, 100);
-    });
+function waitForElement(querySelector, timeout = 0) {
+	const startTime = new Date().getTime();
+	return new Promise((resolve, reject) => {
+		const timer = setInterval(() => {
+			const now = new Date().getTime();
+			if (document.querySelector(querySelector)) {
+				clearInterval(timer);
+				resolve();
+			} else if (timeout && now - startTime >= timeout) {
+				clearInterval(timer);
+				reject();
+			}
+		}, 100);
+	});
 }
 
 /**
  * Get decoded object of jwt
  */
- function parseJwt () {
- 	if (!APP.connection.token) {
- 		return;
+function parseJwt() {
+	if (!APP.connection.token) {
+		return;
 	}
 
-    const base64Url = APP.connection.token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
+	const base64Url = APP.connection.token.split('.')[1];
+	const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+	const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+		return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+	}).join(''));
 
-    return JSON.parse(jsonPayload);
+	return JSON.parse(jsonPayload);
 }

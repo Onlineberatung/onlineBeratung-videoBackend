@@ -1,106 +1,13 @@
-@import "variables";
-@import "fonts";
-@import "colors";
-@import "securityBanner";
 @import "toolbar";
 @import "settings";
-@import "dialog";
-@import "notification-participant-list";
 @import "premeeting/premeeting-screens";
-@import "premeeting/device-status";
-
-/*
-Light brown background profile: #f4f0ee
-
- */
-
-body {
-  font-family: $font1 !important;
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: auto;
-}
 
 .subject {
   display: none !important;
-}
-
-.watermark {
-  width: 140px;
-  height: 36px;
-  filter: drop-shadow(0 0 15px $colorBlack);
-}
-
-a {
-  color: $linkColor !important;
-  transition: all .6s ease;
-
-  &:hover {
-    color: $linkColorHover !important;
-    transition: all .3s ease;
-  }
 }
 
 // Hide the menu to mirror the video (not really useful) and to
 // hide the self view (not correctly translated in German)
 #local-video-menu-trigger {
   display: none;
-}
-
-div[role="dialog"] {
-  footer {
-    justify-content: center;
-
-    button {
-      &, &[form="modal-dialog-form"], &#modal-dialog-cancel-button {
-        min-width: 150px;
-        height: auto;
-        padding: 11px 10px;
-        border-radius: $buttonBorderRadius;
-        text-transform: uppercase;
-        font-size: 16px;
-        line-height: 21px;
-        font-weight: 700;
-
-        border: 3px solid $btnSecondaryBorder;
-
-        &, & span {
-          color: $btnSecondaryColor;
-        }
-
-        &:hover {
-          border-color: $btnSecondaryBorderHover;
-          background-color: $btnSecondaryBgHover;
-
-          &, & span {
-            color: $btnSecondaryColorHover;
-          }
-        }
-      }
-
-      &[form="modal-dialog-form"] {
-        background-color: $btnPrimaryBg;
-
-        &, & span {
-          color: $btnPrimaryColor;
-        }
-
-        &:hover {
-          background-color: $btnPrimaryBgHover;
-          border-color: $btnPrimaryBorderHover;
-
-          &, & span {
-            color: $btnPrimaryColorHover;
-          }
-        }
-      }
-    }
-  }
-}
-
-body.desktop-browser {
-  font-family: $font1 !important;
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: auto;
 }
