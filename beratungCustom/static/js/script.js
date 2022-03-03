@@ -25,6 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		return;
 	}
 
+	if (!supportsE2EEncryptionVideoCall()) {
+		document.location.href = "/static/no_e2ee.html";
+		return;
+	}
+
 	waitForApp()
 		.then(() => {
 			unsubscribe = APP.store.subscribe(() => {
@@ -45,7 +50,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 					room.on(JitsiMeetJS.events.conference.CONFERENCE_FAILED, function (error) {
 						if (error === JitsiMeetJS.errors.conference.CONFERENCE_DESTROYED) {
-							document.location.href = "static/close2.html";
+							document.location.href = "/static/close2.html";
+						}
+					});
+
+					room.on(JitsiMeetJS.events.conference.CONFERENCE_JOINED, function () {
+						// Enable e2ee
+						if (isModerator()) {
+							APP.store.dispatch({
+								type: 'TOGGLE_E2EE',
+								enabled: true
+							});
 						}
 					});
 				}
@@ -116,6 +131,51 @@ const getShareableUrl = () => {
 const isModerator = () => {
 	const jwt = parseJwt();
 	return !!jwt?.moderator;
+}
+
+
+/**
+ * Checks if the browser supports insertable streams or encoded transform, needed for E2EE.
+ * See: https://github.com/jitsi/lib-jitsi-meet/blob/afc006e99a42439c305c20faab50a1f786254676/modules/browser/BrowserCapabilities.js#L259
+ * @returns {boolean} {@code true} if the browser supports insertable streams or encoded transform (Safari).
+ */
+export const supportsE2EEncryptionVideoCall = () => {
+	return supportsInsertableStreams() || supportsEncodedTransform();
+};
+/**
+ * Checks if the browser supports WebRTC Encoded Transform, an alternative
+ * to insertable streams.
+ *
+ * NOTE: At the time of this writing the only browser supporting this is
+ * Safari / WebKit, behind a flag.
+ *
+ * @returns {boolean} {@code true} if the browser supports it.
+ */
+function supportsEncodedTransform() {
+	return Boolean(window.RTCRtpScriptTransform);
+}
+
+/**
+ * Checks if the browser supports insertable streams, needed for E2EE.
+ * @returns {boolean} {@code true} if the browser supports insertable streams.
+ */
+function supportsInsertableStreams() {
+	if (!(typeof window.RTCRtpSender !== 'undefined'
+		&& window.RTCRtpSender.prototype.createEncodedStreams)) {
+		return false;
+	}
+
+	// Feature-detect transferable streams which we need to operate in a worker.
+	// See https://groups.google.com/a/chromium.org/g/blink-dev/c/1LStSgBt6AM/m/hj0odB8pCAAJ
+	const stream = new ReadableStream();
+
+	try {
+		window.postMessage(stream, '*', [ stream ]);
+
+		return true;
+	} catch {
+		return false;
+	}
 }
 
 /**
