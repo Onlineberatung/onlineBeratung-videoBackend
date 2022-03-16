@@ -6,7 +6,7 @@ const url = new URL(window.location.href);
 
 const waitForApp = () => {
 	return new Promise((resolve, reject) => {
-		if (APP?.conference && APP?.connection && APP?.store){
+		if (APP?.conference && APP?.connection && APP?.store) {
 			resolve();
 		} else {
 			setTimeout(() => {
@@ -123,35 +123,35 @@ const isModerator = () => {
  * @param {String} querySelector - Selector of element to wait for
  * @param {number} timeout - Milliseconds to wait before timing out, or 0 for no timeout
  */
-function waitForElement(querySelector, timeout=0){
-    const startTime = new Date().getTime();
-    return new Promise((resolve, reject)=>{
-        const timer = setInterval(()=>{
-            const now = new Date().getTime();
-            if (document.querySelector(querySelector)) {
-                clearInterval(timer);
-                resolve();
-            } else if (timeout && now - startTime >= timeout) {
-                clearInterval(timer);
-                reject();
-            }
-        }, 100);
-    });
+function waitForElement(querySelector, timeout = 0) {
+	const startTime = new Date().getTime();
+	return new Promise((resolve, reject) => {
+		const timer = setInterval(() => {
+			const now = new Date().getTime();
+			if (document.querySelector(querySelector)) {
+				clearInterval(timer);
+				resolve();
+			} else if (timeout && now - startTime >= timeout) {
+				clearInterval(timer);
+				reject();
+			}
+		}, 100);
+	});
 }
 
 /**
  * Get decoded object of jwt
  */
- function parseJwt () {
- 	if (!APP.connection.token) {
- 		return;
+function parseJwt() {
+	if (!APP.connection.token) {
+		return;
 	}
 
-    const base64Url = APP.connection.token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
+	const base64Url = APP.connection.token.split('.')[1];
+	const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+	const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+		return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+	}).join(''));
 
-    return JSON.parse(jsonPayload);
+	return JSON.parse(jsonPayload);
 }
