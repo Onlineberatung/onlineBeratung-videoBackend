@@ -98,9 +98,11 @@
 }
 
 .watermark {
-  width: 140px;
-  height: 36px;
+  width: 200px;
+  height: 51px;
   filter: drop-shadow(0 0 15px #000000);
+  max-width: 200px !important;
+  max-height: 51px !important;
 }
 
 /*# sourceMappingURL=styles.css.map */
