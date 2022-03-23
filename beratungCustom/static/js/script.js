@@ -68,7 +68,11 @@ document.addEventListener('DOMContentLoaded', () => {
 					// If no one is knocking
 					if (featuresLobby.knockingParticipants.length <= 0) {
 						// Try to enable e2ee
-						if (!featuresE2ee.enabled && featuresE2ee.everyoneSupportE2EE === true && !e2eeEnabling) {
+						if (
+							!featuresE2ee.enabled &&
+							featuresE2ee.everyoneSupportE2EE === true &&
+							!e2eeEnabling
+						) {
 							e2eeEnabling = true;
 							// Wait some seconds until user joined and key exchange will work
 							e2eeActivationTimeout = setTimeout(() => {
@@ -77,6 +81,21 @@ document.addEventListener('DOMContentLoaded', () => {
 									enabled: true
 								});
 							}, 5000);
+						} else if (
+							featuresE2ee.enabled &&
+							featuresE2ee.everyoneSupportE2EE === true &&
+							!e2eeEnabling && !e2eeDisabling &&
+							featuresE2ee.everyoneEnabledE2EE === false
+						) {
+							// If e2ee is enabled and everyone supports it but not everyone has enabled it then just
+							// disable it so it will be reenabled after 5 seconds
+							/*
+							e2eeDisabling = true;
+							APP.store.dispatch({
+								type: 'TOGGLE_E2EE',
+								enabled: false
+							});
+							 */
 						}
 					} else {
 						if (e2eeActivationTimeout) {
@@ -143,7 +162,6 @@ const createE2EEBanner = () => {
 
 	const closeBanner = document.createElement('div');
 	closeBanner.classList.add('close');
-	closeBanner.innerText = 'Ausblenden';
 	closeBanner.onclick = hideE2EEBanner;
 	banner.append(closeBanner);
 

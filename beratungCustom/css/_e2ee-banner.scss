@@ -2,12 +2,19 @@
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
+  margin: 0 auto;
   width: 100%;
   z-index: 9999;
   background: rgba(255, 159, 0, 0.9);
   color: #3f373f;
   display: none;
   justify-content: space-between;
+
+  @media only screen and (min-width: 900px) {
+    width: 900px;
+    margin-top: 24px;
+  }
 
   &.visible {
     display: flex;
@@ -18,7 +25,21 @@
     color: #3f373f;
   }
 
+  .text,
+  .close {
+    height: 16px;
+  }
+
+  .text {
+    line-height: 16px;
+  }
+
   .close {
     cursor: pointer;
+    width: 16px;
+    background-image: url("../images/custom/icons/x.svg");
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-position: center;
   }
 }
