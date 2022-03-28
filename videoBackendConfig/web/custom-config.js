@@ -3,6 +3,7 @@ config.disableDeepLinking = true;
 config.enableWelcomePage = false;
 config.enableClosePage = true;
 config.defaultLanguage = 'de';
+config.enableEncodedTransformSupport = false;
 config.toolbarButtons = [
     'microphone',
     'camera',
