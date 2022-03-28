@@ -19,6 +19,7 @@ const waitForApp = () => {
 }
 
 let e2eeBanner = null;
+let hiddenByUser = false;
 
 const hideE2EEBanner = () => {
 	if (e2eeBanner.classList.contains('visible')) {
@@ -27,7 +28,7 @@ const hideE2EEBanner = () => {
 }
 
 const showE2EEBanner = () => {
-	if (!e2eeBanner.classList.contains('visible')) {
+	if (!e2eeBanner.classList.contains('visible') && !hiddenByUser) {
 		e2eeBanner.classList.add('visible');
 	}
 }
@@ -62,6 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
 					} else {
 						e2eeDisabling = false;
 					}
+
+					// Reset banner hidden by user if new participant is knocking
+					hiddenByUser = false;
 				}
 
 				if (isModerator()) {
@@ -147,7 +151,10 @@ const createE2EEBanner = () => {
 
 	const closeBanner = document.createElement('div');
 	closeBanner.classList.add('close');
-	closeBanner.onclick = hideE2EEBanner;
+	closeBanner.onclick = () => {
+		hiddenByUser = true;
+		hideE2EEBanner();
+	};
 	banner.append(closeBanner);
 
 	e2eeBanner = banner;
