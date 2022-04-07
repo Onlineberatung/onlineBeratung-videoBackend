@@ -30,15 +30,15 @@ const hideE2EEBanner = () => {
 const showE2EEBanner = (type) => {
 	if (!e2eeBanner.classList.contains('visible') && !hiddenByUser) {
 		e2eeBanner.classList.add('visible');
-		switch (type) {
-			case 'e2ee':
-				e2eeBanner.querySelector('.text').innerText = 'Dieser Video-Call ist mit der Ende-zu-Ende Verschlüsselung gesichert.'
-				break;
-			case 'transport':
-				e2eeBanner.querySelector('.text').innerText = 'Dieser Video-Call ist mit der Transportverschlüsselung gesichert.'
-				break;
+	}
 
-		}
+	switch (type) {
+		case 'e2ee':
+			e2eeBanner.querySelector('.text').innerText = 'Dieser Video-Call ist mit der Ende-zu-Ende Verschlüsselung gesichert.'
+			break;
+		case 'transport':
+			e2eeBanner.querySelector('.text').innerText = 'Dieser Video-Call ist mit der Transportverschlüsselung gesichert.'
+			break;
 	}
 }
 
