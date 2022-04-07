@@ -2,6 +2,9 @@ const buttonText = 'Video-Link kopieren';
 const buttonTextCopied = 'In Zwischenablage kopiert';
 const buttonChangeDuration = 3000;
 
+const e2eEncText = 'Dieser Video-Call ist mit der Ende-zu-Ende Verschlüsselung gesichert.';
+const transportEncText = 'Dieser Video-Call ist mit der Transportverschlüsselung gesichert';
+
 const url = new URL(window.location.href);
 
 const waitForApp = () => {
@@ -19,25 +22,14 @@ const waitForApp = () => {
 }
 
 let e2eeBanner = null;
-let hiddenByUser = false;
 
-const hideE2EEBanner = () => {
-	if (e2eeBanner.classList.contains('visible')) {
-		e2eeBanner.classList.remove('visible');
-	}
-}
-
-const showE2EEBanner = (type) => {
-	if (!e2eeBanner.classList.contains('visible') && !hiddenByUser) {
-		e2eeBanner.classList.add('visible');
-	}
-
+const changeE2EEBanner = (type) => {
 	switch (type) {
 		case 'e2ee':
-			e2eeBanner.querySelector('.text').innerText = 'Dieser Video-Call ist mit der Ende-zu-Ende Verschlüsselung gesichert.'
+			e2eeBanner.querySelector('.text').innerText = e2eEncText;
 			break;
 		case 'transport':
-			e2eeBanner.querySelector('.text').innerText = 'Dieser Video-Call ist mit der Transportverschlüsselung gesichert.'
+			e2eeBanner.querySelector('.text').innerText = transportEncText;
 			break;
 	}
 }
@@ -72,9 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
 					} else {
 						e2eeDisabling = false;
 					}
-
-					// Reset banner hidden by user if new participant is knocking
-					hiddenByUser = false;
 				}
 
 				if (isModerator()) {
@@ -127,12 +116,12 @@ document.addEventListener('DOMContentLoaded', () => {
 				if (room && room?.joined) {
 					if (Object.keys(room?.members).length > 1) {
 						if (featuresE2ee.enabled === true) {
-							showE2EEBanner('e2ee');
+							changeE2EEBanner('e2ee');
 						} else if (featuresE2ee.enabled === false) {
-							showE2EEBanner('transport');
+							changeE2EEBanner('transport');
 						}
 					} else {
-						hideE2EEBanner();
+						changeE2EEBanner('transport');
 					}
 
 					if (!eventsRegistered) {
@@ -165,7 +154,7 @@ const createE2EEBanner = () => {
 
 	const bannerText = document.createElement('div');
 	bannerText.classList.add('text');
-	bannerText.innerHTML = 'Dieser Video-Call ist mit der Transportverschlüsselung gesichert.';
+	bannerText.innerText = transportEncText;
 	banner.append(bannerText);
 
 	e2eeBanner = banner;
