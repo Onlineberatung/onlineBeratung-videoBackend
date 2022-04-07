@@ -21,10 +21,12 @@
 
 #e2ee-banner .e2ee-banner__icon-filled {
   display: none;
+  filter: drop-shadow(0 0 15px #000000);
 }
 
 #e2ee-banner .e2ee-banner__icon-outline {
   display: block;
+  filter: drop-shadow(0 0 15px #000000);
 }
 
 #e2ee-banner:hover .text {
@@ -52,6 +54,7 @@
   width: 168px;
   max-width: 256px;
   border-radius: 4px;
+  filter: drop-shadow(0 0 15px #00000066);
 }
 
 @media screen and (min-width: 500px) {
