@@ -27,9 +27,18 @@ const hideE2EEBanner = () => {
 	}
 }
 
-const showE2EEBanner = () => {
+const showE2EEBanner = (type) => {
 	if (!e2eeBanner.classList.contains('visible') && !hiddenByUser) {
 		e2eeBanner.classList.add('visible');
+		switch (type) {
+			case 'e2ee':
+				e2eeBanner.querySelector('.text').innerText = 'Dieser Video-Call ist mit der Ende-zu-Ende Verschlüsselung gesichert.'
+				break;
+			case 'transport':
+				e2eeBanner.querySelector('.text').innerText = 'Dieser Video-Call ist mit der Transportverschlüsselung gesichert.'
+				break;
+
+		}
 	}
 }
 
@@ -118,9 +127,9 @@ document.addEventListener('DOMContentLoaded', () => {
 				if (room && room?.joined) {
 					if (Object.keys(room?.members).length > 1) {
 						if (featuresE2ee.enabled === true) {
-							hideE2EEBanner();
+							showE2EEBanner('e2ee');
 						} else if (featuresE2ee.enabled === false) {
-							showE2EEBanner();
+							showE2EEBanner('transport');
 						}
 					} else {
 						hideE2EEBanner();
@@ -144,18 +153,20 @@ const createE2EEBanner = () => {
 	const banner = document.createElement('div');
 	banner.setAttribute('id', 'e2ee-banner');
 
+	const bannerIconFilled = document.createElement('div');
+	bannerIconFilled.classList.add('e2ee-banner__icon-filled');
+	bannerIconFilled.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>`;
+	const bannerIconOutline = document.createElement('div');
+	bannerIconOutline.classList.add('e2ee-banner__icon-outline');
+	bannerIconOutline.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm7 10c0 4.52-2.98 8.69-7 9.93-4.02-1.24-7-5.41-7-9.93V6.3l7-3.11 7 3.11V11zm-11.59.59L6 13l4 4 8-8-1.41-1.42L10 14.17z"/></svg>`;
+
+	banner.append(bannerIconOutline);
+	banner.append(bannerIconFilled);
+
 	const bannerText = document.createElement('div');
 	bannerText.classList.add('text');
-	bannerText.innerHTML = 'Durch die technischen Vorraussetzungen ist der Video-Call nicht Ende-zu-Ende verschlüsselt. Jedoch ist der Video-Call transportverschlüsselt.';
+	bannerText.innerHTML = 'Dieser Video-Call ist mit der Transportverschlüsselung gesichert.';
 	banner.append(bannerText);
-
-	const closeBanner = document.createElement('div');
-	closeBanner.classList.add('close');
-	closeBanner.onclick = () => {
-		hiddenByUser = true;
-		hideE2EEBanner();
-	};
-	banner.append(closeBanner);
 
 	e2eeBanner = banner;
 	document.body.prepend(banner);

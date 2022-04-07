@@ -49,46 +49,85 @@
 
 #e2ee-banner {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 32px;
+  right: 32px;
   margin: 0 auto;
-  width: 100%;
   z-index: 9999;
-  background: rgba(255, 159, 0, 0.9);
-  color: #3f373f;
-  display: none;
-  justify-content: space-between;
-}
-@media only screen and (min-width: 900px) {
-  #e2ee-banner {
-    width: 900px;
-    margin-top: 24px;
-  }
-}
-#e2ee-banner.visible {
   display: flex;
-}
-#e2ee-banner > * {
-  padding: 16px;
-  color: #3f373f;
-}
-#e2ee-banner .text,
-#e2ee-banner .close {
-  min-height: 16px;
-}
-#e2ee-banner .text {
-  line-height: 16px;
-}
-#e2ee-banner .close {
-  cursor: pointer;
-  width: 16px;
-  background-image: url("../images/custom/icons/x.svg");
-  background-size: 16px 16px;
-  background-repeat: no-repeat;
-  background-position: center;
+  justify-content: space-between;
+  transition: right 1s ease-in-out;
 }
 
+@media screen and (min-width: 500px) {
+  #e2ee-banner {
+    right: 150px;
+  }
+}
+#e2ee-banner svg {
+  fill: white;
+}
+
+#e2ee-banner .e2ee-banner__icon-filled {
+  display: none;
+}
+
+#e2ee-banner .e2ee-banner__icon-outline {
+  display: block;
+}
+
+#e2ee-banner:hover .text {
+  display: flex;
+}
+
+#e2ee-banner:hover .e2ee-banner__icon-filled {
+  display: block;
+}
+
+#e2ee-banner:hover .e2ee-banner__icon-outline {
+  display: none;
+}
+
+#e2ee-banner .text {
+  display: none;
+  min-height: 16px;
+  line-height: 16px;
+  padding: 10px;
+  background: white;
+  color: black;
+  position: absolute;
+  top: calc(100% + 12px);
+  right: -10px;
+  width: 168px;
+  max-width: 256px;
+  border-radius: 4px;
+}
+
+@media screen and (min-width: 500px) {
+  #e2ee-banner .text {
+    right: unset;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+#e2ee-banner .text::before {
+  content: "";
+  display: block;
+  border-top: 10px solid transparent;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid white;
+  position: absolute;
+  top: -18px;
+  right: 2px;
+  transform: translateX(-50%);
+}
+
+@media screen and (min-width: 500px) {
+  #e2ee-banner .text::before {
+    right: unset;
+    left: 50%;
+  }
+}
 .subject {
   display: none !important;
 }
