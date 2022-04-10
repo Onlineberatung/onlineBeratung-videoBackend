@@ -18,7 +18,7 @@ interfaceConfig.MOBILE_APP_PROMO = false;
 interfaceConfig.RECENT_LIST_ENABLED = false;
 interfaceConfig.SETTINGS_SECTIONS = [ 'devices', 'language', 'profile' ];
 interfaceConfig.SHOW_JITSI_WATERMARK = true;
-interfaceConfig.SHOW_PROMOTIONAL_CLOSE_PAGE = true;
+interfaceConfig.SHOW_PROMOTIONAL_CLOSE_PAGE = false;
 interfaceConfig.VIDEO_QUALITY_LABEL_DISABLED = true;
 
 /* eslint-enable no-unused-vars, no-var, max-len */
