@@ -2,6 +2,9 @@ const buttonText = 'Video-Link kopieren';
 const buttonTextCopied = 'In Zwischenablage kopiert';
 const buttonChangeDuration = 3000;
 
+const e2eEncText = 'Dieser Video-Call ist mit der Ende-zu-Ende Verschlüsselung gesichert.';
+const transportEncText = 'Dieser Video-Call ist mit der Transportverschlüsselung gesichert';
+
 const url = new URL(window.location.href);
 
 const waitForApp = () => {
@@ -19,17 +22,15 @@ const waitForApp = () => {
 }
 
 let e2eeBanner = null;
-let hiddenByUser = false;
 
-const hideE2EEBanner = () => {
-	if (e2eeBanner.classList.contains('visible')) {
-		e2eeBanner.classList.remove('visible');
-	}
-}
-
-const showE2EEBanner = () => {
-	if (!e2eeBanner.classList.contains('visible') && !hiddenByUser) {
-		e2eeBanner.classList.add('visible');
+const changeE2EEBanner = (type) => {
+	switch (type) {
+		case 'e2ee':
+			e2eeBanner.querySelector('.text').innerText = e2eEncText;
+			break;
+		case 'transport':
+			e2eeBanner.querySelector('.text').innerText = transportEncText;
+			break;
 	}
 }
 
@@ -55,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				const featuresLobby = APP.store.getState()['features/lobby'];
 				const featuresE2ee = APP.store.getState()['features/e2ee'];
 				const featuresBaseConference = APP.store.getState()['features/base/conference'];
+				const featuresBaseJwt = APP.store.getState()['features/base/jwt'];
 
 				if (e2eeLastState !== featuresE2ee.enabled) {
 					e2eeLastState = featuresE2ee.enabled;
@@ -63,12 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
 					} else {
 						e2eeDisabling = false;
 					}
-
-					// Reset banner hidden by user if new participant is knocking
-					hiddenByUser = false;
 				}
 
-				if (isModerator()) {
+				if (isModerator(featuresBaseJwt.jwt)) {
 					// If no one is knocking
 					if (featuresLobby.knockingParticipants.length <= 0) {
 						// Try to enable e2ee
@@ -109,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 					const room = featuresBaseConference?.conference?.room;
 					if (room && room?.joined && featuresToolbox.enabled) {
-						createShareUrlButton(document.querySelector('#new-toolbox .toolbox-content-items'));
+						createShareUrlButton(document.querySelector('#new-toolbox .toolbox-content-items'), featuresBaseJwt.jwt);
 					}
 				}
 
@@ -118,12 +117,12 @@ document.addEventListener('DOMContentLoaded', () => {
 				if (room && room?.joined) {
 					if (Object.keys(room?.members).length > 1) {
 						if (featuresE2ee.enabled === true) {
-							hideE2EEBanner();
+							changeE2EEBanner('e2ee');
 						} else if (featuresE2ee.enabled === false) {
-							showE2EEBanner();
+							changeE2EEBanner('transport');
 						}
 					} else {
-						hideE2EEBanner();
+						changeE2EEBanner('transport');
 					}
 
 					if (!eventsRegistered) {
@@ -144,24 +143,45 @@ const createE2EEBanner = () => {
 	const banner = document.createElement('div');
 	banner.setAttribute('id', 'e2ee-banner');
 
+	const bannerIconFilled = document.createElement('div');
+	bannerIconFilled.classList.add('e2ee-banner__icon-filled');
+	bannerIconFilled.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>`;
+	const bannerIconOutline = document.createElement('div');
+	bannerIconOutline.classList.add('e2ee-banner__icon-outline');
+	bannerIconOutline.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm7 10c0 4.52-2.98 8.69-7 9.93-4.02-1.24-7-5.41-7-9.93V6.3l7-3.11 7 3.11V11zm-11.59.59L6 13l4 4 8-8-1.41-1.42L10 14.17z"/></svg>`;
+
+	banner.append(bannerIconOutline);
+	banner.append(bannerIconFilled);
+
 	const bannerText = document.createElement('div');
 	bannerText.classList.add('text');
-	bannerText.innerHTML = 'Durch die technischen Vorraussetzungen ist der Video-Call nicht Ende-zu-Ende verschlüsselt. Jedoch ist der Video-Call transportverschlüsselt.';
+	bannerText.innerText = transportEncText;
 	banner.append(bannerText);
-
-	const closeBanner = document.createElement('div');
-	closeBanner.classList.add('close');
-	closeBanner.onclick = () => {
-		hiddenByUser = true;
-		hideE2EEBanner();
-	};
-	banner.append(closeBanner);
 
 	e2eeBanner = banner;
 	document.body.prepend(banner);
 }
 
-const createShareUrlButton = (parentElement) => {
+const createShareUrlButton = (parentElement, token) => {
+	let shareableUrl = getShareableUrl(token);
+	if (!shareableUrl) {
+		if (!window.location.hash) {
+			return;
+		}
+
+		const urlSearchParams = new URLSearchParams(window.location.hash.substring(1));
+		if (!urlSearchParams.has("interfaceConfig.shareableUrl")) {
+			return;
+		}
+
+		const shareableUrlParam = urlSearchParams.get("interfaceConfig.shareableUrl");
+		if (!shareableUrlParam || !shareableUrlParam.replaceAll('"', '')) {
+			return;
+		}
+
+		shareableUrl = shareableUrlParam.replaceAll('"', '');
+	}
+
 	const id = 'ca-share-url-button';
 	if (parentElement.querySelector(`#${id}`)) {
 		return;
@@ -184,7 +204,7 @@ const createShareUrlButton = (parentElement) => {
 	button.setAttribute('id', 'ca-share-url-button');
 	button.setAttribute('title', buttonText);
 	button.addEventListener('click', (event) =>
-		copyUrltoClipboard(event, getShareableUrl())
+		copyUrltoClipboard(event, shareableUrl)
 	);
 
 	buttonContainer3.append(button);
@@ -216,25 +236,22 @@ const copyUrltoClipboard = (event, url) => {
 	}, buttonChangeDuration);
 }
 
-const getShareableUrl = () => {
-	const jwt = parseJwt();
+const getShareableUrl = (token) => {
+	const jwt = parseJwt(token);
 	return jwt?.guestVideoCallUrl;
 }
 
-const isModerator = () => {
-	const jwt = parseJwt();
+const isModerator = (token) => {
+	const jwt = parseJwt(token);
 	return !!jwt?.moderator;
 }
 
 /**
  * Get decoded object of jwt
  */
-function parseJwt() {
-	if (!APP.connection.token) {
-		return;
-	}
+function parseJwt(token) {
 
-	const base64Url = APP.connection.token.split('.')[1];
+	const base64Url = token.split('.')[1];
 	const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
 	const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
 		return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
