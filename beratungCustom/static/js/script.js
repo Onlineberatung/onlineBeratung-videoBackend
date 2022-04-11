@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				const featuresLobby = APP.store.getState()['features/lobby'];
 				const featuresE2ee = APP.store.getState()['features/e2ee'];
 				const featuresBaseConference = APP.store.getState()['features/base/conference'];
+				const featuresBaseJwt = APP.store.getState()['features/base/jwt'];
 
 				if (e2eeLastState !== featuresE2ee.enabled) {
 					e2eeLastState = featuresE2ee.enabled;
@@ -66,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					}
 				}
 
-				if (isModerator()) {
+				if (isModerator(featuresBaseJwt.jwt)) {
 					// If no one is knocking
 					if (featuresLobby.knockingParticipants.length <= 0) {
 						// Try to enable e2ee
@@ -107,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 					const room = featuresBaseConference?.conference?.room;
 					if (room && room?.joined && featuresToolbox.enabled) {
-						createShareUrlButton(document.querySelector('#new-toolbox .toolbox-content-items'));
+						createShareUrlButton(document.querySelector('#new-toolbox .toolbox-content-items'), featuresBaseJwt.jwt);
 					}
 				}
 
@@ -161,7 +162,26 @@ const createE2EEBanner = () => {
 	document.body.prepend(banner);
 }
 
-const createShareUrlButton = (parentElement) => {
+const createShareUrlButton = (parentElement, token) => {
+	let shareableUrl = getShareableUrl(token);
+	if (!shareableUrl) {
+		if (!window.location.hash) {
+			return;
+		}
+
+		const urlSearchParams = new URLSearchParams(window.location.hash.substring(1));
+		if (!urlSearchParams.has("interfaceConfig.shareableUrl")) {
+			return;
+		}
+
+		const shareableUrlParam = urlSearchParams.get("interfaceConfig.shareableUrl");
+		if (!shareableUrlParam || !shareableUrlParam.replaceAll('"', '')) {
+			return;
+		}
+
+		shareableUrl = shareableUrlParam.replaceAll('"', '');
+	}
+
 	const id = 'ca-share-url-button';
 	if (parentElement.querySelector(`#${id}`)) {
 		return;
@@ -184,7 +204,7 @@ const createShareUrlButton = (parentElement) => {
 	button.setAttribute('id', 'ca-share-url-button');
 	button.setAttribute('title', buttonText);
 	button.addEventListener('click', (event) =>
-		copyUrltoClipboard(event, getShareableUrl())
+		copyUrltoClipboard(event, shareableUrl)
 	);
 
 	buttonContainer3.append(button);
@@ -216,25 +236,22 @@ const copyUrltoClipboard = (event, url) => {
 	}, buttonChangeDuration);
 }
 
-const getShareableUrl = () => {
-	const jwt = parseJwt();
+const getShareableUrl = (token) => {
+	const jwt = parseJwt(token);
 	return jwt?.guestVideoCallUrl;
 }
 
-const isModerator = () => {
-	const jwt = parseJwt();
+const isModerator = (token) => {
+	const jwt = parseJwt(token);
 	return !!jwt?.moderator;
 }
 
 /**
  * Get decoded object of jwt
  */
-function parseJwt() {
-	if (!APP.connection.token) {
-		return;
-	}
+function parseJwt(token) {
 
-	const base64Url = APP.connection.token.split('.')[1];
+	const base64Url = token.split('.')[1];
 	const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
 	const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
 		return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
