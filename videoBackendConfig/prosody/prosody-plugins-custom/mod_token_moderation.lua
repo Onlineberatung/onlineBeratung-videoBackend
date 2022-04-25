@@ -2,7 +2,6 @@
 -- this module looks for a field on incoming JWT tokens called "moderator".
 -- If it is true the user is added to the room as a moderator, otherwise they are set to a normal user.
 -- Note this may well break other affiliation based features like banning or login-based admins
-local log = module._log;
 local jid_bare = require "util.jid".bare;
 local json = require "cjson";
 local basexx = require "basexx";
@@ -12,10 +11,8 @@ local function is_admin(jid)
     return um_is_admin(jid, module.host);
 end
 
-log('info', 'Loaded token moderation plugin');
 -- Hook into room creation to add this wrapper to every new room
 module:hook("muc-room-created", function(event)
-    log('info', 'room created, adding token moderation code');
     local room = event.room;
     local _handle_normal_presence = room.handle_normal_presence;
     local _handle_first_presence = room.handle_first_presence;
@@ -46,6 +43,10 @@ module:hook("muc-room-created", function(event)
     end;
 end);
 function setupAffiliation(room, origin, stanza)
+    if room.destroying or room._data.destroyed then
+        return;
+    end
+
     if origin.auth_token then
         -- Extract token body and decode it
         local dotFirst = origin.auth_token:find("%.");
