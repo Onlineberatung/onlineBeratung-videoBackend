@@ -41,6 +41,11 @@ let e2eeEnabling = false;
 let e2eeLastState = null;
 
 document.addEventListener('DOMContentLoaded', () => {
+	// ToDo: This is the handler for participant which won't be able to create rooms
+	window.onerror = (message, source, lineno, colno, error) => {
+		document.location.href = "/static/authError.html";
+	}
+
 	if (!JitsiMeetJS.app) {
 		return;
 	}
