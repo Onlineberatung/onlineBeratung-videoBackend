@@ -2,6 +2,7 @@ config.tokenAuthUrl = 'static/authError.html';
 config.disableDeepLinking = true;
 config.enableWelcomePage = false;
 config.enableClosePage = true;
+config.enableLobbyChat = false;
 config.defaultLanguage = 'de';
 config.enableEncodedTransformSupport = false;
 config.toolbarButtons = [
