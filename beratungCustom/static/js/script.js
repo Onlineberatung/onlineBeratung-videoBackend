@@ -41,11 +41,6 @@ let e2eeEnabling = false;
 let e2eeLastState = null;
 
 document.addEventListener('DOMContentLoaded', () => {
-	// ToDo: This is the handler for participant which won't be able to create rooms
-	window.onerror = (message, source, lineno, colno, error) => {
-		document.location.href = "/static/authError.html";
-	}
-
 	if (!JitsiMeetJS.app) {
 		return;
 	}
@@ -58,6 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		.then(() => {
 			e2eeLastState = APP.store.getState()['features/e2ee']?.enabled ?? false;
 			APP.store.subscribe(() => {
+				const featuresBaseConnection = APP.store.getState()['features/base/connection'];
+				if (featuresBaseConnection.error?.name === 'connection.passwordRequired') {
+					document.location.href = "/static/authError.html";
+				}
+
 				const featuresLobby = APP.store.getState()['features/lobby'];
 				const featuresE2ee = APP.store.getState()['features/e2ee'];
 				const featuresBaseConference = APP.store.getState()['features/base/conference'];

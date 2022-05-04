@@ -60,7 +60,7 @@ local check_display_name_required;
 local function load_config()
     whitelist = module:get_option_set('muc_lobby_whitelist', {});
     check_display_name_required
-        = module:get_option_boolean('muc_lobby_check_display_name_required', true);
+    = module:get_option_boolean('muc_lobby_check_display_name_required', true);
 end
 load_config();
 
@@ -73,9 +73,9 @@ function broadcast_json_msg(room, from, json_msg)
     local occupant = room:get_occupant_by_real_jid(from);
     if occupant then
         room:broadcast_message(
-            st.message({ type = 'groupchat', from = occupant.nick })
-              :tag('json-message', {xmlns='http://jitsi.org/jitmeet'})
-              :text(json.encode(json_msg)):up());
+                st.message({ type = 'groupchat', from = occupant.nick })
+                  :tag('json-message', {xmlns='http://jitsi.org/jitmeet'})
+                  :text(json.encode(json_msg)):up());
     end
 end
 
@@ -130,8 +130,8 @@ function filter_stanza(stanza)
             local room = main_muc_service.get_room_from_jid(jid_bare(node .. '@' .. main_muc_component_config));
             local item = muc_x:get_child('item');
             if not room
-                or stanza.attr.type == 'unavailable'
-                or (room.get_affiliation(room, stanza.attr.to) == 'owner'
+                    or stanza.attr.type == 'unavailable'
+                    or (room.get_affiliation(room, stanza.attr.to) == 'owner'
                     and room.get_affiliation(room, item.attr.jid) ~= 'owner') then
                 return stanza;
             end
@@ -158,6 +158,26 @@ function filter_stanza(stanza)
         elseif stanza.name == 'iq' and stanza:get_child('query', DISCO_INFO_NS) then
             -- allow disco info from the lobby component
             return stanza;
+        elseif stanza.name == 'message' then
+            -- allow messages to or from moderator
+            local lobby_room_jid = jid_bare(stanza.attr.from);
+            local lobby_room = lobby_muc_service.get_room_from_jid(lobby_room_jid);
+            local is_to_moderator = lobby_room:get_affiliation(stanza.attr.to) == 'owner';
+            local from_occupant = lobby_room:get_occupant_by_nick(stanza.attr.from);
+
+            local from_real_jid;
+            if from_occupant then
+                for real_jid in from_occupant:each_session() do
+                    from_real_jid = real_jid;
+                end
+            end
+
+            local is_from_moderator = lobby_room:get_affiliation(from_real_jid) == 'owner';
+
+            if is_to_moderator or is_from_moderator then
+                return stanza;
+            end
+            return nil;
         end
 
         return nil;
@@ -239,8 +259,8 @@ function process_lobby_muc_loaded(lobby_muc, host_module)
     host_module:hook('host-disco-info-node', function (event)
         local session, reply, node = event.origin, event.reply, event.node;
         if node == LOBBY_IDENTITY_TYPE
-            and session.jitsi_web_query_room
-            and check_display_name_required then
+                and session.jitsi_web_query_room
+                and check_display_name_required then
             local room = get_room_by_name_and_subdomain(session.jitsi_web_query_room, session.jitsi_web_query_prefix);
 
             if room and room._data.lobbyroom then
@@ -272,7 +292,7 @@ function process_lobby_muc_loaded(lobby_muc, host_module)
         local actor, occupant, room, x = event.actor, event.occupant, event.room, event.x;
         if presence_check_status(x, '307') then
             local display_name = occupant:get_presence():get_child_text(
-                'nick', 'http://jabber.org/protocol/nick');
+                    'nick', 'http://jabber.org/protocol/nick');
             -- we need to notify in the main room
             notify_lobby_access(room.main_room, actor, occupant.nick, display_name, false);
         end
@@ -380,10 +400,13 @@ process_host_module(main_muc_component_config, function(host_module, host)
         local invitee = event.stanza.attr.from;
         local affiliation = room:get_affiliation(invitee);
         if not affiliation or affiliation == 'none' then
-            local reply = st.error_reply(stanza, 'auth', 'registration-required'):up();
+            local reply = st.error_reply(stanza, 'auth', 'registration-required');
             reply.tags[1].attr.code = '407';
-            reply:tag('x', {xmlns = MUC_NS}):up();
-            reply:tag('lobbyroom'):text(room._data.lobbyroom);
+            reply:tag('lobbyroom', { xmlns = 'http://jitsi.org/jitmeet' }):text(room._data.lobbyroom):up():up();
+
+            -- TODO: Drop this tag at some point (when all mobile clients and jigasi are updated), as this violates the rfc
+            reply:tag('lobbyroom'):text(room._data.lobbyroom):up();
+
             event.origin.send(reply:tag('x', {xmlns = MUC_NS}));
             return true;
         end
@@ -394,7 +417,7 @@ process_host_module(main_muc_component_config, function(host_module, host)
         local room, stanza = event.room, event.stanza;
         local invitee = stanza.attr.to;
         local from = stanza:get_child('x', 'http://jabber.org/protocol/muc#user')
-            :get_child('invite').attr.from;
+                           :get_child('invite').attr.from;
 
         if lobby_muc_service and room._data.lobbyroom then
             local lobby_room_obj = lobby_muc_service.get_room_from_jid(room._data.lobbyroom);
