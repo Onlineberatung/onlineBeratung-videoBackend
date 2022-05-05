@@ -2,6 +2,7 @@ config.tokenAuthUrl = 'static/authError.html';
 config.disableDeepLinking = true;
 config.enableWelcomePage = false;
 config.enableClosePage = true;
+config.enableLobbyChat = false;
 config.defaultLanguage = 'de';
 config.enableEncodedTransformSupport = false;
 config.toolbarButtons = [
@@ -28,4 +29,8 @@ config.toolbarConfig = {
     alwaysVisible: false,
     timeout: 4000,
 };
+config.disabledSounds = [
+    'E2EE_OFF_SOUND',
+    'E2EE_ON_SOUND'
+];
 config.dynamicBrandingUrl = '/dynamicBranding.json';

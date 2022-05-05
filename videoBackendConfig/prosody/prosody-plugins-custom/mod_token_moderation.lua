@@ -2,7 +2,6 @@
 -- this module looks for a field on incoming JWT tokens called "moderator".
 -- If it is true the user is added to the room as a moderator, otherwise they are set to a normal user.
 -- Note this may well break other affiliation based features like banning or login-based admins
-local log = module._log;
 local jid_bare = require "util.jid".bare;
 local json = require "cjson";
 local basexx = require "basexx";
@@ -12,20 +11,23 @@ local function is_admin(jid)
     return um_is_admin(jid, module.host);
 end
 
-log('info', 'Loaded token moderation plugin');
+module:log('info', "[VI] Plugin mod_token_moderation loaded");
+
 -- Hook into room creation to add this wrapper to every new room
 module:hook("muc-room-created", function(event)
-    log('info', 'room created, adding token moderation code');
+    module:log('info', "[VI] Hook mod_token_moderation muc-room-created");
     local room = event.room;
     local _handle_normal_presence = room.handle_normal_presence;
     local _handle_first_presence = room.handle_first_presence;
     -- Wrap presence handlers to set affiliations from token whenever a user joins
     room.handle_normal_presence = function(thisRoom, origin, stanza)
+        module:log("info", "[VI] HANDLE NORMAL PRESENCE");
         local pres = _handle_normal_presence(thisRoom, origin, stanza);
         setupAffiliation(thisRoom, origin, stanza);
         return pres;
     end;
     room.handle_first_presence = function(thisRoom, origin, stanza)
+        module:log("info", "[VI] HANDLE FIRST PRESENCE");
         local pres = _handle_first_presence(thisRoom, origin, stanza);
         setupAffiliation(thisRoom, origin, stanza);
         return pres;
@@ -46,6 +48,10 @@ module:hook("muc-room-created", function(event)
     end;
 end);
 function setupAffiliation(room, origin, stanza)
+    if room.destroying or room._data.destroyed then
+        return;
+    end
+
     if origin.auth_token then
         -- Extract token body and decode it
         local dotFirst = origin.auth_token:find("%.");
@@ -57,14 +63,11 @@ function setupAffiliation(room, origin, stanza)
                 local jid = jid_bare(stanza.attr.from);
                 -- If user is a moderator or an admin, set their affiliation to be an owner
                 if body["moderator"] == true or is_admin(jid) then
+                    module:log('info', "[VI] Hook mod_token_moderation owner");
                     room:set_affiliation("token_plugin", jid, "owner");
                 else
-                    if room.moderator ~= nil or room._data.lobbyroom then
-                        room:set_affiliation("token_plugin", jid, "member");
-                    else
-                        room:destroy();
-                        room:clean();
-                    end;
+                    module:log('info', "[VI] Hook mod_token_moderation member");
+                    room:set_affiliation("token_plugin", jid, "member");
                 end;
             end;
         end;
