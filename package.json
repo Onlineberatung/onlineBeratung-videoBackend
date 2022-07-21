@@ -1,5 +1,5 @@
 {
-  "name": "caritas-online-beratung-videobackend",
+  "name": "online-beratung-videobackend",
   "version": "1.3.0",
   "scripts": {
     "build": "sass beratungCustom/css/styles.scss beratungCustom/css/styles.css",
