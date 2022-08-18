@@ -1,15 +1,67 @@
+local is_healthcheck_room = module:require "util".is_healthcheck_room
+local jid_node = require "util.jid".node;
+local timer = require "util.timer"
+
+-- How many seconds the room waits for owner to come back before it destroys the room
+local MIN = module:get_option_number("conference_timeout", 20)
+local statistics_enabled = module:get_option_boolean('enable_statistics')
+local TIMEOUT = MIN
+
+module:log('info', "[VI] Plugin mod_close_room loaded");
+
 module:hook("muc-occupant-left", function(event)
-  local barejid = event.occupant.bare_jid;
-  local role =  event.room:get_affiliation(barejid);
-  local statistics_enabled = module:get_option_boolean('enable_statistics');
-  if role == "owner" then
-    local room = event.room:get_name();
-    event.room:destroy();
-    event.room:clear();
-    if statistics_enabled then
-      local utctimestamp = os.date("!%Y-%m-%dT%XZ");
-      fireStatisticsEvent(utctimestamp, room);
+  local room = event.room
+  local mods = room:each_affiliation("owner");
+  local leaver = event.occupant.bare_jid;
+  local a = 0;
+  local b = 0;
+
+  -- count owner exepting leaver
+  for mod in mods do
+    a = a + 1;
+    if mod == leaver then
+      -- set leaver to outcast if he was under owners
+      room:set_affiliation(true, leaver, "outcast");
+      a = a - 1;
     end
+  end
+
+  if a == 1 then
+    -- disable room temporary so owner could join again
+    room:set_members_only(false);
+
+    if is_healthcheck_room(room.jid) then
+      return
+    end
+
+    module:log('info', "[VI] Moderator left room %s. Room will be closed in %s secs.", TIMEOUT, room.jid);
+
+    timer.add_task(TIMEOUT, function()
+      if is_healthcheck_room(room.jid) then
+        return
+      end
+
+      -- count owner
+      for mod in mods do
+        b = b + 1;
+      end
+
+      -- if only single owner presented (focus@jitsi.meet) kick all others
+      if b == 1 then
+        -- destroy and clear the room
+        room:destroy();
+        room:clear();
+        module:log('info', "[VI] Room %s terminated!", room.jid);
+
+        if statistics_enabled then
+          local utctimestamp = os.date("!%Y-%m-%dT%XZ");
+          fireStatisticsEvent(utctimestamp, jid_node(room.jid));
+        end
+      else
+        -- If owner is back (reload, rejoin) keep up the room
+        module:log('info', "[VI] Moderator has rejoined room %s. Room will not be terminated.", room.jid);
+      end
+    end)
   end
 end)
 

@@ -2,9 +2,6 @@ const buttonText = 'Video-Link kopieren';
 const buttonTextCopied = 'In Zwischenablage kopiert';
 const buttonChangeDuration = 3000;
 
-const e2eEncText = 'Dieser Video-Call ist mit der Ende-zu-Ende Verschlüsselung gesichert.';
-const transportEncText = 'Dieser Video-Call ist mit der Transportverschlüsselung gesichert';
-
 const url = new URL(window.location.href);
 
 const waitForApp = () => {
@@ -21,19 +18,6 @@ const waitForApp = () => {
 	});
 }
 
-let e2eeBanner = null;
-
-const changeE2EEBanner = (type) => {
-	switch (type) {
-		case 'e2ee':
-			e2eeBanner.querySelector('.text').innerText = e2eEncText;
-			break;
-		case 'transport':
-			e2eeBanner.querySelector('.text').innerText = transportEncText;
-			break;
-	}
-}
-
 let eventsRegistered = false;
 let e2eeActivationTimeout = null;
 let e2eeDisabling = false;
@@ -43,10 +27,6 @@ let e2eeLastState = null;
 document.addEventListener('DOMContentLoaded', () => {
 	if (!JitsiMeetJS.app) {
 		return;
-	}
-
-	if (!document.getElementById('e2ee-banner')) {
-		createE2EEBanner();
 	}
 
 	waitForApp()
@@ -121,13 +101,15 @@ document.addEventListener('DOMContentLoaded', () => {
 				const room = featuresBaseConference?.conference?.room;
 				if (room && room?.joined) {
 					if (Object.keys(room?.members).length > 1) {
-						if (featuresE2ee.enabled === true) {
-							changeE2EEBanner('e2ee');
-						} else if (featuresE2ee.enabled === false) {
-							changeE2EEBanner('transport');
-						}
+						APP.API._sendEvent({
+							name: 'custom-e2ee-toggled',
+							enabled: featuresE2ee.enabled
+						});
 					} else {
-						changeE2EEBanner('transport');
+						APP.API._sendEvent({
+							name: 'custom-e2ee-toggled',
+							enabled: false
+						});
 					}
 
 					if (!eventsRegistered) {
@@ -144,47 +126,28 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 });
 
-const createE2EEBanner = () => {
-	const banner = document.createElement('div');
-	banner.setAttribute('id', 'e2ee-banner');
+const getShareableUrlFromUrl = () => {
+	if (!window.location.hash) {
+		return null;
+	}
 
-	const bannerIconFilled = document.createElement('div');
-	bannerIconFilled.classList.add('e2ee-banner__icon-filled');
-	bannerIconFilled.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>`;
-	const bannerIconOutline = document.createElement('div');
-	bannerIconOutline.classList.add('e2ee-banner__icon-outline');
-	bannerIconOutline.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm7 10c0 4.52-2.98 8.69-7 9.93-4.02-1.24-7-5.41-7-9.93V6.3l7-3.11 7 3.11V11zm-11.59.59L6 13l4 4 8-8-1.41-1.42L10 14.17z"/></svg>`;
+	const urlSearchParams = new URLSearchParams(window.location.hash.substring(1));
+	if (!urlSearchParams.has("interfaceConfig.shareableUrl")) {
+		return null;
+	}
 
-	banner.append(bannerIconOutline);
-	banner.append(bannerIconFilled);
+	const shareableUrlParam = urlSearchParams.get("interfaceConfig.shareableUrl");
+	if (!shareableUrlParam || !shareableUrlParam.replaceAll('"', '')) {
+		return null;
+	}
 
-	const bannerText = document.createElement('div');
-	bannerText.classList.add('text');
-	bannerText.innerText = transportEncText;
-	banner.append(bannerText);
-
-	e2eeBanner = banner;
-	document.body.prepend(banner);
+	return shareableUrlParam.replaceAll('"', '');
 }
 
 const createShareUrlButton = (parentElement, token) => {
-	let shareableUrl = getShareableUrl(token);
+	let shareableUrl = getShareableUrlFromUrl();
 	if (!shareableUrl) {
-		if (!window.location.hash) {
-			return;
-		}
-
-		const urlSearchParams = new URLSearchParams(window.location.hash.substring(1));
-		if (!urlSearchParams.has("interfaceConfig.shareableUrl")) {
-			return;
-		}
-
-		const shareableUrlParam = urlSearchParams.get("interfaceConfig.shareableUrl");
-		if (!shareableUrlParam || !shareableUrlParam.replaceAll('"', '')) {
-			return;
-		}
-
-		shareableUrl = shareableUrlParam.replaceAll('"', '');
+		shareableUrl = getShareableUrl(token);
 	}
 
 	const id = 'ca-share-url-button';
