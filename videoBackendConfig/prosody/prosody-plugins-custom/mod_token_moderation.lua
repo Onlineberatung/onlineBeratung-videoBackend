@@ -61,6 +61,13 @@ function setupAffiliation(room, origin, stanza)
                 local bodyB64 = origin.auth_token:sub(dotFirst + 1, dotFirst + dotSecond - 1);
                 local body = json.decode(basexx.from_url64(bodyB64));
                 local jid = jid_bare(stanza.attr.from);
+
+                -- If outcast affiliation presented do not handle token again
+                if room:get_affiliation(jid) == "outcast" then
+                    module:log('info', "[VI] Token outcast");
+                    return;
+                end;
+
                 -- If user is a moderator or an admin, set their affiliation to be an owner
                 if body["moderator"] == true or is_admin(jid) then
                     module:log('info', "[VI] Hook mod_token_moderation owner");
