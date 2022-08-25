@@ -6,9 +6,6 @@ interfaceConfig.DISABLE_TRANSCRIPTION_SUBTITLES = true;
 interfaceConfig.DISABLE_VIDEO_BACKGROUND = true;
 interfaceConfig.DISPLAY_WELCOME_PAGE_CONTENT = true;
 interfaceConfig.DEFAULT_BACKGROUND = '#ffffff';
-//interfaceConfig.DEFAULT_LOGO_URL = 'images/custom/watermark.svg';
-interfaceConfig.DEFAULT_WELCOME_PAGE_LOGO_URL = 'images/custom/watermark.svg';
-//interfaceConfig.JITSI_WATERMARK_LINK = '#';
 
 interfaceConfig.ENABLE_DIAL_OUT = false;
 interfaceConfig.GENERATE_ROOMNAMES_ON_WELCOME_PAGE = false;
@@ -17,7 +14,7 @@ interfaceConfig.LANG_DETECTION = false;
 interfaceConfig.MOBILE_APP_PROMO = false;
 interfaceConfig.RECENT_LIST_ENABLED = false;
 interfaceConfig.SETTINGS_SECTIONS = [ 'devices', 'language', 'profile' ];
-interfaceConfig.SHOW_JITSI_WATERMARK = true;
+interfaceConfig.SHOW_JITSI_WATERMARK = false;
 interfaceConfig.SHOW_PROMOTIONAL_CLOSE_PAGE = false;
 interfaceConfig.VIDEO_QUALITY_LABEL_DISABLED = true;
 
