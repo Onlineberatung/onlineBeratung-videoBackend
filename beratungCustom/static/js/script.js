@@ -1,5 +1,5 @@
 const buttonText = 'Video-Link kopieren';
-const buttonTextCopied = 'In Zwischenablage kopiert';
+const buttonTextCopied = 'Video-Link wurde in die Zwischenablage kopiert';
 const buttonChangeDuration = 3000;
 
 const url = new URL(window.location.href);
@@ -126,6 +126,24 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 });
 
+const getParamFromUrl = (key) => {
+	if (!window.location.hash) {
+		return null;
+	}
+
+	const urlSearchParams = new URLSearchParams(window.location.hash.substring(1));
+	if (!urlSearchParams.has(key)) {
+		return null;
+	}
+
+	const param = urlSearchParams.get(key);
+	if (!param || !param.replaceAll('"', '')) {
+		return null;
+	}
+
+	return param.replaceAll('"', '');
+}
+
 const getShareableUrlFromUrl = () => {
 	if (!window.location.hash) {
 		return null;
@@ -150,6 +168,9 @@ const createShareUrlButton = (parentElement, token) => {
 		shareableUrl = getShareableUrl(token);
 	}
 
+	const btnText = decodeURI(getParamFromUrl('interfaceConfig.btnText') ?? buttonText);
+	const btnTextCopied = decodeURI(getParamFromUrl('interfaceConfig.btnTextCopied') ?? buttonTextCopied);
+
 	const id = 'ca-share-url-button';
 	if (parentElement.querySelector(`#${id}`)) {
 		return;
@@ -167,12 +188,12 @@ const createShareUrlButton = (parentElement, token) => {
 	buttonContainer2.append(buttonContainer3);
 
 	const button = document.createElement('button');
-	button.innerHTML = buttonText;
+	button.innerHTML = btnText;
 	button.classList.add('shareUrlButton');
 	button.setAttribute('id', 'ca-share-url-button');
-	button.setAttribute('title', buttonText);
+	button.setAttribute('title', btnText);
 	button.addEventListener('click', (event) =>
-		copyUrltoClipboard(event, shareableUrl)
+		copyUrltoClipboard(event, shareableUrl, btnText, btnTextCopied)
 	);
 
 	buttonContainer3.append(button);
@@ -180,9 +201,9 @@ const createShareUrlButton = (parentElement, token) => {
 	parentElement.prepend(buttonContainer1);
 }
 
-const copyUrltoClipboard = (event, url) => {
+const copyUrltoClipboard = (event, url, btnText, btnTextCopied) => {
 	event.target.classList.add('shareUrlButton--copied');
-	event.target.innerHTML = buttonTextCopied;
+	event.target.innerHTML = btnTextCopied;
 	// textarea is used to copy the url to the clipboard
 	const textarea = document.createElement('textarea');
 	textarea.value = url;
@@ -200,7 +221,7 @@ const copyUrltoClipboard = (event, url) => {
 	// remove copied class after some seconds
 	setTimeout(() => {
 		event.target.classList.remove('shareUrlButton--copied');
-		event.target.innerHTML = buttonText;
+		event.target.innerHTML = btnText;
 	}, buttonChangeDuration);
 }
 
