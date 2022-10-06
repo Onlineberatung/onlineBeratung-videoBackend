@@ -34,7 +34,7 @@ module:hook("muc-occupant-left", function(event)
       return
     end
 
-    module:log('info', "[VI] Moderator left room %s. Room will be closed in %s secs.", TIMEOUT, room.jid);
+    module:log('info', "[VI] Moderator left room %s. Room will be closed in %s secs.", room.jid, TIMEOUT);
 
     timer.add_task(TIMEOUT, function()
       if is_healthcheck_room(room.jid) then
@@ -67,35 +67,49 @@ end)
 
 function fireStatisticsEvent(timestamp, room)
   if room ~= nil then
+    module:log('info', "[VI] Fire statistics for room %s.", room);
     prosody.unlock_globals();
-    local http = require("socket.http");
+
+    local json = require('cjson');
+    local req = require("net.http");
     local mime = require("mime");
 
     local rabbit_url = module:get_option_string('rabbit_url');
     local rabbit_username = module:get_option_string('rabbit_username');
     local rabbit_password = module:get_option_string('rabbit_password');
     local rabbit_user = rabbit_username .. [[:]] .. rabbit_password;
-    local message = [[ {\"eventType\":\"STOP_VIDEO_CALL\",\"videoCallUuid\":\"]] .. room .. [[\",\"timestamp\":\"]] .. timestamp .. [[\"}]];
-    local payload = [[ {"properties":{}, "routing_key":"STOP_VIDEO_CALL", "payload":"]] .. message .. [[", "payload_encoding":"string"} ]];
-    local response_body = { }
 
-    local res, httpcode, response_headers, status = http.request
-    {
-      url = rabbit_url,
+    local jsonRequest = json.encode({
+        ["properties"]={},
+        ["routing_key"]="STOP_VIDEO_CALL",
+        ["payload"]=json.encode({
+            ["eventType"]="STOP_VIDEO_CALL",
+            ["videoCallUuid"]=room,
+            ["timestamp"]=timestamp
+        }),
+        ["payload_encoding"]="string"
+    });
+
+    module:log("error", "[VI] Statistics event json (len: %s): %s", jsonRequest:len(), jsonRequest);
+
+    req.request( rabbit_url, {
       method = "POST",
-      headers =
-      {
+      body = jsonRequest,
+      headers = {
         ["Authorization"] = "Basic " .. (mime.b64(rabbit_user)),
         ["Content-Type"] = "application/json",
-        ["Content-Length"] = payload:len()
-      },
-      source = ltn12.source.string(payload),
-      sink = ltn12.sink.table(response_body)
-    }
-
-    if httpcode > 200 then
-      module:log("error", "Could not fire statistics event for room %s: %s", room, status);
-      module:log("error", "Statistics event payload: %s", payload);
-    end
+        ["Content-Length"] = jsonRequest:len()
+      }},
+      function(res, httpcode)
+        if httpcode > 200 then
+          module:log("error", "[VI] Could not fire statistics event for room %s: %s", room, httpcode);
+          module:log("error", "[VI] Statistics event payload: %s", jsonRequest);
+        else
+            module:log("info", "[VI] Statistics fire succeed!");
+        end
+      end
+    )
+  else
+    module:log('info', "[VI] Fire statistics failed because of missing room.");
   end
 end
