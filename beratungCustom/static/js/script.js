@@ -198,6 +198,11 @@ const createShareUrlButton = (parentElement, token) => {
 
 	buttonContainer3.append(button);
 
+	const tooltip = document.createElement('div');
+	tooltip.innerHTML = btnTextCopied;
+	tooltip.classList.add('shareUrlButton__tooltip');
+	buttonContainer3.append(tooltip);
+
 	parentElement.prepend(buttonContainer1);
 }
 
