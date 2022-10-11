@@ -23,8 +23,8 @@
         background-position: center;
       }
 
-      &--copied::after {
-        display: inline-block;
+      & + .shareUrlButton__tooltip {
+        display: none;
         position: absolute;
         font-size: 14px;
         line-height: 19px;
@@ -34,6 +34,10 @@
         padding: 12px 8px;
         border-radius: 4px;
         cursor: auto;
+      }
+
+      &--copied + .shareUrlButton__tooltip {
+        display: inline-block;
       }
     }
   }
