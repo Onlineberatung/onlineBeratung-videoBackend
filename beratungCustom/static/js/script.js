@@ -3,6 +3,7 @@ const buttonTextCopied = 'Video-Link wurde in die Zwischenablage kopiert';
 const buttonChangeDuration = 3000;
 
 const url = new URL(window.location.href);
+const DEBUG = true;
 
 const waitForApp = () => {
 	return new Promise((resolve, reject) => {
@@ -23,18 +24,29 @@ let e2eeActivationTimeout = null;
 let e2eeDisabling = false;
 let e2eeEnabling = false;
 let e2eeLastState = null;
+let e2eeStateChanged = null;
+
+const Logger = {
+	log: (message) => DEBUG && console.log('[LOG][JITSI]', message),
+	error: (message) => DEBUG && console.error('[ERROR][JITSI]', message),
+	info: (message) => DEBUG && console.info('[INFO][JITSI]', message),
+}
 
 document.addEventListener('DOMContentLoaded', () => {
 	if (!JitsiMeetJS.app) {
 		return;
 	}
 
+	Logger.log("Wait for app ...");
 	waitForApp()
 		.then(() => {
 			e2eeLastState = APP.store.getState()['features/e2ee']?.enabled ?? false;
+			e2eeStateChanged = false;
+			Logger.log("App store subscribe ...");
 			APP.store.subscribe(() => {
 				const featuresBaseConnection = APP.store.getState()['features/base/connection'];
 				if (featuresBaseConnection.error?.name === 'connection.passwordRequired') {
+					Logger.error("Password required!");
 					document.location.href = "/static/authError.html";
 				}
 
@@ -42,12 +54,16 @@ document.addEventListener('DOMContentLoaded', () => {
 				const featuresE2ee = APP.store.getState()['features/e2ee'];
 				const featuresBaseConference = APP.store.getState()['features/base/conference'];
 				const featuresBaseJwt = APP.store.getState()['features/base/jwt'];
+				const room = featuresBaseConference?.conference?.room;
 
 				if (e2eeLastState !== featuresE2ee.enabled) {
+					e2eeStateChanged = true;
 					e2eeLastState = featuresE2ee.enabled;
 					if (featuresE2ee.enabled === true) {
+						Logger.log("E2EE State changed: enabled");
 						e2eeEnabling = false;
 					} else {
+						Logger.log("E2EE State changed: disabled");
 						e2eeDisabling = false;
 					}
 				}
@@ -59,29 +75,49 @@ document.addEventListener('DOMContentLoaded', () => {
 						if (
 							!featuresE2ee.enabled &&
 							featuresE2ee.everyoneSupportE2EE === true &&
-							!e2eeEnabling
+							!e2eeEnabling &&
+							room && room.joined && Object.keys(room.members).length > 1
 						) {
+							Logger.log("Ready for enabling e2ee in 5 seconds!");
 							e2eeEnabling = true;
 							// Wait some seconds until user joined and key exchange will work
 							e2eeActivationTimeout = setTimeout(() => {
+								Logger.log("Start enabling e2ee ...");
 								APP.store.dispatch({
 									type: 'TOGGLE_E2EE',
 									enabled: true
 								});
 							}, 5000);
+						} else {
+							if (room && room.joined && Object.keys(room.members).length <= 1) {
+								// No log. Only to less members in room
+							} else if (featuresE2ee.enabled) {
+								Logger.log("E2EE could not be enabled because e2ee is already enabled!");
+							} else if (featuresE2ee.everyoneSupportE2EE !== true) {
+								Logger.error("E2EE could not be enabled because not everyone supports e2ee!");
+							} else if (e2eeEnabling) {
+								Logger.log("E2EE could not be enabled because enabling process already running!");
+							}
 						}
 					} else {
 						if (e2eeActivationTimeout) {
+							Logger.log("Stop running e2ee enabling process");
 							clearTimeout(e2eeActivationTimeout);
+							e2eeActivationTimeout = null;
 							e2eeEnabling = false;
 						}
 
 						if (featuresE2ee.enabled && !e2eeDisabling) {
+							Logger.log("Disabling e2ee because of knocking participant");
 							e2eeDisabling = true;
 							APP.store.dispatch({
 								type: 'TOGGLE_E2EE',
 								enabled: false
 							});
+						} else if (featuresE2ee.enabled && e2eeDisabling) {
+							Logger.log("E2EE disabling already in progress.");
+						} else {
+							Logger.log("E2EE already disabled.");
 						}
 					}
 
@@ -90,26 +126,33 @@ document.addEventListener('DOMContentLoaded', () => {
 					}
 
 					const featuresToolbox = APP.store.getState()['features/toolbox'];
-
-					const room = featuresBaseConference?.conference?.room;
 					if (room && room?.joined && featuresToolbox.enabled) {
 						createShareUrlButton(document.querySelector('#new-toolbox .toolbox-content-items'), featuresBaseJwt.jwt);
 					}
 				}
 
 				// Show/Hide e2ee banner for everyone
-				const room = featuresBaseConference?.conference?.room;
 				if (room && room?.joined) {
-					if (Object.keys(room?.members).length > 1) {
-						APP.API._sendEvent({
-							name: 'custom-e2ee-toggled',
-							enabled: featuresE2ee.enabled
-						});
-					} else {
-						APP.API._sendEvent({
-							name: 'custom-e2ee-toggled',
-							enabled: false
-						});
+
+					if (e2eeStateChanged) {
+						Logger.log("Room joined");
+						if (Object.keys(room?.members).length > 1) {
+							Logger.log("ENABLED " + APP.API._enabled);
+							Logger.log("E2EE " + featuresE2ee.enabled);
+							Logger.log("Sending custom e2ee toggle event enabled");
+							APP.API._sendEvent({
+								name: 'custom-e2ee-toggled',
+								enabled: featuresE2ee.enabled
+							});
+						} else {
+							Logger.log("Sending custom e2ee toggle event disabled");
+							APP.API._sendEvent({
+								name: 'custom-e2ee-toggled',
+								enabled: false
+							});
+						}
+
+						e2eeStateChanged = false;
 					}
 
 					if (!eventsRegistered) {
@@ -117,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 						room.on(JitsiMeetJS.events.conference.CONFERENCE_FAILED, (error) => {
 							if (error === JitsiMeetJS.errors.conference.CONFERENCE_DESTROYED) {
+								Logger.error("Conference destroyed!");
 								document.location.href = "/static/close2.html";
 							}
 						});
@@ -175,6 +219,7 @@ const createShareUrlButton = (parentElement, token) => {
 	if (parentElement.querySelector(`#${id}`)) {
 		return;
 	}
+	Logger.log("Create share url button");
 
 	const buttonContainer1 = document.createElement('div');
 	buttonContainer1.classList.add('share-url-button');

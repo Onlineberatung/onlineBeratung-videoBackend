@@ -30,6 +30,8 @@ local jid_bare = require 'util.jid'.bare;
 local json = require 'util.json';
 local filters = require 'util.filters';
 local st = require 'util.stanza';
+local muc_util = module:require "muc/util";
+local valid_affiliations = muc_util.valid_affiliations;
 local MUC_NS = 'http://jabber.org/protocol/muc';
 local DISCO_INFO_NS = 'http://jabber.org/protocol/disco#info';
 local DISPLAY_NAME_REQUIRED_FEATURE = 'http://jitsi.org/protocol/lobbyrooms#displayname_required';
@@ -60,7 +62,7 @@ local check_display_name_required;
 local function load_config()
     whitelist = module:get_option_set('muc_lobby_whitelist', {});
     check_display_name_required
-    = module:get_option_boolean('muc_lobby_check_display_name_required', true);
+        = module:get_option_boolean('muc_lobby_check_display_name_required', true);
 end
 load_config();
 
@@ -73,9 +75,9 @@ function broadcast_json_msg(room, from, json_msg)
     local occupant = room:get_occupant_by_real_jid(from);
     if occupant then
         room:broadcast_message(
-                st.message({ type = 'groupchat', from = occupant.nick })
-                  :tag('json-message', {xmlns='http://jitsi.org/jitmeet'})
-                  :text(json.encode(json_msg)):up());
+            st.message({ type = 'groupchat', from = occupant.nick })
+              :tag('json-message', {xmlns='http://jitsi.org/jitmeet'})
+              :text(json.encode(json_msg)):up());
     end
 end
 
@@ -130,8 +132,8 @@ function filter_stanza(stanza)
             local room = main_muc_service.get_room_from_jid(jid_bare(node .. '@' .. main_muc_component_config));
             local item = muc_x:get_child('item');
             if not room
-                    or stanza.attr.type == 'unavailable'
-                    or (room.get_affiliation(room, stanza.attr.to) == 'owner'
+                or stanza.attr.type == 'unavailable'
+                or (room.get_affiliation(room, stanza.attr.to) == 'owner'
                     and room.get_affiliation(room, item.attr.jid) ~= 'owner') then
                 return stanza;
             end
@@ -259,8 +261,8 @@ function process_lobby_muc_loaded(lobby_muc, host_module)
     host_module:hook('host-disco-info-node', function (event)
         local session, reply, node = event.origin, event.reply, event.node;
         if node == LOBBY_IDENTITY_TYPE
-                and session.jitsi_web_query_room
-                and check_display_name_required then
+            and session.jitsi_web_query_room
+            and check_display_name_required then
             local room = get_room_by_name_and_subdomain(session.jitsi_web_query_room, session.jitsi_web_query_prefix);
 
             if room and room._data.lobbyroom then
@@ -292,7 +294,7 @@ function process_lobby_muc_loaded(lobby_muc, host_module)
         local actor, occupant, room, x = event.actor, event.occupant, event.room, event.x;
         if presence_check_status(x, '307') then
             local display_name = occupant:get_presence():get_child_text(
-                    'nick', 'http://jabber.org/protocol/nick');
+                'nick', 'http://jabber.org/protocol/nick');
             -- we need to notify in the main room
             notify_lobby_access(room.main_room, actor, occupant.nick, display_name, false);
         end
@@ -417,7 +419,7 @@ process_host_module(main_muc_component_config, function(host_module, host)
         local room, stanza = event.room, event.stanza;
         local invitee = stanza.attr.to;
         local from = stanza:get_child('x', 'http://jabber.org/protocol/muc#user')
-                           :get_child('invite').attr.from;
+            :get_child('invite').attr.from;
 
         if lobby_muc_service and room._data.lobbyroom then
             local lobby_room_obj = lobby_muc_service.get_room_from_jid(room._data.lobbyroom);
@@ -443,8 +445,30 @@ end);
 
 function handle_create_lobby(event)
     local room = event.room;
+
+    -- since this is called by backend rather than triggered by UI, we need to handle a few additional things:
+    --  1. Make sure existing participants are already members or they will get kicked out when set_members_only(true)
+    --  2. Trigger a 104 (config change) status message so UI state is properly updated for existing users
+
+    -- make sure all existing occupants are members
+    for _, occupant in room:each_occupant() do
+        local affiliation = room:get_affiliation(occupant.bare_jid);
+        if valid_affiliations[affiliation or "none"] < valid_affiliations.member then
+            room:set_affiliation(true, occupant.bare_jid, 'member');
+        end
+    end
+    -- Now it is safe to set the room to members only
     room:set_members_only(true);
-    attach_lobby_room(room)
+
+    -- Trigger a presence with 104 so existing participants retrieves new muc#roomconfig
+    room:broadcast_message(
+        st.message({ type='groupchat', from=room.jid })
+            :tag('x', { xmlns='http://jabber.org/protocol/muc#user' })
+                :tag('status', { code='104' })
+    );
+
+    -- Attach the lobby room.
+    attach_lobby_room(room);
 end
 
 function handle_destroy_lobby(event)
@@ -454,4 +478,3 @@ end
 module:hook_global('config-reloaded', load_config);
 module:hook_global('create-lobby-room', handle_create_lobby);
 module:hook_global('destroy-lobby-room', handle_destroy_lobby);
-
