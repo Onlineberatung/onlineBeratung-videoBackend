@@ -173,10 +173,7 @@ services:
             - '5280'
         volumes:
             - ${CONFIG}/prosody/config:/config:Z
-            - ${CONFIG}/prosody/prosody-plugins-custom/mod_token_moderation.lua:/prosody-plugins-custom/mod_token_moderation.lua:Z
-            - ${CONFIG}/prosody/prosody-plugins-custom/mod_close_room.lua:/prosody-plugins-custom/mod_close_room.lua:Z
-            - ${CONFIG}/prosody/prosody-plugins-custom/mod_create_room.lua:/prosody-plugins-custom/mod_create_room.lua:Z
-            - ${CONFIG}/prosody/prosody-plugins-custom/mod_muc_lobby_rooms.lua:/prosody-plugins/mod_muc_lobby_rooms.lua:Z
+            - ${CONFIG}/prosody/prosody-plugins-custom:/prosody-plugins-custom:Z
         environment:
             - AUTH_TYPE
             - DISABLE_POLLS

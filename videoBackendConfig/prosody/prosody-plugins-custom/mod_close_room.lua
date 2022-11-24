@@ -6,8 +6,10 @@ local timer = require "util.timer"
 local MIN = module:get_option_number("conference_timeout", 20)
 local statistics_enabled = module:get_option_boolean('enable_statistics')
 local TIMEOUT = MIN
+local LOGLEVEL = "info";
 
-module:log('info', "[VI] Plugin mod_close_room loaded");
+
+module:log(LOGLEVEL, "[VI] Plugin mod_close_room loaded");
 
 module:hook("muc-occupant-left", function(event)
   local room = event.room
@@ -34,7 +36,7 @@ module:hook("muc-occupant-left", function(event)
       return
     end
 
-    module:log('info', "[VI] Moderator left room %s. Room will be closed in %s secs.", room.jid, TIMEOUT);
+    module:log(LOGLEVEL, "[VI] Moderator left room %s. Room will be closed in %s secs.", room.jid, TIMEOUT);
 
     timer.add_task(TIMEOUT, function()
       if is_healthcheck_room(room.jid) then
@@ -51,7 +53,7 @@ module:hook("muc-occupant-left", function(event)
         -- destroy and clear the room
         room:destroy();
         room:clear();
-        module:log('info', "[VI] Room %s terminated!", room.jid);
+        module:log(LOGLEVEL, "[VI] Room %s terminated!", room.jid);
 
         if statistics_enabled then
           local utctimestamp = os.date("!%Y-%m-%dT%XZ");
@@ -59,7 +61,7 @@ module:hook("muc-occupant-left", function(event)
         end
       else
         -- If owner is back (reload, rejoin) keep up the room
-        module:log('info', "[VI] Moderator has rejoined room %s. Room will not be terminated.", room.jid);
+        module:log(LOGLEVEL, "[VI] Moderator has rejoined room %s. Room will not be terminated.", room.jid);
       end
     end)
   end
@@ -67,7 +69,7 @@ end)
 
 function fireStatisticsEvent(timestamp, room)
   if room ~= nil then
-    module:log('info', "[VI] Fire statistics for room %s.", room);
+    module:log(LOGLEVEL, "[VI] Fire statistics for room %s.", room);
     prosody.unlock_globals();
 
     local json = require('cjson');
@@ -110,6 +112,6 @@ function fireStatisticsEvent(timestamp, room)
       end
     )
   else
-    module:log('info', "[VI] Fire statistics failed because of missing room.");
+    module:log(LOGLEVEL, "[VI] Fire statistics failed because of missing room.");
   end
 end
