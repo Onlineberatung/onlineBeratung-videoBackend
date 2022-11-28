@@ -20,7 +20,7 @@ const waitForApp = () => {
 }
 
 let eventsRegistered = false;
-let e2eeActivationTimeout = null;
+let e2eeTimeout = null;
 let e2eeDisabling = false;
 let e2eeEnabling = false;
 let e2eeLastState = null;
@@ -30,6 +30,44 @@ const Logger = {
 	log: (message) => DEBUG && console.log('[LOG][JITSI]', message),
 	error: (message) => DEBUG && console.error('[ERROR][JITSI]', message),
 	info: (message) => DEBUG && console.info('[INFO][JITSI]', message),
+}
+
+const enableE2EE = () => {
+	const featuresBaseConference = APP.store.getState()['features/base/conference'];
+	const featuresE2ee = APP.store.getState()['features/e2ee'];
+
+	if (
+		!featuresBaseConference.e2eeSupported
+		|| !featuresE2ee.everyoneSupportE2EE
+		|| featuresE2ee.enabled
+	) {
+		return;
+	}
+
+	APP.store.dispatch({
+		type: 'TOGGLE_E2EE',
+		enabled: true
+	});
+}
+
+const disableE2EE = () => {
+	const featuresE2ee = APP.store.getState()['features/e2ee'];
+	if (e2eeTimeout) clearTimeout(e2eeTimeout);
+	if (
+		!featuresE2ee.enabled
+		|| featuresE2ee.everyoneSupportE2EE
+	) {
+		return;
+	}
+
+	// Disable with short timeout because everyoneSupportE2EE is set to false on join
+	e2eeTimeout = setTimeout(() => {
+		APP.store.dispatch({
+			type: 'TOGGLE_E2EE',
+			enabled: false
+		});
+		e2eeTimeout = null;
+	}, 1000);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -59,67 +97,11 @@ document.addEventListener('DOMContentLoaded', () => {
 				if (e2eeLastState !== featuresE2ee.enabled) {
 					e2eeStateChanged = true;
 					e2eeLastState = featuresE2ee.enabled;
-					if (featuresE2ee.enabled === true) {
-						Logger.log("E2EE State changed: enabled");
-						e2eeEnabling = false;
-					} else {
-						Logger.log("E2EE State changed: disabled");
-						e2eeDisabling = false;
-					}
 				}
 
-				if (isModerator(featuresBaseJwt.jwt)) {
-					// If no one is knocking
-					if (featuresLobby.knockingParticipants.length <= 0) {
-						// Try to enable e2ee
-						if (
-							!featuresE2ee.enabled &&
-							featuresE2ee.everyoneSupportE2EE === true &&
-							!e2eeEnabling &&
-							room && room.joined && Object.keys(room.members).length > 1
-						) {
-							Logger.log("Ready for enabling e2ee in 5 seconds!");
-							e2eeEnabling = true;
-							// Wait some seconds until user joined and key exchange will work
-							e2eeActivationTimeout = setTimeout(() => {
-								Logger.log("Start enabling e2ee ...");
-								APP.store.dispatch({
-									type: 'TOGGLE_E2EE',
-									enabled: true
-								});
-							}, 5000);
-						} else {
-							if (room && room.joined && Object.keys(room.members).length <= 1) {
-								// No log. Only to less members in room
-							} else if (featuresE2ee.enabled) {
-								Logger.log("E2EE could not be enabled because e2ee is already enabled!");
-							} else if (featuresE2ee.everyoneSupportE2EE !== true) {
-								Logger.error("E2EE could not be enabled because not everyone supports e2ee!");
-							} else if (e2eeEnabling) {
-								Logger.log("E2EE could not be enabled because enabling process already running!");
-							}
-						}
-					} else {
-						if (e2eeActivationTimeout) {
-							Logger.log("Stop running e2ee enabling process");
-							clearTimeout(e2eeActivationTimeout);
-							e2eeActivationTimeout = null;
-							e2eeEnabling = false;
-						}
-
-						if (featuresE2ee.enabled && !e2eeDisabling) {
-							Logger.log("Disabling e2ee because of knocking participant");
-							e2eeDisabling = true;
-							APP.store.dispatch({
-								type: 'TOGGLE_E2EE',
-								enabled: false
-							});
-						} else if (featuresE2ee.enabled && e2eeDisabling) {
-							Logger.log("E2EE disabling already in progress.");
-						} else {
-							Logger.log("E2EE already disabled.");
-						}
-					}
+				if (isModerator(featuresBaseJwt.jwt) && !featuresLobby.lobbyVisible) {
+					enableE2EE();
+					disableE2EE();
 
 					if (!document.body.classList.contains('isModerator')) {
 						document.body.classList.add('isModerator');
@@ -133,8 +115,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 				// Show/Hide e2ee banner for everyone
 				if (room && room?.joined) {
-
 					if (e2eeStateChanged) {
+						e2eeStateChanged = false;
+
 						Logger.log("Room joined");
 						if (Object.keys(room?.members).length > 1) {
 							Logger.log("ENABLED " + APP.API._enabled);
@@ -151,8 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
 								enabled: false
 							});
 						}
-
-						e2eeStateChanged = false;
 					}
 
 					if (!eventsRegistered) {

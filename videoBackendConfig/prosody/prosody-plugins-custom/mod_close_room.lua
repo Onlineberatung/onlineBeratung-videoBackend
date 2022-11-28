@@ -29,9 +29,6 @@ module:hook("muc-occupant-left", function(event)
   end
 
   if a == 1 then
-    -- disable room temporary so owner could join again
-    room:set_members_only(false);
-
     if is_healthcheck_room(room.jid) then
       return
     end

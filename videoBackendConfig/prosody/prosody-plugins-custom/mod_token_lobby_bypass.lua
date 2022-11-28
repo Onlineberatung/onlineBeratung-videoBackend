@@ -29,8 +29,9 @@ module:hook("muc-occupant-pre-join", function (event)
     local affiliation = room:get_affiliation(invitee);
 
     if affiliation ~= 'owner' then
-        module:log(LOGLEVEL, "[VI] Skip user %s with affiliation - %s", occupant.bare_jid, affiliation)
-        return
+        module:log(LOGLEVEL, "[VI] Skip user %s with affiliation - %s", occupant.bare_jid, affiliation);
+        occupant.role = 'participant';
+        return;
     end
 
     module:log(LOGLEVEL, "[VI] Bypassing lobby for room %s occupant %s", room.jid, occupant.bare_jid);
@@ -38,3 +39,17 @@ module:hook("muc-occupant-pre-join", function (event)
 end, -3);
 --- Run just before lobby(priority -4) and members_only (-5).
 --- Must run after token_verification (99), max_occupants (10), allowners (2).
+
+module:hook("muc-occupant-joined", function (event)
+    module:log(LOGLEVEL, "[VI] Hook mod_token_lobby_bypass muc-occupant-joined");
+
+    local room, occupant, stanza = event.room, event.occupant, event.stanza;
+    local invitee = stanza.attr.from;
+    local affiliation = room:get_affiliation(invitee);
+
+    if affiliation ~= 'owner' then
+        occupant.role = 'participant';
+        room:set_affiliation(true, occupant.bare_jid, 'member');
+        room:save();
+    end
+end);

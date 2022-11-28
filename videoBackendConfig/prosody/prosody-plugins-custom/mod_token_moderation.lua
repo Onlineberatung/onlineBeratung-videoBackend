@@ -17,7 +17,7 @@ module:log(LOGLEVEL, "[VI] Plugin mod_token_moderation loaded");
 
 module:hook("muc-occupant-pre-join", function(event)
     setupAffiliation(event.room, event.origin, event.stanza)
-end)
+end, -2);
 
 function setupAffiliation(room, origin, stanza)
     if room.destroying or room._data.destroyed then
@@ -44,6 +44,9 @@ function setupAffiliation(room, origin, stanza)
                 if body["moderator"] == true or is_admin(jid) then
                     module:log(LOGLEVEL, "[VI] Hook mod_token_moderation owner");
                     room:set_affiliation(true, jid, 'owner');
+                else
+                    module:log(LOGLEVEL, "[VI] Hook mod_token_moderation none");
+                    room:set_affiliation(true, jid, 'none');
                 end;
             end;
         end;

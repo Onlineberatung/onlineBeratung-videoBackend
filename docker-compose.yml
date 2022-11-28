@@ -180,7 +180,7 @@ services:
             - ENABLE_AUTH
             - ENABLE_AV_MODERATION
             - ENABLE_BREAKOUT_ROOMS
-            - ENABLE_END_CONFERENCE=0
+            - ENABLE_END_CONFERENCE
             - ENABLE_GUESTS
             - ENABLE_IPV6
             - ENABLE_LOBBY
@@ -284,7 +284,6 @@ services:
             - JICOFO_CONF_INITIAL_PARTICIPANT_WAIT_TIMEOUT
             - JICOFO_CONF_SINGLE_PARTICIPANT_TIMEOUT
             - JICOFO_ENABLE_HEALTH_CHECKS
-            - JICOFO_SHORT_ID
             - JIBRI_BREWERY_MUC
             - JIBRI_REQUEST_RETRIES
             - JIBRI_PENDING_TIMEOUT
@@ -315,7 +314,6 @@ services:
         restart: ${RESTART_POLICY}
         ports:
             - '${JVB_PORT}:${JVB_PORT}/udp'
-            - '${JVB_TCP_PORT}:${JVB_TCP_PORT}'
         volumes:
             - ${CONFIG}/jvb:/config:Z
         environment:
