@@ -13,8 +13,6 @@ module:log(LOGLEVEL, "[VI] Plugin mod_create_room loaded");
 module:hook_global("post-jitsi-authentication", function(event)
     module:log(LOGLEVEL, "[VI] Hook mod_create_room post-jitsi-authentication");
 
-    -- room:set_affiliation(true, occupant.bare_jid, 'member');
-
     if event.auth_token then
         module:log(LOGLEVEL, "[VI] Token found");
         local tokenData = parse_token(event.auth_token)
