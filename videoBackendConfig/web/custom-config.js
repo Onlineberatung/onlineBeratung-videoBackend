@@ -33,4 +33,5 @@ config.disabledSounds = [
     'E2EE_OFF_SOUND',
     'E2EE_ON_SOUND'
 ];
+config.channelLastN = 5;
 config.dynamicBrandingUrl = '/dynamicBranding.json';
