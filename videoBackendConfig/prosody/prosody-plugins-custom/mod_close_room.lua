@@ -8,59 +8,96 @@ local statistics_enabled = module:get_option_boolean('enable_statistics')
 local TIMEOUT = MIN
 local LOGLEVEL = "info";
 
-
 module:log(LOGLEVEL, "[VI] Plugin mod_close_room loaded");
 
-module:hook("muc-occupant-left", function(event)
-  local room = event.room
-  local mods = room:each_affiliation("owner");
-  local leaver = event.occupant.bare_jid;
-  local a = 0;
-  local b = 0;
+module:hook("muc-occupant-joined", function(event)
+  module:log(LOGLEVEL, "[VI] Plugin mod_close_room muc-occupant-joined");
 
-  -- count owner exepting leaver
-  for mod in mods do
-    a = a + 1;
-    if mod == leaver then
-      -- set leaver to outcast if he was under owners
-      room:set_affiliation(true, leaver, "outcast");
-      a = a - 1;
-    end
+  local room, occupant = event.room, event.occupant;
+  local affiliation = room:get_affiliation(occupant.bare_jid)
+
+  if not room._data.presentedOwners then
+    room._data.presentedOwners = {}
   end
 
-  if a == 1 then
-    if is_healthcheck_room(room.jid) then
-      return
+  -- ToDo: maybe use "core.usermanager".is_admin for identification of instant admins like focus
+  if affiliation == 'owner' and jid_node(occupant.bare_jid) ~= 'focus' then
+    local presentedOwnerIndex = 0
+    for key, value in pairs(room._data.presentedOwners) do
+      if value == occupant.bare_jid then
+        presentedOwnerIndex = key
+      end
     end
 
-    module:log(LOGLEVEL, "[VI] Moderator left room %s. Room will be closed in %s secs.", room.jid, TIMEOUT);
+    if presentedOwnerIndex == 0 then
+        module:log(LOGLEVEL, "[VI] Moderator with affiliation %s joined %s", affiliation, room.jid);
+        table.insert(room._data.presentedOwners, occupant.bare_jid);
+    end
+  end
+end)
 
-    timer.add_task(TIMEOUT, function()
+function tablelength(T)
+  local count = 0
+  for _ in pairs(T) do count = count + 1 end
+  return count
+end
+
+module:hook("muc-occupant-left", function(event)
+  module:log(LOGLEVEL, "[VI] Plugin mod_close_room muc-occupant-left");
+
+  local room, occupant = event.room, event.occupant
+  local affiliation = room:get_affiliation(occupant.bare_jid)
+
+  if not room._data.presentedOwners then
+    room._data.presentedOwners = {}
+  end
+
+  if tablelength(room._data.presentedOwners) > 0 then
+    -- ToDo: maybe use "core.usermanager".is_admin for identification of instant admins like focus
+    if affiliation == 'owner' and jid_node(occupant.bare_jid) ~= 'focus' then
+      local presentedOwnerIndex = 0
+      for key, value in pairs(room._data.presentedOwners) do
+        module:log(LOGLEVEL, "[VI] Check %s == %s", value, occupant.bare_jid);
+        if value == occupant.bare_jid then
+          presentedOwnerIndex = key
+        end
+      end
+
+      if presentedOwnerIndex ~= 0 then
+        module:log(LOGLEVEL, "[VI] User with affiliation %s left %s", affiliation, room.jid);
+        table.remove(room._data.presentedOwners, presentedOwnerIndex)
+      end
+    end
+
+    if tablelength(room._data.presentedOwners) <= 0 then
       if is_healthcheck_room(room.jid) then
         return
       end
 
-      -- count owner
-      for mod in mods do
-        b = b + 1;
-      end
+      module:log(LOGLEVEL, "[VI] No Moderators left in room %s. Room will be closed in %s secs.", room.jid, TIMEOUT);
 
-      -- if only single owner presented (focus@jitsi.meet) kick all others
-      if b == 1 then
-        -- destroy and clear the room
-        room:destroy();
-        room:clear();
-        module:log(LOGLEVEL, "[VI] Room %s terminated!", room.jid);
-
-        if statistics_enabled then
-          local utctimestamp = os.date("!%Y-%m-%dT%XZ");
-          fireStatisticsEvent(utctimestamp, jid_node(room.jid));
+      timer.add_task(TIMEOUT, function()
+        if is_healthcheck_room(room.jid) then
+          return
         end
-      else
-        -- If owner is back (reload, rejoin) keep up the room
-        module:log(LOGLEVEL, "[VI] Moderator has rejoined room %s. Room will not be terminated.", room.jid);
-      end
-    end)
+
+        -- if no owner is presented kick all others
+        if tablelength(room._data.presentedOwners) == 0 then
+          -- destroy and clear the room
+          room:destroy();
+          room:clear();
+          module:log(LOGLEVEL, "[VI] Room %s terminated!", room.jid);
+
+          if statistics_enabled then
+            local utctimestamp = os.date("!%Y-%m-%dT%XZ");
+            fireStatisticsEvent(utctimestamp, jid_node(room.jid));
+          end
+        else
+          -- If owner is back (reload, rejoin) keep up the room
+          module:log(LOGLEVEL, "[VI] A Moderator has rejoined the room %s. Room will not be terminated.", room.jid);
+        end
+      end)
+    end
   end
 end)
 
