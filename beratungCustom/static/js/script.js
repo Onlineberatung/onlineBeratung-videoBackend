@@ -3,6 +3,7 @@ const buttonTextCopied = 'Video-Link wurde in die Zwischenablage kopiert';
 const buttonChangeDuration = 3000;
 
 const url = new URL(window.location.href);
+const DEBUG = true;
 
 const waitForApp = () => {
 	return new Promise((resolve, reject) => {
@@ -19,22 +20,69 @@ const waitForApp = () => {
 }
 
 let eventsRegistered = false;
-let e2eeActivationTimeout = null;
-let e2eeDisabling = false;
-let e2eeEnabling = false;
+let e2eeTimeout = null;
 let e2eeLastState = null;
+let e2eeStateChanged = null;
+
+const Logger = {
+	log: (message) => DEBUG && console.log('[LOG][JITSI]', message),
+	error: (message) => DEBUG && console.error('[ERROR][JITSI]', message),
+	info: (message) => DEBUG && console.info('[INFO][JITSI]', message),
+}
+
+const enableE2EE = () => {
+	const featuresBaseConference = APP.store.getState()['features/base/conference'];
+	const featuresE2ee = APP.store.getState()['features/e2ee'];
+
+	if (
+		!featuresBaseConference.e2eeSupported
+		|| !featuresE2ee.everyoneSupportE2EE
+		|| featuresE2ee.enabled
+	) {
+		return;
+	}
+
+	APP.store.dispatch({
+		type: 'TOGGLE_E2EE',
+		enabled: true
+	});
+}
+
+const disableE2EE = () => {
+	const featuresE2ee = APP.store.getState()['features/e2ee'];
+	if (e2eeTimeout) clearTimeout(e2eeTimeout);
+	if (
+		!featuresE2ee.enabled
+		|| featuresE2ee.everyoneSupportE2EE
+	) {
+		return;
+	}
+
+	// Disable with short timeout because everyoneSupportE2EE is set to false on join
+	e2eeTimeout = setTimeout(() => {
+		APP.store.dispatch({
+			type: 'TOGGLE_E2EE',
+			enabled: false
+		});
+		e2eeTimeout = null;
+	}, 1000);
+}
 
 document.addEventListener('DOMContentLoaded', () => {
 	if (!JitsiMeetJS.app) {
 		return;
 	}
 
+	Logger.log("Wait for app ...");
 	waitForApp()
 		.then(() => {
 			e2eeLastState = APP.store.getState()['features/e2ee']?.enabled ?? false;
+			e2eeStateChanged = false;
+			Logger.log("App store subscribe ...");
 			APP.store.subscribe(() => {
 				const featuresBaseConnection = APP.store.getState()['features/base/connection'];
 				if (featuresBaseConnection.error?.name === 'connection.passwordRequired') {
+					Logger.error("Password required!");
 					document.location.href = "/static/authError.html";
 				}
 
@@ -42,73 +90,35 @@ document.addEventListener('DOMContentLoaded', () => {
 				const featuresE2ee = APP.store.getState()['features/e2ee'];
 				const featuresBaseConference = APP.store.getState()['features/base/conference'];
 				const featuresBaseJwt = APP.store.getState()['features/base/jwt'];
+				const room = featuresBaseConference?.conference?.room;
 
 				if (e2eeLastState !== featuresE2ee.enabled) {
+					e2eeStateChanged = true;
 					e2eeLastState = featuresE2ee.enabled;
-					if (featuresE2ee.enabled === true) {
-						e2eeEnabling = false;
-					} else {
-						e2eeDisabling = false;
-					}
 				}
 
-				if (isModerator(featuresBaseJwt.jwt)) {
-					// If no one is knocking
-					if (featuresLobby.knockingParticipants.length <= 0) {
-						// Try to enable e2ee
-						if (
-							!featuresE2ee.enabled &&
-							featuresE2ee.everyoneSupportE2EE === true &&
-							!e2eeEnabling
-						) {
-							e2eeEnabling = true;
-							// Wait some seconds until user joined and key exchange will work
-							e2eeActivationTimeout = setTimeout(() => {
-								APP.store.dispatch({
-									type: 'TOGGLE_E2EE',
-									enabled: true
-								});
-							}, 5000);
-						}
-					} else {
-						if (e2eeActivationTimeout) {
-							clearTimeout(e2eeActivationTimeout);
-							e2eeEnabling = false;
-						}
-
-						if (featuresE2ee.enabled && !e2eeDisabling) {
-							e2eeDisabling = true;
-							APP.store.dispatch({
-								type: 'TOGGLE_E2EE',
-								enabled: false
-							});
-						}
-					}
+				if (isModerator(featuresBaseJwt.jwt) && !featuresLobby.lobbyVisible) {
+					enableE2EE();
+					disableE2EE();
 
 					if (!document.body.classList.contains('isModerator')) {
 						document.body.classList.add('isModerator');
 					}
 
 					const featuresToolbox = APP.store.getState()['features/toolbox'];
-
-					const room = featuresBaseConference?.conference?.room;
 					if (room && room?.joined && featuresToolbox.enabled) {
 						createShareUrlButton(document.querySelector('#new-toolbox .toolbox-content-items'), featuresBaseJwt.jwt);
 					}
 				}
 
 				// Show/Hide e2ee banner for everyone
-				const room = featuresBaseConference?.conference?.room;
 				if (room && room?.joined) {
-					if (Object.keys(room?.members).length > 1) {
+					if (e2eeStateChanged) {
+						e2eeStateChanged = false;
+
 						APP.API._sendEvent({
 							name: 'custom-e2ee-toggled',
 							enabled: featuresE2ee.enabled
-						});
-					} else {
-						APP.API._sendEvent({
-							name: 'custom-e2ee-toggled',
-							enabled: false
 						});
 					}
 
@@ -117,6 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 						room.on(JitsiMeetJS.events.conference.CONFERENCE_FAILED, (error) => {
 							if (error === JitsiMeetJS.errors.conference.CONFERENCE_DESTROYED) {
+								Logger.error("Conference destroyed!");
 								document.location.href = "/static/close2.html";
 							}
 						});
@@ -175,6 +186,7 @@ const createShareUrlButton = (parentElement, token) => {
 	if (parentElement.querySelector(`#${id}`)) {
 		return;
 	}
+	Logger.log("Create share url button");
 
 	const buttonContainer1 = document.createElement('div');
 	buttonContainer1.classList.add('share-url-button');
