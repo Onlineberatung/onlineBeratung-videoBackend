@@ -14,7 +14,8 @@ local function is_admin(jid)
     return um_is_admin(jid, module.host);
 end
 
-log('info', 'Loaded token moderation plugin');
+module:log(LOGLEVEL, "[VI] Plugin mod_token_moderation loaded");
+
 -- Hook into room creation to add this wrapper to every new room
 module:hook("muc-room-created", function(event)
     module:log(LOGLEVEL, "[VI] Hook mod_token_moderation muc-room-created");

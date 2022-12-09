@@ -21,8 +21,6 @@ const waitForApp = () => {
 
 let eventsRegistered = false;
 let e2eeTimeout = null;
-let e2eeDisabling = false;
-let e2eeEnabling = false;
 let e2eeLastState = null;
 let e2eeStateChanged = null;
 
@@ -118,22 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
 					if (e2eeStateChanged) {
 						e2eeStateChanged = false;
 
-						Logger.log("Room joined");
-						if (Object.keys(room?.members).length > 1) {
-							Logger.log("ENABLED " + APP.API._enabled);
-							Logger.log("E2EE " + featuresE2ee.enabled);
-							Logger.log("Sending custom e2ee toggle event enabled");
-							APP.API._sendEvent({
-								name: 'custom-e2ee-toggled',
-								enabled: featuresE2ee.enabled
-							});
-						} else {
-							Logger.log("Sending custom e2ee toggle event disabled");
-							APP.API._sendEvent({
-								name: 'custom-e2ee-toggled',
-								enabled: false
-							});
-						}
+						APP.API._sendEvent({
+							name: 'custom-e2ee-toggled',
+							enabled: featuresE2ee.enabled
+						});
 					}
 
 					if (!eventsRegistered) {
